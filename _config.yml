@@ -81,14 +81,14 @@ analytics:
 # Site Author
 author:
   name             : "Davo Acevedo-Cardona"
-  avatar           : "profile.png"
-  bio              : "AI/ML Engineer with an M.S. in Human Language Technology and a B.S. in Electrical Engineering, bringing a strong foundation and hands-on experience in data analysis, machine learning, and natural language processing. Experienced in developing end-to-end analytical pipelines using Python and R, applying statistical and ML techniques to large, complex datasets, and translating results for both technical and non-technical stakeholders. Seeking full-time roles related to Artificial Intelligence / Machine Learning or Data Analytics where analytical rigor, problem-solving, and collaboration drive real-world impact."
+  avatar           : "davo.png"
+  bio              : "AI/ML Engineer with an M.S. in Human Language Technology and a B.S. in Electrical Engineering specialized in NLP, data pipelines, Large Language Models and applied machine learning on Python & R."
   location         : "Tucson, AZ"
   employer         :
-  pubmed           : "https://www.ncbi.nlm.nih.gov/pubmed/?term=john+snow"
-  googlescholar    : "http://yourfullgooglescholarurl.com"
+  pubmed           : 
+  googlescholar    : 
   email            : "davoacevedo@arizona.edu"
-  researchgate     :  # example: "https://www.researchgate.net/profile/yourprofile"
+  researchgate     :  
   uri              :
   bitbucket        :
   codepen          :
@@ -100,16 +100,16 @@ author:
   google_plus      :
   keybase          :
   instagram        :
-  impactstory      : #"https://profiles.impactstory.org/u/xxxx-xxxx-xxxx-xxxx"
+  impactstory      : 
   lastfm           :
   linkedin         : "https://www.linkedin.com/in/davoacevedo/"
-  orcid            : "http://orcid.org/yourorcidurl"
+  orcid            : 
   pinterest        :
   soundcloud       :
-  stackoverflow    : # http://stackoverflow.com/users/123456/username
+  stackoverflow    : 
   steam            :
   tumblr           :
-  twitter          : "replacethistwitterhandle"
+  twitter          : 
   vine             :
   weibo            :
   xing             :
