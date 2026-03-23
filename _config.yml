@@ -10,10 +10,10 @@ locale                   : "en-US"
 title                    : "Davo Acevedo-Cardona / Official Portfolio"
 title_separator          : "-"
 name                     : &name "Davo Acevedo-Cardona"
-description              : &description "sdasdasdasdasd"
-url                      : https://yourGHusername.github.io # the base hostname & protocol for your site e.g. "https://mmistakes.github.io"
+description              : &description "Davo Acevedo-Cardona | NLP & Data Science Portfolio"
+url                      : https://lldavoll.github.io # the base hostname & protocol for your site e.g. "https://mmistakes.github.io"
 baseurl                  : "" # the subpath of your site, e.g. "/blog"
-repository               : "yourGHusername/yourGHusername.github.io"
+repository               : "lldavoll/lldavoll.github.io"
 teaser                   :  # filename of teaser fallback teaser image placed in /images/, .e.g. "500x300.png"
 breadcrumbs              : false # true, false (default)
 words_per_minute         : 160
@@ -80,14 +80,14 @@ analytics:
 
 # Site Author
 author:
-  name             : "Your Sidebar Name"
+  name             : "Davo Acevedo-Cardona"
   avatar           : "profile.png"
-  bio              : "Your biography for the left-hand sidebar"
-  location         : "Location"
+  bio              : "AI/ML Engineer with an M.S. in Human Language Technology and a B.S. in Electrical Engineering, bringing a strong foundation and hands-on experience in data analysis, machine learning, and natural language processing. Experienced in developing end-to-end analytical pipelines using Python and R, applying statistical and ML techniques to large, complex datasets, and translating results for both technical and non-technical stakeholders. Seeking full-time roles related to Artificial Intelligence / Machine Learning or Data Analytics where analytical rigor, problem-solving, and collaboration drive real-world impact."
+  location         : "Tucson, AZ"
   employer         :
   pubmed           : "https://www.ncbi.nlm.nih.gov/pubmed/?term=john+snow"
   googlescholar    : "http://yourfullgooglescholarurl.com"
-  email            :
+  email            : "davoacevedo@arizona.edu"
   researchgate     :  # example: "https://www.researchgate.net/profile/yourprofile"
   uri              :
   bitbucket        :
@@ -96,13 +96,13 @@ author:
   flickr           :
   facebook         :
   foursquare       :
-  github           : "yourGHusername"
+  github           : "lldavoll"
   google_plus      :
   keybase          :
   instagram        :
   impactstory      : #"https://profiles.impactstory.org/u/xxxx-xxxx-xxxx-xxxx"
   lastfm           :
-  linkedin         :
+  linkedin         : "https://www.linkedin.com/in/davoacevedo/"
   orcid            : "http://orcid.org/yourorcidurl"
   pinterest        :
   soundcloud       :
