@@ -9,7 +9,7 @@ redirect_from:
 ---
 
 <p align="center">
-  <img src="../images/about.png" width="1000">
+  <img src="../images/about.png" width="800">
 </p>
 
 <div style="text-align: justify;">
