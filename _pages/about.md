@@ -8,6 +8,12 @@ redirect_from:
   - /about.html
 ---
 
+<p align="center">
+  <img src="../images/about.png" width="250">
+</p>
+
+<div style="text-align: justify;">
+
 I am an AI/ML Engineer with a Master’s degree in Human Language Technology and a background in Electrical Engineering, specializing in natural language processing, data pipelines, and applied machine learning. My work focuses on building end-to-end systems that transform large, complex, and often unstructured data into structured, actionable insights.
 
 My interest in this field began during the last year of my undergraduate studies in Electrical Engieering in Colombia in ehich I learned about classifiers, machine learning and neural networks, where I developed a passion in how computational methods can model, process, and extract meaning from real-world data. This perspective has guided my work in both academic and industry settings, especially when dealing with noisy, large-scale datasets.
@@ -21,3 +27,5 @@ In addition to industry experience, I have conducted research involving multilin
 My technical toolkit includes Python (pandas, NumPy, scikit-learn, NLTK, spaCy, Transformers, PyTorch, TensorFlow), R (tidyverse, dplyr, ggplot2, tidyr, stringr, readr, caret, quanteda), SQL, Linux/Bash, Git/GitHub, Perl, Prolog and cloud-based data platforms. I am passionate in solving real-world problems where data is messy, ambiguous, and large-scale, requiring both analytical rigor and practical engineering solutions.
 
 I am currently seeking full-time opportunities in Artificial Intelligence, Machine Learning, or Data Analytics where I can contribute to building data-driven systems that create measurable impact. I am especially motivated by work that makes complex data more accessible and usable, helping bridge the gap between raw information and meaningful, real-world decisions.
+
+</div>
