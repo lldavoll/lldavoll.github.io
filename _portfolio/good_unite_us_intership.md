@@ -7,9 +7,15 @@ collection: portfolio
   <img src="/images/good.png" style="width: 100%; max-width: 700px; height: 320px; object-fit: cover; border-radius: 12px;">
 </p>
 
-This is an item in your portfolio that describes your internship. It can have images or nice text. If you name the file .md, it will be parsed as markdown. If you name the file .html, it will be parsed as HTML.
+<div style="text-align: justify; line-height: 1.7;">
+  
+# Summary
 
-As you're describing the content of your internship, be sure to describe how you were able to apply the concepts and skills you acquired from HLT courses to your internship. You'll also want to describe the things that you learned from the internship itself that might help you in future work.
+During my internship at Goods Unite Us, I worked as an NLP Intern developing data pipelines to process large-scale structured and unstructured datasets related to corporations, executives, political contributions, and user-generated requests. My work focused on transforming noisy sources such as SEC filings, FEC records, email-based brand requests, and internal company datasets into structured, analyzable outputs that could support transparency, improve data quality, and contribute to the company’s products. :contentReference[oaicite:0]{index=0}
+
+A central part of the internship involved applying natural language processing and data science methods to real-world data problems. I built workflows for information extraction, text normalization, entity resolution, and cross-dataset integration, with the goal of producing reliable datasets from sources that were often inconsistent, incomplete, or semi-structured. This directly aligned with the internship goals of strengthening my NLP and preprocessing skills, gaining experience with large-scale text data, and learning how to translate technical analysis into useful insights in a collaborative environment. :contentReference[oaicite:1]{index=1}
+
+Across the internship, I contributed to several connected projects, including executive extraction from SEC filings, title normalization, contact enrichment, subsidiary extraction from Exhibit 21, PAC donation classification and validation, email-based brand request aggregation, and executive change extraction from alert emails. Together, these tasks formed a broader corporate intelligence pipeline that connected public filings, political data, and internal datasets into reusable analytical resources. :contentReference[oaicite:2]{index=2} :contentReference[oaicite:3]{index=3} :contentReference[oaicite:4]{index=4}
 
 ## Evaluation criteria
 Remember that each of the two projects in your portfolio will be evaluated on these points:
@@ -25,3 +31,6 @@ Remember that each of the two projects in your portfolio will be evaluated on th
     1. Students will demonstrate programming skills for the workplace.
     2. Students will be able to use fundamental algorithms and concepts in Natural Language Processing.
     3. Students will show knowledge of tools and packages used in Natural Language Processing.
+
+
+</div>
