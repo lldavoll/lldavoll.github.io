@@ -1,6 +1,6 @@
 ---
-title: "Your HLT Internship (with a much more explanatory title)"
-excerpt: "Short description of the goals and content of your internship<br/><img src='/images/500x300.png'>"
+title: "Goods Unite Us Internship: NLP Pipelines for Corporate and Policy Data"
+excerpt: "During my internship at Goods Unite Us, I developed NLP-driven data pipelines to process large-scale corporate and policy datasets, including SEC filings and political contribution records. This project focused on extracting, normalizing, and integrating unstructured data from into structured insights to support transparency, check reliable patterns and integrated to the Mobile App.<br/><img src='/images/good.png'>"
 collection: portfolio
 ---
 
