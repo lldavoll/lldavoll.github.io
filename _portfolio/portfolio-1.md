@@ -1,11 +1,11 @@
 ---
 title: "Goods Unite Us Internship: NLP Pipelines for Corporate and Policy Data"
-excerpt: "During my internship at Goods Unite Us, I developed NLP-driven data pipelines to process large-scale corporate and policy datasets, including SEC filings and political contribution records. This project focused on extracting, normalizing, and integrating unstructured data from into structured insights to support transparency, check reliable patterns and integrated to the Mobile App.
-<br/> <p align="center">
-  <img src="/images/good.png" style="width: 100%; max-width: 700px; height: 320px; object-fit: cover; border-radius: 12px;">
-</p>"
+excerpt: "During my internship at Goods Unite Us, I developed NLP-driven data pipelines to process large-scale corporate and policy datasets, including SEC filings and political contribution records. This project focused on extracting, normalizing, and integrating unstructured data from into structured insights to support transparency, check reliable patterns and integrated to the Mobile App."
 collection: portfolio
 ---
+<p align="center">
+  <img src="/images/good.png" style="width: 100%; max-width: 700px; height: 320px; object-fit: cover; border-radius: 12px;">
+</p>
 
 This is an item in your portfolio that describes your internship. It can have images or nice text. If you name the file .md, it will be parsed as markdown. If you name the file .html, it will be parsed as HTML.
 
