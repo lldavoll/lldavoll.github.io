@@ -274,3 +274,164 @@ def parse_exhibit_21(url):
     
     return clean
 ```
+### 3. Contact Enrichment and Email-Based NLP Pipelines
+
+This project focused on extracting structured information from web data and large-scale email datasets.
+
+#### Objectives
+- Enrich company data with contact and social media information.  
+- Extract user-generated brand requests from historical emails.  
+
+#### Approach
+- Built **web scraping pipelines** using BeautifulSoup and search APIs.  
+- Implemented filtering to remove irrelevant or broken links.  
+- Developed a **Gmail API pipeline** to process ~300k emails.  
+- Normalized brand names and aggregated request frequencies.  
+
+#### Outcome
+- Generated enriched company profiles with contact data.  
+- Produced ranked datasets of user-requested brands.  
+- Enabled analysis of user demand and trends.
+
+_Gmail Brand Extraction Snippet:_
+
+```python
+BRAND_BLOCK_RE = re.compile(
+    r"i['’]d\s+like\s+to\s+know\s+more\s+details\s+about:\s*(.*?)\s*thanks",
+    flags=re.IGNORECASE | re.DOTALL
+)
+
+SUBJECT_FALLBACK_RE = re.compile(
+    r"details\s+about:\s*(.*?)\s*(?:thanks|\Z)",
+    flags=re.IGNORECASE | re.DOTALL
+)
+
+# Trailing junk sometimes included by users after the brand
+TRAILING_JUNK_RE = re.compile(
+    r"""
+    (.*?) 
+    (?: 
+        (?:\.\s*based\s+in\b.*)$
+      | (?:\bbased\s+in\b.*)$ 
+      | (?:\blocated\s+in\b.*)$
+      | (?:\bbased\s+out\s+of\b.*)$
+    )
+    """,
+    flags=re.IGNORECASE | re.DOTALL | re.VERBOSE
+)
+
+PAREN_LIST_RE = re.compile(r"^\s*(.*?)\s*\((.*?)\)\s*$", flags=re.DOTALL)
+
+def extract_brand_block(body: str, subject: str) -> Tuple[Optional[str], str]:
+    if body:
+        m = BRAND_BLOCK_RE.search(body)
+        if m:
+            raw = m.group(1).strip()
+            return (raw if raw else None), "body"
+
+    if subject:
+        m = SUBJECT_FALLBACK_RE.search(subject)
+        if m:
+            raw = m.group(1).strip()
+            return (raw if raw else None), "subject"
+
+    return None, "none"
+
+
+def _split_commas_outside_parens(s: str) -> List[str]:
+    out, buf, depth = [], [], 0
+    for ch in s:
+        if ch == "(":
+            depth += 1
+        elif ch == ")":
+            depth = max(0, depth - 1)
+
+        if ch == "," and depth == 0:
+            piece = "".join(buf).strip()
+            if piece:
+                out.append(piece)
+            buf = []
+        else:
+            buf.append(ch)
+
+    last = "".join(buf).strip()
+    if last:
+        out.append(last)
+    return out
+
+
+def split_brands(raw: str) -> List[str]:
+    raw = (raw or "").strip()
+    if not raw:
+        return []
+
+    # 0) Remove trailing location/descriptor junk
+    m_junk = TRAILING_JUNK_RE.match(raw)
+    if m_junk:
+        raw = (m_junk.group(1) or "").strip()
+
+    # 1) Split on slashes first
+    parts = []
+    for chunk in raw.split("/"):
+        chunk = re.sub(r"\s+", " ", chunk).strip()
+        if chunk:
+            parts.append(chunk)
+
+    # 2) Split on commas outside parentheses
+    tmp = []
+    for p in parts:
+        tmp.extend(_split_commas_outside_parens(p))
+    parts = [re.sub(r"\s+", " ", p).strip() for p in tmp if p.strip()]
+
+    # 3) Expand parenthetical lists
+    expanded = []
+    for p in parts:
+        pm = PAREN_LIST_RE.match(p)
+        if pm:
+            main = pm.group(1).strip()
+            inside = pm.group(2).strip()
+            if main:
+                expanded.append(main)
+
+            # split inside on commas
+            inside_items = [x.strip() for x in inside.split(",") if x.strip()]
+            expanded.extend(inside_items)
+        else:
+            expanded.append(p)
+
+    # 4) Conservative split on "and"
+    exceptions = {
+        "wine and spirits",
+        "oil and gas",
+        "research and development",
+    }
+    generic_tails = {"spirits", "vodka", "tequila", "store", "stores", "company"}
+
+    final = []
+    for p in expanded:
+        p = re.sub(r"\s+", " ", p).strip()
+        low = p.lower()
+
+        if any(exc in low for exc in exceptions):
+            final.append(p)
+            continue
+
+        if re.search(r"\s+and\s+", p, flags=re.IGNORECASE):
+            and_parts = re.split(r"\s+and\s+", p, maxsplit=1, flags=re.IGNORECASE)
+            if len(and_parts) == 2:
+                left, right = and_parts[0].strip(), and_parts[1].strip()
+                if right.lower() in generic_tails:
+                    final.append(p)
+                else:
+                    if left:
+                        final.append(left)
+                    if right:
+                        final.append(right)
+            else:
+                final.append(p)
+        else:
+            final.append(p)
+
+    # final cleanup
+    return [x for x in final if x.strip()]
+```
