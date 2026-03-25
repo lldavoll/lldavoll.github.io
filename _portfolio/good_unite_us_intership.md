@@ -24,24 +24,19 @@ Across the internship, I contributed to several connected projects, including ex
   
 ## Project Goals
 <div style="text-align: justify; line-height: 1.7;">
-<p>
-The primary goal of this internship was to **apply natural language processing and data science techniques to real-world, large-scale datasets involving corporate, financial, and policy-related information.** Rather than working with clean, preprocessed data, the focus was on **developing robust workflows capable of handling noisy, inconsistent, and semi-structured sources such as SEC filings, political contribution records, and user-generated text.**
-</p>
 
-<p>
-* A key objective was to design and implement scalable preprocessing pipelines that could transform raw text into structured datasets. This included tasks such as tokenization, normalization, information extraction, and feature engineering, with the aim of enabling downstream analysis and integration across multiple data sources. 
-</p>
-
-<p>
-* Another major goal was to improve entity resolution across datasets in cases where company names, executive roles, and organizational identifiers were inconsistent or ambiguous. This required developing strategies to standardize entities and accurately match records across heterogeneous data sources.
-</p>
-
-<p>
-Finally, an important professional goal was to gain experience working in a collaborative engineering environment, contributing to shared codebases, participating in iterative development, and aligning technical work with broader organizational objectives. 
-</p>
-
+The primary goal of this internship was to apply natural language processing and data science techniques to real-world, large-scale datasets involving corporate, financial, and policy-related information. Rather than working with clean, preprocessed data, the focus was on developing robust workflows capable of handling noisy, inconsistent, and semi-structured sources such as SEC filings, political contribution records, and user-generated text.
 </div>
-<div style="text-align: justify; line-height: 1.7;">
+* Key objectives included:
+
+- Developing preprocessing pipelines for noisy and unstructured data (SEC filings, FEC records, email text)
+- Implementing information extraction and normalization workflows
+- Performing entity resolution across inconsistent datasets
+- Integrating multiple data sources into unified, structured outputs
+- Translating technical results into insights for real-world applications
+- Collaborating in a professional engineering environment
+
+
 * **Length**: A summary of the project goals, technology used, and outcomes, as appropriate for a general technical audience, between 1000 and 3000 words (not counting code)
 * **Content**: student’s experience demonstrates the learning outcomes for the MSHLT program [^note]
 * **Code**: Code is contained in the site, or a link to the code (such as in a GitHub repository) exists on the site.
