@@ -30,18 +30,16 @@ The primary goal of this internship was to apply natural language processing and
 
 **Key objectives included:**
 
-- Developing preprocessing pipelines for noisy and unstructured data (SEC filings, FEC records, email text)
-- Implementing information extraction and normalization workflows
-- Performing entity resolution across inconsistent datasets
-- Integrating multiple data sources into unified, structured outputs
-- Translating technical results into insights for real-world applications
-- Collaborating in a professional engineering environment
+- Developing preprocessing pipelines for noisy and unstructured data (SEC filings, FEC records, email text).
+- Implementing information extraction and normalization workflows.
+- Performing entity resolution across inconsistent datasets.
+- Integrating multiple data sources into unified, structured outputs.
+- Translating technical results into insights for real-world applications.
+- Collaborating in a professional engineering environment.
 
 ## My Role and Contributions
 
 As an NLP Intern, I:
-
----
 
 - **Built end-to-end NLP pipelines** to process structured and unstructured data from SEC filings, FEC records, and internal datasets. 
 - **Extracted executive information** (names, roles, company relationships) from SEC filings using regex-based and NLP methods (e.g., spaCy, RapidFuzzy), with multi-tier confidence validation (filters).  
@@ -56,10 +54,73 @@ As an NLP Intern, I:
 - **Developed email-based extraction systems** using the Gmail API (with Google Cloud) to process historical brand requests, normalize entities.
 - **Extracted subsidiary relationships** from SEC Exhibit 21 filings using the EDGAR API, creating structured parent–subsidiary datasets.
 - **Engineered data integration workflows** for Firebase (Firestore), Snowflake for normalization mismatches, and joins.
-   
+
+During the internship I worked most    ly with **Python** (pandas, regex, NLP libraries), SQL/Snowflake, and cloud platforms such as AWS, Azure, Firebase, and Google Cloud APIs.
+
+## Data Sources and Tools
+
+This project involved integrating datasets from heterogeneous sources, requiring both NLP techniques and data engineering workflows.
+
+### Data Sources
+
+- **SEC Filings (8-K, 10-K, Exhibit 21):**  
+  Used to extract executive information, corporate structure, and subsidiary relationships through document parsing and text processing.
+
+- **FEC Political Contribution Data:**  
+  Used to analyze PAC activity and classify companies based on political donation behavior.
+
+- **Internal Company Datasets (Snowflake/Firebase):**  
+  Provided structured corporate data, including company identifiers and PAC contribution records, enabling cross-dataset integration.
+
+- **User-Generated Email Data (Gmail API):**  
+  Historical “brand request” emails (~300k+) used to extract and aggregate user interest signals.
+
+- **Web Data (Company Websites & Social Media):**  
+  Collected via web scraping to enrich company profiles with contact information and external links.
+
 ---
 
-During the internship I worked mostly with **Python (pandas, regex, NLP libraries)**, **SQL/Snowflake**, and cloud platforms such as **AWS, Azure, Firebase, and Google Cloud APIs**.
+### Tools and Technologies
+
+- **Programming Languages:**  
+  Python, SQL
+
+- **NLP and Data Processing:**  
+  pandas, NumPy, regex, spaCy, NLTK
+
+- **Machine Learning / Statistical Methods:**  
+  scikit-learn
+
+- **Data Engineering and Storage:**  
+  Snowflake, Firebase (Firestore), CSV
+
+- **APIs and Web Scraping:**  
+  SEC EDGAR API, Gmail API, BeautifulSoup, DuckDuckGo search integration, Rapidfuzz
+
+- **Cloud Platforms:**  
+  AWS, Azure, Google Cloud
+
+- **Visualization and Analysis:**  
+  matplotlib
+
+---
+
+### Connection to MSHLT Coursework
+
+The internship allow me to apply the knowledge that that I acquired during the program, during this internship I was able to use directly concepts and techniques such as:
+
+- **Statistical NLP:**  
+  Text preprocessing, feature extraction, and handling of noisy language data.
+
+- **Programming for NLP (Python):**  
+  Implementation of scalable data pipelines and data manipulation workflows.
+
+- **Data Analysis and Visualization:**  
+  Summarizing and interpreting large datasets through statistical methods and visual outputs.
+
+- **Corpus Processing:**  
+  Working with large, real-world text corpora (SEC filings, emails) requiring normalization and structured representation.
+
 
 
 * **Length**: A summary of the project goals, technology used, and outcomes, as appropriate for a general technical audience, between 1000 and 3000 words (not counting code)
