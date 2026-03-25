@@ -432,7 +432,9 @@ One of the most valuable aspects of this internship was the opportunity to direc
 </p>
 
 <p>
+  
 Coursework in *Statistical Natural Language Processing*, *HLT I & II*, *Computational Linguistics*, and *Computational Techniques for Linguists* provided the foundation for designing NLP pipelines for tasks such as named entity recognition, text normalization, and entity extraction. In practice, however, these methods needed to be combined with rule-based approaches to handle inconsistencies and edge cases that are rarely present in controlled academic datasets.
+
 </p>
 
 <p>
