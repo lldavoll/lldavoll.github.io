@@ -26,8 +26,8 @@ Across the internship, I contributed to several connected projects, including ex
 <div style="text-align: justify; line-height: 1.7;">
   
 The primary goal of this internship was to apply natural language processing and data science techniques to real-world, large-scale datasets using Python involving corporate, financial, and policy-related information. Rather than working with clean, preprocessed data, the focus was on developing robust workflows capable of handling noisy, inconsistent, and semi-structured sources such as SEC filings, political contribution records, and user-generated text.
-
 </div>
+
 **Key objectives included:**
 
 - Developing preprocessing pipelines for noisy and unstructured data (SEC filings, FEC records, email text)
@@ -36,6 +36,27 @@ The primary goal of this internship was to apply natural language processing and
 - Integrating multiple data sources into unified, structured outputs
 - Translating technical results into insights for real-world applications
 - Collaborating in a professional engineering environment
+
+## My Role and Contributions
+
+As an NLP Intern, I:
+
+- **Built end-to-end NLP pipelines** to process structured and unstructured data from SEC filings, FEC records, and internal datasets. 
+- **Extracted executive information** (names, roles, company relationships) from SEC filings using regex-based and NLP methods (e.g., spaCy, RapidFuzzy), with multi-tier confidence validation (filters).  
+- **Normalized and standardized executive titles**, reducing hundreds of raw variants into consistent categories (e.g., CEO, CFO, President). 
+- **Performed entity resolution across datasets**, matching companies and executives despite inconsistencies in naming and formatting.  
+- **Integrated corporate and political data**, linking company records with PAC contribution data to enable analysis of corporate political activity.  
+- **Developed data validation workflows**, including filtering, deduplication, and fuzzy matching to improve data quality and reliability.  
+- **Processed large-scale datasets**, such as SEC filings and over 300k user-generated emails, using memory-efficient and scalable workflows.  
+- **Removing false positives**, such as  non-person entities and refining extraction pipelines through iterative validation 
+- **Optimized long-running processes**, including multi-day web scraping workflows with filtering, retry logic, and domain validation  
+- **Built web-scraping pipelines** to collect company contact information such as domains, emails, social media.  
+- **Developed email-based extraction systems** using the Gmail API (with Google Cloud) to process historical brand requests, normalize entities.
+- **Extracted subsidiary relationships** from SEC Exhibit 21 filings using the EDGAR API, creating structured parent–subsidiary datasets.
+- **Engineered data integration workflows** for Firebase (Firestore), Snowflake for normalization mismatches, and joins.  
+---
+
+During the internship I worked mostly with **Python (pandas, regex, NLP libraries)**, **SQL/Snowflake**, and cloud platforms such as **AWS, Azure, Firebase, and Google Cloud APIs**.
 
 
 * **Length**: A summary of the project goals, technology used, and outcomes, as appropriate for a general technical audience, between 1000 and 3000 words (not counting code)
