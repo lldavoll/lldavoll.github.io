@@ -433,11 +433,41 @@ One of the most valuable aspects of this internship was the opportunity to direc
 
 <p>
   
-Coursework in *Statistical Natural Language Processing*, *HLT I & II*, *Computational Linguistics*, and *Computational Techniques for Linguists* provided the foundation for designing NLP pipelines for tasks such as named entity recognition, text normalization, and entity extraction. In practice, however, these methods needed to be combined with rule-based approaches to handle inconsistencies and edge cases that are rarely present in controlled academic datasets.
+Coursework in <em>Statistical Natural Language Processing, HLT I & II, Computational Linguistics, and Computational Techniques for Linguists</em> provided the foundation for designing NLP pipelines for tasks such as named entity recognition, text normalization, and entity extraction. In practice, however, these methods needed to be combined with rule-based approaches to handle inconsistencies and edge cases that are rarely present in controlled academic datasets.
 
 </p>
 
 <p>
-Additionally, courses such as *Statistical Analysis for Linguistics*, *Data Mining and Discovery*, and *Data Analysis and Visualization* provided the statistical foundation necessary to evaluate data quality, validate outputs, and identify patterns in large datasets. These skills were important for tasks such as PAC donation classification and entity matching, where even small inconsistencies could significantly impact results. These courses also strengthened my ability to communicate results clearly and effectively.
+Additionally, courses such as <em>Statistical Analysis for Linguistics, Data Mining and Discovery, and Data Analysis and Visualization</em> provided the statistical foundation necessary to evaluate data quality, validate outputs, and identify patterns in large datasets. These skills were important for tasks such as PAC donation classification and entity matching, where even small inconsistencies could significantly impact results. These courses also strengthened my ability to communicate results clearly and effectively.
 </p>
 </div>
+
+## Conclusion and Future Work
+
+<div style="text-align: justify; line-height: 1.7;">
+
+<p> 
+As a final takeaway, the internship provided me experience in building NLP-driven data pipelines for real-world datasets. By integrating corporate, financial, and user-generated data sources, I developed systems that transform unstructured text into structured, analyzable information which required combining statistical NLP methods with rule-based approaches, emphasizing the importance of flexibility when working with noisy and heterogeneous data.
+</p>
+
+<p> 
+Beyond the technical implementation, this experience reinforced key data engineering principles such as scalability, validation, and reproducibility. It also highlighted the importance of designing workflows that not only produce accurate results, but are also maintainable and useful for downstream applications.
+</p>
+
+</div>
+
+### Future Work
+
+For future project I would like to extend my work on:
+
+- **Advanced entity resolution:**  
+  Incorporate machine learning or embedding-based methods to improve matching accuracy across datasets.
+
+- **Automation and pipeline orchestration:**  
+  Integrate tools such as dbt or workflow schedulers to improve reproducibility and deployment.
+
+- **Real-time data integration:**  
+  Extend pipelines to support streaming or near real-time updates from APIs and external sources.
+
+- **Containerization:**  
+  Containerize pipelines using Docker to ensure reproducibility, portability, and consistent execution across environments.
