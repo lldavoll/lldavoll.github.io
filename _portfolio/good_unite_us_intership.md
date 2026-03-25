@@ -145,9 +145,69 @@ This project focused on extracting and structuring executive-level information f
 - Enabled downstream analysis and integration with other datasets  
 
 ```python
-# your code here
-def example():
-    return "clean snippet"
+def normalize_title(t):
+    """
+    Normalize and classify executive titles by hierarchical importance.
+    """
+    t = str(t).lower().strip()
+
+    # Handle unknown or empty titles
+    if t in ['unknown', 'na', 'n/a', 'none', '']:
+        return 'Other Executive'
+
+    # 1. CEO
+    if re.search(r'\b(ceo|chief executive)\b', t):
+        return 'Chief Executive Officer'
+
+    # 2. Vice President (checked first to avoid overlap with President)
+    elif re.search(r'\b(vice|svp|evp)\s+president\b', t):
+        return 'Vice President'
+
+    # 3. President (not preceded by Vice/SVP/EVP)
+    elif re.search(r'(?<!vice\s)(?<!svp\s)(?<!evp\s)\bpresident\b', t):
+        return 'President'
+
+    # 4. COO
+    elif re.search(r'\b(coo|chief operating)\b', t):
+        return 'Chief Operating Officer'
+
+    # 5. CFO
+    elif re.search(r'\b(cfo|chief financial)\b', t):
+        return 'Chief Financial Officer'
+
+    # 6. CTO / CIO
+    elif re.search(r'\b(cto|cio|chief technology|chief information)\b', t):
+        return 'Chief Technology Officer'
+
+    # 7. CMO
+    elif re.search(r'\b(cmo|chief marketing)\b', t):
+        return 'Chief Marketing Officer'
+
+    # 8. General Counsel / CLO
+    elif re.search(r'\b(general counsel|chief legal|chief counsel|clo)\b', t):
+        return 'General Counsel'
+
+    # 9. Director
+    elif re.search(r'\bdirector\b', t):
+        return 'Director'
+
+    # 10. Treasurer / Controller / Finance
+    elif re.search(r'\b(treasurer|controller|finance)\b', t):
+        return 'Treasurer / Controller'
+
+    # 11. Secretary
+    elif re.search(r'\b(secretary)\b', t):
+        return 'Corporate Secretary'
+
+    # 12. Fallback
+    else:
+        return 'Other Executive'
+
+# Apply normalization to the dataset
+df['title_standard'] = df['title_clean'].apply(normalize_title)
+
+
+print(df[['title_clean', 'title_standard']].head(10))
 ```
 
 sada
