@@ -105,22 +105,6 @@ This project involved integrating datasets from heterogeneous sources, requiring
 
 ---
 
-### Connection to MSHLT Coursework
-
-The internship allow me to apply the knowledge that that I acquired during the program, during this internship I was able to use directly concepts and techniques such as:
-
-- **Statistical NLP:**  
-  Text preprocessing, feature extraction, and handling of noisy language data.
-
-- **Programming for NLP (Python):**  
-  Implementation of scalable data pipelines and data manipulation workflows.
-
-- **Data Analysis and Visualization:**  
-  Summarizing and interpreting large datasets through statistical methods and visual outputs.
-
-- **Corpus Processing:**  
-  Working with large, real-world text corpora (SEC filings, emails) requiring normalization and structured representation.
-
 ## Project Breakdown
 
 ### 1. Executive and Corporate Information Extraction
@@ -386,3 +370,52 @@ merged = fec_p.merge(
 merged["TOTAL_AMOUNT"] = merged["TOTAL_AMOUNT"].fillna(0)
 merged["HAS_DONATED"] = merged["HAS_DONATED"].fillna(False)
 ```
+
+## Results and Outcomes
+
+The internship resulted in several structured datasets and reusable workflows that improved the organization’s ability to analyze corporate, executive, and political data at scale.
+
+Some of the main outputs included:
+
+- **Executive extraction dataset:** a cleaned dataset containing **11,283 executive records** across **4,631 companies**, with normalized job titles and confidence labels for extraction quality.
+- **Executive title categorization:** a standardized mapping of raw executive titles into canonical categories such as CEO, CFO, President, and Vice President.
+- **Company contact enrichment dataset:** a structured dataset of **4,631 companies** with extracted domains, investor-relations pages, contact emails, and social media links.
+- **Parent–subsidiary dataset:** a unified dataset built from SEC Exhibit 21 filings, linking companies to subsidiary information and flagging cases where Exhibit 21 was unavailable.
+- **Brand request aggregation dataset:** a cleaned summary of historical user-submitted company requests extracted from email data, including normalized brand names, frequency counts, and time ranges.
+- **PAC donation superset:** a company-level dataset classifying firms into **PAC_DONATED**, **PAC_NO_DONATIONS**, and **NO_PAC** categories based on FEC and Snowflake data.
+- **PAC validation layer:** a matching workflow that achieved approximately **95% alignment** between Snowflake committee names and official FEC records.
+- **Executive change event dataset:** a structured dataset built from Official Board alert emails, capturing appointments, promotions, departures, and role changes across companies and industries.
+
+_For more detailed information about the project's code and output please visit the following [My GitHub Repository](https://github.com/lldavoll/NLP-Pipelines-for-Corporate-and-Policy-Data)_
+
+## What I Learned...
+
+This internship allowed me to apply theoretical knowledge from the MSHLT program to real-world data problems in the context of noisy, large-scale, and heterogeneous datasets.
+
+### Applying NLP to Real-World Data
+
+Through tasks such as executive extraction and email-based brand parsing, I learned how to apply NLP techniques beyond controlled environments. Unlike classroom datasets, real-world data required combining statistical methods (e.g., spaCy NER) with rule-based approaches to handle ambiguity, inconsistency, and noise.
+
+### Importance of Data Preprocessing and Normalization
+
+My major takeaway was the importance of preprocessing in NLP pipelines. Tasks such as executive title normalization, committee name standardization, and brand cleaning showed me that raw data is rarely usable without extensive transformation. Small inconsistencies in text can significantly impact downstream tasks such as matching and aggregation.
+
+### Entity Resolution and Data Integration
+
+Working across multiple datasets (SEC, FEC, Snowflake, email data) highlighted the complexity of entity resolution. I learned how to design normalization strategies and matching workflows (including fuzzy matching) to link entities across sources, which is a key challenge in applied NLP and data engineering.
+
+### Scalability and Performance
+
+Handling large datasets (SEC filings, hundreds of thousands of emails, Snowflake datasets) required thinking about performance and memory efficiency. I learned to design pipelines that scale, using chunked processing, efficient transformations, and careful validation to ensure reliability.
+
+### Professional and Collaborative Skills
+
+More important than technical skills, I gained experience working in a collaborative environment outside my native language (Spanish) were I was able to communicate progress, refining solutions based on feedback, and aligning with my coworkers to achieve the project goals. 
+
+### Bridging Theory and Practice (Connection to MSHLT Coursework)
+
+One of the most valuable aspects of this internship was the opportunity to directly apply concepts from my Master’s in Human Language Technology to real-world data challenges.
+
+Coursework in *Statistical Natural Language Processing*, *HLT I & II*, *Computational Linguistics*, and *Computational Techniques for Linguists* provided the foundation for designing NLP pipelines for tasks such as named entity recognition, text normalization, and entity extraction. In practice, however, these methods needed to be combined with rule-based approaches to handle inconsistencies and edge cases that are rarely present in controlled academic datasets.
+
+Additionally, courses such as *Statistical Analysis for Linguistics*, *Data Mining and Discovery*, and *Data Analysis and Visualization* provided the statistical foundation necessary to evaluate data quality, validate outputs, and identify patterns in large datasets. These skills were important for tasks such as PAC donation classification and entity matching, where even small inconsistencies could significantly impact results. These courses also strengthened my ability to communicate results clearly and effectively.
