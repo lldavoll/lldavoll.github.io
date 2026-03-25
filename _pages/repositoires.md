@@ -64,11 +64,15 @@ document.addEventListener("DOMContentLoaded", async () => {
     const repos = await response.json();
 
     const filtered = repos
-      .filter(repo => !repo.fork && !repo.private)
+      .filter(repo => 
+        !repo.fork &&
+        !repo.private &&
+        repo.name !== "lldavoll.github.io"
+      )
       .sort((a, b) => new Date(b.updated_at) - new Date(a.updated_at));
 
     if (!filtered.length) {
-      container.innerHTML = "<p>No public repositories found.</p>";
+      container.innerHTML = "<p>No relevant repositories found.</p>";
       return;
     }
 
