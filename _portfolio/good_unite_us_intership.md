@@ -144,7 +144,7 @@ This project focused on extracting and structuring executive-level information f
 - Improved consistency and usability of executive-level data.  
 - Enabled downstream analysis and integration with other datasets.  
 
-_SpaCy Extraction snippet:_
+_SpaCy Extraction snippet: This pipeline combines statistical NLP (spaCy NER) with rule-based post-processing to extract and normalize executive names from noisy SEC filing text. By filtering false positives and enforcing structural constraints, it improves precision and produces a high-quality, deduplicated entity dataset._
 
 ```python
 # Load SpaCy English model
@@ -225,7 +225,7 @@ This project focused on identifying parent–subsidiary relationships using SEC 
 - Enabled hierarchical analysis of corporate structures.  
 - Provided foundational data for linking companies to broader datasets.  
 
-_BeautifulSoup Extraction Snippet:_
+_BeautifulSoup Extraction Snippet: This extraction function combines HTML parsing with rule-based entity detection to identify subsidiary companies from SEC Exhibit 21 filings. By prioritizing structured table data and incorporating fallback text parsing, it handles variability in document formats and ensures reliable recovery of corporate entities._
 
 ```python
 def parse_exhibit_21(url):
@@ -293,7 +293,7 @@ This project focused on extracting structured information from web data and larg
 - Produced ranked datasets of user-requested brands.  
 - Enabled analysis of user demand and trends.
 
-_Gmail Brand Extraction Snippet:_
+_Gmail Brand Extraction Snippet: This rule-based extraction function converts semi-structured email text into structured brand request candidates. It uses regex-based span detection, fallback parsing, and delimiter-aware splitting to preserve useful entities while reducing noise from inconsistent user input._
 
 ```python
 BRAND_BLOCK_RE = re.compile(
@@ -306,23 +306,7 @@ SUBJECT_FALLBACK_RE = re.compile(
     flags=re.IGNORECASE | re.DOTALL
 )
 
-# Trailing junk sometimes included by users after the brand
-TRAILING_JUNK_RE = re.compile(
-    r"""
-    (.*?) 
-    (?: 
-        (?:\.\s*based\s+in\b.*)$
-      | (?:\bbased\s+in\b.*)$ 
-      | (?:\blocated\s+in\b.*)$
-      | (?:\bbased\s+out\s+of\b.*)$
-    )
-    """,
-    flags=re.IGNORECASE | re.DOTALL | re.VERBOSE
-)
-
-PAREN_LIST_RE = re.compile(r"^\s*(.*?)\s*\((.*?)\)\s*$", flags=re.DOTALL)
-
-def extract_brand_block(body: str, subject: str) -> Tuple[Optional[str], str]:
+def extract_brand_block(body: str, subject: str):
     if body:
         m = BRAND_BLOCK_RE.search(body)
         if m:
@@ -338,100 +322,20 @@ def extract_brand_block(body: str, subject: str) -> Tuple[Optional[str], str]:
     return None, "none"
 
 
-def _split_commas_outside_parens(s: str) -> List[str]:
-    out, buf, depth = [], [], 0
-    for ch in s:
-        if ch == "(":
-            depth += 1
-        elif ch == ")":
-            depth = max(0, depth - 1)
-
-        if ch == "," and depth == 0:
-            piece = "".join(buf).strip()
-            if piece:
-                out.append(piece)
-            buf = []
-        else:
-            buf.append(ch)
-
-    last = "".join(buf).strip()
-    if last:
-        out.append(last)
-    return out
-
-
-def split_brands(raw: str) -> List[str]:
+def split_brands(raw: str):
     raw = (raw or "").strip()
     if not raw:
         return []
 
-    # 0) Remove trailing location/descriptor junk
-    m_junk = TRAILING_JUNK_RE.match(raw)
-    if m_junk:
-        raw = (m_junk.group(1) or "").strip()
-
-    # 1) Split on slashes first
     parts = []
     for chunk in raw.split("/"):
         chunk = re.sub(r"\s+", " ", chunk).strip()
         if chunk:
             parts.append(chunk)
 
-    # 2) Split on commas outside parentheses
-    tmp = []
-    for p in parts:
-        tmp.extend(_split_commas_outside_parens(p))
-    parts = [re.sub(r"\s+", " ", p).strip() for p in tmp if p.strip()]
-
-    # 3) Expand parenthetical lists
-    expanded = []
-    for p in parts:
-        pm = PAREN_LIST_RE.match(p)
-        if pm:
-            main = pm.group(1).strip()
-            inside = pm.group(2).strip()
-            if main:
-                expanded.append(main)
-
-            # split inside on commas
-            inside_items = [x.strip() for x in inside.split(",") if x.strip()]
-            expanded.extend(inside_items)
-        else:
-            expanded.append(p)
-
-    # 4) Conservative split on "and"
-    exceptions = {
-        "wine and spirits",
-        "oil and gas",
-        "research and development",
-    }
-    generic_tails = {"spirits", "vodka", "tequila", "store", "stores", "company"}
-
     final = []
-    for p in expanded:
-        p = re.sub(r"\s+", " ", p).strip()
-        low = p.lower()
+    for p in parts:
+        final.extend([x.strip() for x in p.split(",") if x.strip()])
 
-        if any(exc in low for exc in exceptions):
-            final.append(p)
-            continue
-
-        if re.search(r"\s+and\s+", p, flags=re.IGNORECASE):
-            and_parts = re.split(r"\s+and\s+", p, maxsplit=1, flags=re.IGNORECASE)
-            if len(and_parts) == 2:
-                left, right = and_parts[0].strip(), and_parts[1].strip()
-                if right.lower() in generic_tails:
-                    final.append(p)
-                else:
-                    if left:
-                        final.append(left)
-                    if right:
-                        final.append(right)
-            else:
-                final.append(p)
-        else:
-            final.append(p)
-
-    # final cleanup
-    return [x for x in final if x.strip()]
+    return final
 ```
