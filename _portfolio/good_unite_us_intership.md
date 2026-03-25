@@ -41,11 +41,13 @@ Finally, an important professional goal was to gain experience working in a coll
 </p>
 
 </div>
+<div style="text-align: justify; line-height: 1.7;">
 * **Length**: A summary of the project goals, technology used, and outcomes, as appropriate for a general technical audience, between 1000 and 3000 words (not counting code)
 * **Content**: student’s experience demonstrates the learning outcomes for the MSHLT program [^note]
 * **Code**: Code is contained in the site, or a link to the code (such as in a GitHub repository) exists on the site.
 * **Professionalism**: Free of grammatical, mechanical, and stylistic issues
 * **Above and beyond**: How well does this component communicate the most relevant features?
+</div>
 
 [^note]: The learning outcomes of the MSHLT program are:
     
