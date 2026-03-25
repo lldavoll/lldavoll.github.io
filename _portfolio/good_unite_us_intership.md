@@ -128,86 +128,149 @@ The internship allow me to apply the knowledge that that I acquired during the p
 This project focused on extracting and structuring executive-level information from SEC filings (8-K and 10-K), transforming unstructured financial documents into clean, analyzable datasets.
 
 #### Objectives
-- Identify executive names and roles from filings  
-- Normalize and standardize titles  
-- Create a clean, deduplicated executive dataset  
+- Identify executive names and roles from filings.  
+- Normalize and standardize titles.
+- Create a clean, deduplicated executive dataset.  
 
 #### Approach
-- Applied **regex-based extraction** and **spaCy NLP models** for entity recognition  
-- Implemented **multi-tier confidence validation** (high/low/spaCy)  
-- Removed false positives (e.g., financial terms misidentified as names)  
-- Standardized titles into canonical categories (CEO, CFO, etc.)  
-- Built validation and deduplication pipelines  
+- Applied **regex-based extraction** and **spaCy NLP models** for entity recognition.  
+- Implemented **multi-tier confidence validation** (high/low/spaCy).  
+- Removed false positives (e.g., financial terms misidentified as names).  
+- Standardized titles into canonical categories (CEO, CFO, etc.).  
+- Built validation and deduplication pipelines.  
 
 #### Outcome
-- Produced a structured dataset of executives across thousands of companies  
-- Improved consistency and usability of executive-level data  
-- Enabled downstream analysis and integration with other datasets  
+- Produced a structured dataset of executives across thousands of companies.  
+- Improved consistency and usability of executive-level data.  
+- Enabled downstream analysis and integration with other datasets.  
+
+_SpaCy Extraction snippet:_
 
 ```python
-def normalize_title(t):
-    """
-    Normalize and classify executive titles by hierarchical importance.
-    """
-    t = str(t).lower().strip()
+# Load SpaCy English model
+nlp = spacy.load("en_core_web_sm")
 
-    # Handle unknown or empty titles
-    if t in ['unknown', 'na', 'n/a', 'none', '']:
-        return 'Other Executive'
+# Load cleaned low data
+raw_path = "executive_cleaned_low.csv"
+df = pd.read_csv(raw_path)
 
-    # 1. CEO
-    if re.search(r'\b(ceo|chief executive)\b', t):
-        return 'Chief Executive Officer'
+# Extraction
+def extract_persons(text):
+    if pd.isna(text):
+        return None
+    doc = nlp(text)
+    names = [ent.text.strip() for ent in doc.ents if ent.label_ == "PERSON"]
+    return names[0] if names else None
 
-    # 2. Vice President (checked first to avoid overlap with President)
-    elif re.search(r'\b(vice|svp|evp)\s+president\b', t):
-        return 'Vice President'
+df["executive_name"] = df["executive_name"].apply(extract_persons)
 
-    # 3. President (not preceded by Vice/SVP/EVP)
-    elif re.search(r'(?<!vice\s)(?<!svp\s)(?<!evp\s)\bpresident\b', t):
-        return 'President'
+# --- STEP 3: Basic text cleaning ---
+df["executive_name"] = (
+    df["executive_name"]
+    .astype(str)
+    .str.replace(r"\b(Email|Phone)\b", "", regex=True)
+    .str.strip()
+)
 
-    # 4. COO
-    elif re.search(r'\b(coo|chief operating)\b', t):
-        return 'Chief Operating Officer'
+# Remove false positives
+false_positive_keywords = [
+    "Prepared Remarks", "Good Standing", "Qualified Transferee", "Diligence", "Milestones",
+    "Retirement", "Witness", "Indemnifying", "Securities", "Transfer Restricted", "Baton Rouge",
+    "Ganado Advocates", "Due Diligence", "Mutual Acknowledgment", "Hasche Sigle",
+    "Dykema Gossett", "Gunderson Dettmer", "Advocates", "Consulting", "LLP", "LLC", "Group",
+    "Corp", "Holdings", "Capital", "Incorporated", "Partners", "PLC", "Advisors", "Associates",
+    "Inc", "Company", "Enterprises", "Legal", "Strategy", "Bank", "Investments", "Management",
+    "Services"
+]
+pattern = re.compile("|".join([re.escape(k) for k in false_positive_keywords]), re.IGNORECASE)
 
-    # 5. CFO
-    elif re.search(r'\b(cfo|chief financial)\b', t):
-        return 'Chief Financial Officer'
+def is_valid_name(name):
+    if pd.isna(name) or name.strip() == "":
+        return False
+    if pattern.search(name):
+        return False
+    if len(name.split()) > 6 or any(char.isdigit() for char in name):
+        return False
+    if name.isupper() and len(name) > 2:
+        return False
+    return True
 
-    # 6. CTO / CIO
-    elif re.search(r'\b(cto|cio|chief technology|chief information)\b', t):
-        return 'Chief Technology Officer'
+df = df[df["executive_name"].apply(is_valid_name)]
 
-    # 7. CMO
-    elif re.search(r'\b(cmo|chief marketing)\b', t):
-        return 'Chief Marketing Officer'
+# Delete duplicates
+df = df.drop_duplicates(subset=["executive_name"]).reset_index(drop=True)
 
-    # 8. General Counsel / CLO
-    elif re.search(r'\b(general counsel|chief legal|chief counsel|clo)\b', t):
-        return 'General Counsel'
+# --- STEP 6: Save final cleaned file ---
+final_path = "executive_cleaned_spacy.csv"
+df.to_csv(final_path, index=False)
 
-    # 9. Director
-    elif re.search(r'\bdirector\b', t):
-        return 'Director'
-
-    # 10. Treasurer / Controller / Finance
-    elif re.search(r'\b(treasurer|controller|finance)\b', t):
-        return 'Treasurer / Controller'
-
-    # 11. Secretary
-    elif re.search(r'\b(secretary)\b', t):
-        return 'Corporate Secretary'
-
-    # 12. Fallback
-    else:
-        return 'Other Executive'
-
-# Apply normalization to the dataset
-df['title_standard'] = df['title_clean'].apply(normalize_title)
-
-
-print(df[['title_clean', 'title_standard']].head(10))
+print(f"Cleaned dataset saved as {final_path} ({len(df)} rows)")
 ```
 
-sada
+### 2. Corporate Structure and Subsidiary Mapping
+
+This project focused on identifying parent–subsidiary relationships using SEC filings, enabling analysis of corporate hierarchies.
+
+#### Objectives
+- Extract subsidiary information from Exhibit 21 filings.  
+- Build a unified dataset of corporate relationships.  
+
+#### Approach
+- Used the **SEC EDGAR API** to retrieve 10-K filings.  
+- Parsed Exhibit 21 documents for subsidiary disclosures.    
+- Normalized company and subsidiary names.  
+
+#### Outcome
+- Created a structured parent–subsidiary dataset.  
+- Enabled hierarchical analysis of corporate structures.  
+- Provided foundational data for linking companies to broader datasets.  
+
+_BeautifulSoup Extraction Snippet:_
+
+```python
+def parse_exhibit_21(url):
+    r = requests.get(url, headers=SEC_HEADERS)
+    if not r.ok:
+        return []
+
+    soup = BeautifulSoup(r.text, "html.parser")
+
+    subs = []
+
+    # Extract from tables first
+    tables = soup.find_all("table")
+    for table in tables:
+        for row in table.find_all("tr"):
+            cells = row.find_all(["td", "th"])
+            if not cells:
+                continue
+
+            text = cells[0].get_text(" ", strip=True)
+
+            # Skip header-like entries
+            if text.lower() in ["name", "subsidiary", "entity", "company"]:
+                continue
+
+            # Skip junk rows
+            if len(text) < 3:
+                continue
+
+            # Must contain an indicator of corporate entity
+            if not re.search(r'\b(inc|llc|ltd|corp|co|company|bank|group)\b', text, re.I):
+                continue
+
+            subs.append(text)
+
+    if subs:
+        return subs
+
+    # Raw text parsing
+    text = soup.get_text("\n")
+    lines = [line.strip() for line in text.split("\n") if line.strip()]
+
+    pattern = re.compile(r"\b(inc|llc|ltd|corp|company|co|bank|group)\b", re.I)
+
+    clean = [line for line in lines if pattern.search(line)]
+    
+    return clean
+```
