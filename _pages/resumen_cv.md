@@ -9,9 +9,9 @@ redirect_from:
 
 {% include base_path %}
 
-## Resumen
+Here you can find my latest **Resumen & CV**, please feel free to view and download them:
 
-Please feel free to view and download my latest Resumen:
+## Resumen
 
 <div style="text-align: center;">
 
