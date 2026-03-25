@@ -121,13 +121,33 @@ The internship allow me to apply the knowledge that that I acquired during the p
 - **Corpus Processing:**  
   Working with large, real-world text corpora (SEC filings, emails) requiring normalization and structured representation.
 
+## Project Breakdown
 
+### 1. Executive and Corporate Information Extraction
 
-* **Length**: A summary of the project goals, technology used, and outcomes, as appropriate for a general technical audience, between 1000 and 3000 words (not counting code)
-* **Content**: student’s experience demonstrates the learning outcomes for the MSHLT program [^note]
-* **Code**: Code is contained in the site, or a link to the code (such as in a GitHub repository) exists on the site.
-* **Professionalism**: Free of grammatical, mechanical, and stylistic issues
-* **Above and beyond**: How well does this component communicate the most relevant features?
+This project focused on extracting and structuring executive-level information from SEC filings (8-K and 10-K), transforming unstructured financial documents into clean, analyzable datasets.
+
+#### Objectives
+- Identify executive names and roles from filings  
+- Normalize and standardize titles  
+- Create a clean, deduplicated executive dataset  
+
+#### Approach
+- Applied **regex-based extraction** and **spaCy NLP models** for entity recognition  
+- Implemented **multi-tier confidence validation** (high/low/spaCy)  
+- Removed false positives (e.g., financial terms misidentified as names)  
+- Standardized titles into canonical categories (CEO, CFO, etc.)  
+- Built validation and deduplication pipelines  
+
+#### Outcome
+- Produced a structured dataset of executives across thousands of companies  
+- Improved consistency and usability of executive-level data  
+- Enabled downstream analysis and integration with other datasets  
+
+```python
+# your code here
+def example():
+    return "clean snippet"
 
 
 [^note]: The learning outcomes of the MSHLT program are:
@@ -135,3 +155,6 @@ The internship allow me to apply the knowledge that that I acquired during the p
     1. Students will demonstrate programming skills for the workplace.
     2. Students will be able to use fundamental algorithms and concepts in Natural Language Processing.
     3. Students will show knowledge of tools and packages used in Natural Language Processing.
+```
+
+sada
