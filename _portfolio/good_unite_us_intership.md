@@ -41,6 +41,8 @@ The primary goal of this internship was to apply natural language processing and
 
 As an NLP Intern, I:
 
+---
+
 - **Built end-to-end NLP pipelines** to process structured and unstructured data from SEC filings, FEC records, and internal datasets. 
 - **Extracted executive information** (names, roles, company relationships) from SEC filings using regex-based and NLP methods (e.g., spaCy, RapidFuzzy), with multi-tier confidence validation (filters).  
 - **Normalized and standardized executive titles**, reducing hundreds of raw variants into consistent categories (e.g., CEO, CFO, President). 
@@ -53,7 +55,8 @@ As an NLP Intern, I:
 - **Built web-scraping pipelines** to collect company contact information such as domains, emails, social media.  
 - **Developed email-based extraction systems** using the Gmail API (with Google Cloud) to process historical brand requests, normalize entities.
 - **Extracted subsidiary relationships** from SEC Exhibit 21 filings using the EDGAR API, creating structured parent–subsidiary datasets.
-- **Engineered data integration workflows** for Firebase (Firestore), Snowflake for normalization mismatches, and joins.  
+- **Engineered data integration workflows** for Firebase (Firestore), Snowflake for normalization mismatches, and joins.
+   
 ---
 
 During the internship I worked mostly with **Python (pandas, regex, NLP libraries)**, **SQL/Snowflake**, and cloud platforms such as **AWS, Azure, Firebase, and Google Cloud APIs**.
