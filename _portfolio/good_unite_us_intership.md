@@ -24,10 +24,11 @@ Across the internship, I contributed to several connected projects, including ex
   
 ## Project Goals
 <div style="text-align: justify; line-height: 1.7;">
+  
+The primary goal of this internship was to apply natural language processing and data science techniques to real-world, large-scale datasets using Python involving corporate, financial, and policy-related information. Rather than working with clean, preprocessed data, the focus was on developing robust workflows capable of handling noisy, inconsistent, and semi-structured sources such as SEC filings, political contribution records, and user-generated text.
 
-The primary goal of this internship was to apply natural language processing and data science techniques to real-world, large-scale datasets involving corporate, financial, and policy-related information. Rather than working with clean, preprocessed data, the focus was on developing robust workflows capable of handling noisy, inconsistent, and semi-structured sources such as SEC filings, political contribution records, and user-generated text.
 </div>
-* Key objectives included:
+**Key objectives included:**
 
 - Developing preprocessing pipelines for noisy and unstructured data (SEC filings, FEC records, email text)
 - Implementing information extraction and normalization workflows
@@ -42,7 +43,7 @@ The primary goal of this internship was to apply natural language processing and
 * **Code**: Code is contained in the site, or a link to the code (such as in a GitHub repository) exists on the site.
 * **Professionalism**: Free of grammatical, mechanical, and stylistic issues
 * **Above and beyond**: How well does this component communicate the most relevant features?
-</div>
+
 
 [^note]: The learning outcomes of the MSHLT program are:
     
