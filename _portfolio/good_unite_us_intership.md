@@ -339,3 +339,50 @@ def split_brands(raw: str):
 
     return final
 ```
+
+### 4. Political Data Integration and Validation
+
+This project integrated corporate data with political contribution datasets to analyze corporate political activity.
+
+#### Objectives
+- Determine PAC activity at the company level.  
+- Validate and classify political contribution data.  
+- Extend analysis to executive-level political behavior.  
+
+#### Approach
+- Integrated **FEC data** with internal **Snowflake datasets** . 
+- Built classification pipelines for PAC activity (donated / not donated / none).  
+- Implemented **exact and fuzzy matching** against official records.  
+- Linked executives to company identifiers for future donation analysis.  
+
+#### Outcome
+- Created a company-level PAC activity dataset.  
+- Achieved high validation accuracy (~95% match rate).  
+- Established groundwork for executive-level political analysis.
+
+_Snowflake FEC Normalization Function Snippet: This normalization function supports entity resolution by converting noisy committee names into a canonical form, improving join accuracy across external (FEC) and internal datasets. It is a key preprocessing step for linking political contribution data at scale._
+
+```python
+def norm_committee_name(s: str) -> str:
+    if s is None:
+        return ""
+    s = str(s).lower()
+    s = re.sub(r"[^a-z0-9\s]", " ", s)  # remove punctuation
+    s = re.sub(r"\b(pac|political|action|committee|fund|the|and|of|for|employees)\b", " ", s)
+    s = re.sub(r"\s+", " ", s).strip()
+    return s
+
+fec_p["committee_name_clean"] = fec_p["CMTE_NM"].map(norm_committee_name)
+sf["committee_name_clean"] = sf["COMMITTEE_NAME"].map(norm_committee_name)
+
+#Left join
+merged = fec_p.merge(
+    sf[["committee_name_clean", "TOTAL_AMOUNT", "HAS_DONATED", "FIRST_CYCLE", "LAST_CYCLE"]],
+    on="committee_name_clean",
+    how="left",
+    suffixes=("_fec", "_sf")
+)
+
+merged["TOTAL_AMOUNT"] = merged["TOTAL_AMOUNT"].fillna(0)
+merged["HAS_DONATED"] = merged["HAS_DONATED"].fillna(False)
+```
