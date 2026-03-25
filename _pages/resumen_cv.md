@@ -11,6 +11,8 @@ redirect_from:
 
 ## Resumen
 
+Please feel free to view and download my latest Resumen:
+
 <div style="text-align: center;">
 
 <iframe 
