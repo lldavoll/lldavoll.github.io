@@ -148,13 +148,6 @@ This project focused on extracting and structuring executive-level information f
 # your code here
 def example():
     return "clean snippet"
-
-
-[^note]: The learning outcomes of the MSHLT program are:
-    
-    1. Students will demonstrate programming skills for the workplace.
-    2. Students will be able to use fundamental algorithms and concepts in Natural Language Processing.
-    3. Students will show knowledge of tools and packages used in Natural Language Processing.
 ```
 
 sada
