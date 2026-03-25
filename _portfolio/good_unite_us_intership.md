@@ -29,11 +29,11 @@ The primary goal of this internship was to **apply natural language processing a
 </p>
 
 <p>
-A key objective was to design and implement scalable preprocessing pipelines that could transform raw text into structured datasets. This included tasks such as tokenization, normalization, information extraction, and feature engineering, with the aim of enabling downstream analysis and integration across multiple data sources. 
+* A key objective was to design and implement scalable preprocessing pipelines that could transform raw text into structured datasets. This included tasks such as tokenization, normalization, information extraction, and feature engineering, with the aim of enabling downstream analysis and integration across multiple data sources. 
 </p>
 
 <p>
-Another major goal was to improve entity resolution across datasets in cases where company names, executive roles, and organizational identifiers were inconsistent or ambiguous. This required developing strategies to standardize entities and accurately match records across heterogeneous data sources.
+* Another major goal was to improve entity resolution across datasets in cases where company names, executive roles, and organizational identifiers were inconsistent or ambiguous. This required developing strategies to standardize entities and accurately match records across heterogeneous data sources.
 </p>
 
 <p>
