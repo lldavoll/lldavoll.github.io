@@ -1,6 +1,6 @@
 ---
 layout: archive
-title: "Repositoires"
+title: "Repositories"
 permalink: /repositories/
 author_profile: true
 redirect_from:
