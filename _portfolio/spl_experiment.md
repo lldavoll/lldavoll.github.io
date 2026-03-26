@@ -285,75 +285,41 @@ This part of the project showed me that building experimental tools often requir
 
 </p>
 </div>
+
 ---
 
-### 2. Corporate Structure and Subsidiary Mapping
+### 3. Prueba Step: Practice Version of the Experiment
 
-This project focused on identifying parent–subsidiary relationships using SEC filings, enabling analysis of corporate hierarchies.
+<div style="text-align: justify; line-height: 1.7;">
+<p>
+  
+Before running the full experiment, I created a <strong>practice version</strong> (`prueba`) to test the full pipeline in a controlled way. This step served as a smaller-scale version of the experiment and was essential for debugging timing, audio playback, keyboard responses, and questionnaire flow.
 
-#### Objectives
-- Extract subsidiary information from Exhibit 21 filings.  
-- Build a unified dataset of corporate relationships.  
+</p>
+</div>
 
-#### Approach
-- Used the **SEC EDGAR API** to retrieve 10-K filings.  
-- Parsed Exhibit 21 documents for subsidiary disclosures.    
-- Normalized company and subsidiary names.  
+The practice trials allowed me to verify that:
 
-#### Outcome
-- Created a structured parent–subsidiary dataset.  
-- Enabled hierarchical analysis of corporate structures.  
-- Provided foundational data for linking companies to broader datasets.  
+- Segmented audio played in the correct order.
+- Participants could advance with the spacebar.
+- Comprehension questions appeared correctly.
+- Key responses (`f` and `j`) were recorded properly.
+- Timing variables were stored as expected.
+- PsychoPy loaded the correct CSV condition files.
+- The BLP routines worked as intended inside the full experiment structure.
 
-_BeautifulSoup Extraction Snippet: This extraction function combines HTML parsing with rule-based entity detection to identify subsidiary companies from SEC Exhibit 21 filings. By prioritizing structured table data and incorporating fallback text parsing, it handles variability in document formats and ensures reliable recovery of corporate entities._
+<div style="text-align: justify; line-height: 1.7;">
+<p>
+This stage was important because it exposed problems that would have been difficult to diagnose during real participant testing. For example, it helped identify issues related to routine transitions, lag caused by certain interface elements, and how PsychoPy stored response data in the output CSV files.
+<p>
+  
+</p>
+By separating a practice phase from the main experiment, I was able to test the experimental logic more safely and make iterative adjustments before final deployment.
 
-```python
-def parse_exhibit_21(url):
-    r = requests.get(url, headers=SEC_HEADERS)
-    if not r.ok:
-        return []
+</p>
+</div>
+---
 
-    soup = BeautifulSoup(r.text, "html.parser")
-
-    subs = []
-
-    # Extract from tables first
-    tables = soup.find_all("table")
-    for table in tables:
-        for row in table.find_all("tr"):
-            cells = row.find_all(["td", "th"])
-            if not cells:
-                continue
-
-            text = cells[0].get_text(" ", strip=True)
-
-            # Skip header-like entries
-            if text.lower() in ["name", "subsidiary", "entity", "company"]:
-                continue
-
-            # Skip junk rows
-            if len(text) < 3:
-                continue
-
-            # Must contain an indicator of corporate entity
-            if not re.search(r'\b(inc|llc|ltd|corp|co|company|bank|group)\b', text, re.I):
-                continue
-
-            subs.append(text)
-
-    if subs:
-        return subs
-
-    # Raw text parsing
-    text = soup.get_text("\n")
-    lines = [line.strip() for line in text.split("\n") if line.strip()]
-
-    pattern = re.compile(r"\b(inc|llc|ltd|corp|company|co|bank|group)\b", re.I)
-
-    clean = [line for line in lines if pattern.search(line)]
-    
-    return clean
-```
 ### 3. Contact Enrichment and Email-Based NLP Pipelines
 
 This project focused on extracting structured information from web data and large-scale email datasets.
