@@ -26,45 +26,57 @@ This project reflects the intersection of <strong>computational linguistics, exp
 
   
 ## Project Goals
-<div style="text-align: justify; line-height: 1.7;">
-  
-The primary goal of this internship was to apply natural language processing and data science techniques to real-world, large-scale datasets using Python involving corporate, financial, and policy-related information. Rather than working with clean, preprocessed data, the focus was on developing robust workflows capable of handling noisy, inconsistent, and semi-structured sources such as SEC filings, political contribution records, and user-generated text.
-</div>
 
-**Key objectives included:**
+The project was designed around three main objectives:
 
-- Developing preprocessing pipelines for noisy and unstructured data (SEC filings, FEC records, email text).
-- Implementing information extraction and normalization workflows.
-- Performing entity resolution across inconsistent datasets.
-- Integrating multiple data sources into unified, structured outputs.
-- Translating technical results into insights for real-world applications.
-- Collaborating in a professional engineering environment.
+1. **Implement a controlled SPL paradigm**
+   - Present auditory stimuli segmented across multiple steps.
+   - Record precise reaction times at each segment.
+   - Capture comprehension responses following each trial.
 
-## My Role and Contributions
+2. **Integrate a bilingual profiling system**
+   - Collect demographic and linguistic background data.
+   - Measure language use, proficiency, and attitudes.
+   - Ensure usability across Spanish and Quechua contexts.
 
-As an NLP Intern, I:
+3. **Develop a reproducible data pipeline**
+   - Clean and standardize raw PsychoPy outputs.
+   - Merge experimental and questionnaire data.
+   - Prepare datasets for statistical analysis.
 
-- **Built end-to-end NLP pipelines** to process structured and unstructured data from SEC filings, FEC records, and internal datasets. 
-- **Extracted executive information** (names, roles, company relationships) from SEC filings using regex-based and NLP methods (e.g., spaCy, RapidFuzzy), with multi-tier confidence validation (filters).  
-- **Normalized and standardized executive titles**, reducing hundreds of raw variants into consistent categories (e.g., CEO, CFO, President). 
-- **Performed entity resolution across datasets**, matching companies and executives despite inconsistencies in naming and formatting.  
-- **Integrated corporate and political data**, linking company records with PAC contribution data to enable analysis of corporate political activity.  
-- **Developed data validation workflows**, including filtering, deduplication, and fuzzy matching to improve data quality and reliability.  
-- **Processed large-scale datasets**, such as SEC filings and over 300k user-generated emails, using memory-efficient and scalable workflows.  
-- **Removing false positives**, such as  non-person entities and refining extraction pipelines through iterative validation 
-- **Optimized long-running processes**, including multi-day web scraping workflows with filtering, retry logic, and domain validation  
-- **Built web-scraping pipelines** to collect company contact information such as domains, emails, social media.  
-- **Developed email-based extraction systems** using the Gmail API (with Google Cloud) to process historical brand requests, normalize entities.
-- **Extracted subsidiary relationships** from SEC Exhibit 21 filings using the EDGAR API, creating structured parent–subsidiary datasets.
-- **Engineered data integration workflows** for Firebase (Firestore), Snowflake for normalization mismatches, and joins.
+---
 
-During the internship I worked most    ly with **Python** (pandas, regex, NLP libraries), SQL/Snowflake, and cloud platforms such as AWS, Azure, Firebase, and Google Cloud APIs.
+## Experimental Design
 
-## Data Sources and Tools
+### Self-Paced Listening Paradigm
 
-This project involved integrating datasets from heterogeneous sources, requiring both NLP techniques and data engineering workflows.
+The SPL task is a widely used method in psycholinguistics to study **incremental sentence processing**. In this implementation:
 
-### Data Sources
+- Each sentence is divided into **7 audio segments**.
+- Participants press the **spacebar** to advance between segments.
+- Reaction time is recorded at each step.
+
+After the final segment:
+
+- A **comprehension question (segment 8)** is presented.
+- Participants respond using:
+  - **F = Sí [Yes]**
+  - **J = No [No]**
+
+This design allows us to measure the processing time at each segment, sensitivity to linguistic structure and comprehension accuracy
+
+---
+
+### Stimuli Structure
+
+Audio stimuli follow a structured naming convention:
+
+d_<list><sublist>_seg<number>.wav
+
+Example:
+
+- d_1a_seg1.wav = Segment 1
+- d_1a_seg8.wav = Question audio
 
 - **SEC Filings (8-K, 10-K, Exhibit 21):**  
   Used to extract executive information, corporate structure, and subsidiary relationships through document parsing and text processing.
