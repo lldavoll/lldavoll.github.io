@@ -9,10 +9,12 @@ collection: portfolio
 
 # Overview
 
+<div style="text-align: justify; line-height: 1.7;">
+<p>
+  
+This project presents the design, implementation, and analysis pipeline of a <strong>Self-Paced Listening (SPL) experiment</strong> integrated with a <strong>Bilingual Language Profile (BLP) questionnaire</div>, developed as part of my work in the LABORATIORIO CAMBIAR NOMBRE ACA.
 
-This project presents the design, implementation, and analysis pipeline of a **Self-Paced Listening (SPL) experiment** integrated with a **Bilingual Language Profile (BLP) questionnaire**, developed as part of my work in the LABORATIORIO CAMBIAR NOMBRE ACA.
-
-The primary goal of the project was to create a **fully reproducible psycholinguistic experiment pipeline**, including:
+The primary goal of the project was to create a <strong>fully reproducible psycholinguistic experiment pipeline</strong>, including:
 
 - Experimental design and stimulus presentation. (PsychoPy)
 - Participant interaction and reaction time collection.
@@ -20,7 +22,7 @@ The primary goal of the project was to create a **fully reproducible psycholingu
 - Automated data cleaning and restructuring (Python).
 - A repository-ready architecture for reproducibility and reuse.
 
-This project reflects the intersection of **computational linguistics, experimental design, and data engineering**, all central components of the MSHLT program.
+This project reflects the intersection of <strong>computational linguistics, experimental design, and data engineering</strong>.
 
   
 ## Project Goals
