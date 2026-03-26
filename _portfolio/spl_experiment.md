@@ -236,22 +236,22 @@ The BLP section was designed to complement the self-paced listening task by prov
 
 The BLP implementation was divided into multiple sections:
 
-- **Biographical information**
-- **Language history**
-- **Language use**
-- **Language competence**
-- **Language attitudes**
+- **Biographical information.**
+- **Language history.**
+- **Language use.**
+- **Language competence.**
+- **Language attitudes.**
 
 The questionnaire included items such as:
 
-- age and place of birth
-- current residence
-- parents’ languages
-- age of acquisition for each language
-- years of formal education in each language
-- self-reported speaking, reading, writing, and comprehension ability
-- patterns of language use with family, friends, work, and internal thought
-- identity and attitude toward the participant’s languages
+- Age and place of birth.
+- Current residence.
+- Parents’ languages.
+- Age of acquisition for each language.
+- Years of formal education in each language.
+- Self-reported speaking, reading, writing, and comprehension ability.
+- Patterns of language use with family, friends, work, and internal thought.
+- Identity and attitude toward the participant’s languages.
 
 #### Design Decisions
 
@@ -320,71 +320,50 @@ By separating a practice phase from the main experiment, I was able to test the 
 </div>
 ---
 
-### 3. Contact Enrichment and Email-Based NLP Pipelines
+### 4. Testing and Experimental Refinement
 
-This project focused on extracting structured information from web data and large-scale email datasets.
+<div style="text-align: justify; line-height: 1.7;">
+<p>
+  
+Once the preprocessing and practice stages were complete, I moved to a broader testing phase. This involved repeatedly running the experiment in PsychoPy and refining both the task structure and participant interface.
+  
+</p>
+</div>
 
-#### Objectives
-- Enrich company data with contact and social media information.  
-- Extract user-generated brand requests from historical emails.  
+Several important implementation issues were resolved during this stage:
 
-#### Approach
-- Built **web scraping pipelines** using BeautifulSoup and search APIs.  
-- Implemented filtering to remove irrelevant or broken links.  
-- Developed a **Gmail API pipeline** to process ~300k emails.  
-- Normalized brand names and aggregated request frequencies.  
+#### Audio Timing
 
-#### Outcome
-- Generated enriched company profiles with contact data.  
-- Produced ranked datasets of user-requested brands.  
-- Enabled analysis of user demand and trends.
+<div style="text-align: justify; line-height: 1.7;">
+<p>
+  
+One of the main testing goals was to confirm that each audio segment stopped at the correct point. Since the experiment depends on segmented listening, even small timing inconsistencies could affect the validity of the task. The preprocessing step with duration extraction was therefore critical for reliable playback.
+<p>
+  
+</p>
+I also examined the difference between PsychoPy log timings and CSV output timings. In particular, the reported value of `audio_stopped` in the CSV did not always exactly match the “Audio finished at” time in the PsychoPy log. This helped me better understand the difference between internal PsychoPy timing and data written to the output file, including small processing delays.
 
-_Gmail Brand Extraction Snippet: This rule-based extraction function converts semi-structured email text into structured brand request candidates. It uses regex-based span detection, fallback parsing, and delimiter-aware splitting to preserve useful entities while reducing noise from inconsistent user input._
+</p>
+</div>
 
-```python
-BRAND_BLOCK_RE = re.compile(
-    r"i['’]d\s+like\s+to\s+know\s+more\s+details\s+about:\s*(.*?)\s*thanks",
-    flags=re.IGNORECASE | re.DOTALL
-)
+#### Fixation Cross and Routine Flow
 
-SUBJECT_FALLBACK_RE = re.compile(
-    r"details\s+about:\s*(.*?)\s*(?:thanks|\Z)",
-    flags=re.IGNORECASE | re.DOTALL
-)
+<div style="text-align: justify; line-height: 1.7;">
+<p>
+At one point, the fixation cross routine caused the next audio segment to begin automatically before the participant was ready. After testing several configurations, I removed the fixation and instruction elements that were interfering with participant-controlled pacing. This restored the intended self-paced behavior of the task.
 
-def extract_brand_block(body: str, subject: str):
-    if body:
-        m = BRAND_BLOCK_RE.search(body)
-        if m:
-            raw = m.group(1).strip()
-            return (raw if raw else None), "body"
+</p>
+</div>
 
-    if subject:
-        m = SUBJECT_FALLBACK_RE.search(subject)
-        if m:
-            raw = m.group(1).strip()
-            return (raw if raw else None), "subject"
+#### Performance and Lag
 
-    return None, "none"
-
-
-def split_brands(raw: str):
-    raw = (raw or "").strip()
-    if not raw:
-        return []
-
-    parts = []
-    for chunk in raw.split("/"):
-        chunk = re.sub(r"\s+", " ", chunk).strip()
-        if chunk:
-            parts.append(chunk)
-
-    final = []
-    for p in parts:
-        final.extend([x.strip() for x in p.split(",") if x.strip()])
-
-    return final
-```
+<div style="text-align: justify; line-height: 1.7;">
+<p>
+The most significant technical issue was lag. Through testing, I found that PsychoPy’s Form component was one of the main sources of slowdown. Splitting the questionnaire into smaller routines helped somewhat, but the strongest improvement came from replacing Forms with TextBox2 and Sliders.
+  
+</p>
+</div>
+---
 
 ### 4. Political Data Integration and Validation
 
