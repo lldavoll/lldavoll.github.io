@@ -68,7 +68,7 @@ After the final segment:
   - **F = Sí [Yes]**
   - **J = No [No]**
 
-This design allows us to measure the processing time at each segment, sensitivity to linguistic structure and comprehension accuracy
+This design allows us to measure the processing time at each segment, sensitivity to linguistic structure and comprehension accuracy.
 
 ---
 
@@ -160,9 +160,9 @@ The first stage of the project focused on preparing the materials needed to run 
 </p>
 </div>
 
-1. extract the exact duration of each audio segment in milliseconds  
-2. generate four counterbalanced experimental lists  
-3. create the Bilingual Language Profile (BLP) form structure  
+1. Extract the exact duration of each audio segment in milliseconds.  
+2. Generate four counterbalanced experimental lists.  
+3. Create the Bilingual Language Profile (BLP) form structure.  
 
 <div style="text-align: justify; line-height: 1.7;">
 <p>
@@ -176,13 +176,13 @@ This stage was necessary because the experiment relies on segmented [.wav] files
 
 The preprocessing code was designed to support several parts of the experiment at once. Specifically, it was used to:
 
-- control timing between stimuli
-- create four lists for counterbalancing participants across conditions
-- support later logging and timing analysis
-- add the experiment condition label for each item:
+- Control timing between stimuli.
+- Create four lists for counterbalancing participants across conditions.
+- Support later logging and timing analysis.
+- Add the experiment condition label for each item:
   - **Diminutive (`dim`)**
   - **Plural (`plu`)**
-- create the Bilingual Language Profile (BLP) form input structure
+- Create the Bilingual Language Profile (BLP) form input structure.
   
 
 _Master Stimuli and ms Extraction snippet: This pipeline calculates the duration (in milliseconds) of each .wav audio segment in a folder.
@@ -216,6 +216,76 @@ for file in os.listdir(audio_dir):
 df = pd.DataFrame(rows)
 df.to_csv("durations.csv", index=False, encoding="utf-8-sig")
 ```
+---
+
+### 2. Bilingual Language Profile (BLP) Implementation
+
+<div style="text-align: justify; line-height: 1.7;">
+<p>
+  
+The second major part of the project was the implementation of a <strong>Bilingual Language Profile (BLP)</strong> questionnaire directly inside PsychoPy. The purpose of this component was to gather participant background information relevant to bilingualism, language use, and self-reported proficiency.
+
+<p>
+</p>
+
+The BLP section was designed to complement the self-paced listening task by providing a richer profile of each participant’s linguistic experience. This was especially important because the project involved bilingual participants and required more than simple demographic information.
+</p>
+</div>
+
+#### Sections Included
+
+The BLP implementation was divided into multiple sections:
+
+- **Biographical information**
+- **Language history**
+- **Language use**
+- **Language competence**
+- **Language attitudes**
+
+The questionnaire included items such as:
+
+- age and place of birth
+- current residence
+- parents’ languages
+- age of acquisition for each language
+- years of formal education in each language
+- self-reported speaking, reading, writing, and comprehension ability
+- patterns of language use with family, friends, work, and internal thought
+- identity and attitude toward the participant’s languages
+
+#### Design Decisions
+
+<div style="text-align: justify; line-height: 1.7;">
+<p>
+  
+At first, I explored PsychoPy’s <strong>Form</strong> component to build the questionnaire. However, in practice this created substantial lag and reduced the performance of the experiment, especially on less powerful computers. To solve this, I redesigned the BLP using a combination of:
+
+</p>
+</div>
+
+- **TextBox2** for open-ended text fields
+- **Sliders** for ratings and numeric scales
+- **Custom “Siguiente” buttons** for navigation
+- **Code components** to enforce that participants could only continue after answering all required questions
+
+<div style="text-align: justify; line-height: 1.7;">
+<p>
+  
+This redesign significantly improved usability and performance. It also gave me greater control over the visual layout, response validation, and multilingual interface design.
+
+</p>
+</div>
+
+#### Why This Matters?
+
+<div style="text-align: justify; line-height: 1.7;">
+<p>
+  
+This part of the project showed me that building experimental tools often requires balancing theory and implementation. From an HLT perspective, the BLP section demonstrates the use of technical tools to collect structured linguistic data while maintaining an accessible participant experience.
+
+</p>
+</div>
+---
 
 ### 2. Corporate Structure and Subsidiary Mapping
 
