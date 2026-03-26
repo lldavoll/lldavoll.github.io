@@ -10,9 +10,11 @@ collection: portfolio
 # Overview
 
 <div style="text-align: justify; line-height: 1.7;">
-
+<p>
+  
 This project presents the design, implementation, and analysis pipeline of a <strong>Self-Paced Listening (SPL) experiment</strong> integrated with a <strong>Bilingual Language Profile (BLP) questionnaire</strong>, developed as part of my work in the LABORATIORIO CAMBIAR NOMBRE ACA.
 
+</p>
 </div>
 
 The primary goal of the project was to create a <strong>fully reproducible psycholinguistic experiment pipeline</strong>, including:
@@ -72,7 +74,7 @@ This design allows us to measure the processing time at each segment, sensitivit
 
 Audio stimuli follow a structured naming convention:
 
-d_<list><sublist>_seg<number>.wav
+d_[list][sublist]_seg[number].wav
 
 Example:
 
