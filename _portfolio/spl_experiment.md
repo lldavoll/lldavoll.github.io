@@ -10,9 +10,10 @@ collection: portfolio
 # Overview
 
 <div style="text-align: justify; line-height: 1.7;">
-<p>
-  
+
 This project presents the design, implementation, and analysis pipeline of a <strong>Self-Paced Listening (SPL) experiment</strong> integrated with a <strong>Bilingual Language Profile (BLP) questionnaire</div>, developed as part of my work in the LABORATIORIO CAMBIAR NOMBRE ACA.
+
+</div>
 
 The primary goal of the project was to create a <strong>fully reproducible psycholinguistic experiment pipeline</strong>, including:
 
