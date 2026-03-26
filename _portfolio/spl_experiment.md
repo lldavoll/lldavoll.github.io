@@ -92,8 +92,12 @@ Each trial is associated with metadata:
 - `genero` [genre]
 - `spl_exp` (experimental condition)
 
-Four lists are used for **counterbalancing participants**, ensuring experimental control.
+Two lists are used for **counterbalancing participants**, ensuring experimental control, the structure I followed was:
 
+<p align="center">
+  <img src="/images/stimuli.png" 
+       style="width: 100%; max-width: 800px; height: auto; border-radius: 12px;">
+</p>
 ---
 
 ### Pseudorandomization
