@@ -1,16 +1,28 @@
 ---
-title: "spl"
-excerpt: "During my internship at Goods Unite Us, I developed NLP-driven data pipelines to process large-scale corporate and policy datasets, including SEC filings and political contribution records. This project focused on extracting, normalizing, and integrating unstructured data from into structured insights to support transparency, check reliable patterns and integrated to the Mobile App."
+title: "Design and Implementation of a Self-Paced Listening Experiment with Integrated Bilingual Language Profiling (Quechua-Spanish)"
+excerpt: "End-to-end psycholinguistic experiment built in PsychoPy, combining self-paced listening with bilingual profiling and a reproducible Python data pipeline."
 collection: portfolio
 ---
 <p align="center">
-  <img src="/images/good.png" style="width: 100%; max-width: 700px; height: 320px; object-fit: cover; border-radius: 12px;">
+  <img src="/images/psychopy.png" style="width: 100%; max-width: 700px; height: 320px; object-fit: cover; border-radius: 12px;">
 </p>
 
-# Summary
+# Overview
 <div style="text-align: justify; line-height: 1.7;">
 <p>
-During my internship at Goods Unite Us, I worked as an NLP Intern developing data pipelines to process large-scale structured and unstructured datasets related to corporations, executives, political contributions, and user-generated requests. My work focused on transforming noisy sources such as SEC filings, FEC records, email-based brand requests, and internal company datasets into structured, analyzable outputs that could support transparency, improve data quality, and contribute to the company’s products.
+
+This project presents the design, implementation, and analysis pipeline of a **Self-Paced Listening (SPL) experiment** integrated with a **Bilingual Language Profile (BLP) questionnaire**, developed as part of my work in the LABORATIORIO CAMBIAR NOMBRE ACA.
+
+The primary goal of the project was to create a **fully reproducible psycholinguistic experiment pipeline**, including:
+
+- Experimental design and stimulus presentation. (PsychoPy)
+- Participant interaction and reaction time collection.
+- Bilingual profiling through structured questionnaires.
+- Automated data cleaning and restructuring (Python).
+- A repository-ready architecture for reproducibility and reuse.
+
+This project reflects the intersection of **computational linguistics, experimental design, and data engineering**, all central components of the MSHLT program.
+
 </p>
 
 <p>
