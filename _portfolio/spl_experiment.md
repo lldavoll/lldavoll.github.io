@@ -17,7 +17,7 @@ collection: portfolio
 <div style="text-align: justify; line-height: 1.7;">
 <p>
   
-This project presents the design, implementation, and analysis pipeline of a <strong>Self-Paced Listening (SPL) experiment</strong> integrated with a <strong>Bilingual Language Profile (BLP) questionnaire</strong>, developed as part of my work in the Arizona Applied Psycholinguistics Lab [AAPL](https://uavip.arizona.edu/arizona-applied-psycholinguistics-lab).
+This project presents the design, implementation, and analysis pipeline of a <strong>Self-Paced Listening (SPL) experiment</strong> integrated with a <strong>Bilingual Language Profile (BLP) questionnaire</strong>, developed as part of my work in the <a href="https://uavip.arizona.edu/arizona-applied-psycholinguistics-lab" target="_blank"> Arizona Applied Psycholinguistics Lab (AAPL) </a>.
 </p>
 </div>
 
@@ -28,9 +28,6 @@ The primary goal of the project was to create a <strong>fully reproducible psych
 - Bilingual profiling through structured questionnaires.
 - Automated data cleaning and restructuring (Python).
 - A repository-ready architecture for reproducibility and reuse.
-
-This project reflects the intersection of <strong>computational linguistics, experimental design, and data engineering</strong>.
-
   
 ## Project Goals
 
@@ -56,6 +53,7 @@ The project was designed around three main objectives:
 ## Experimental Design
 
 ### Self-Paced Listening Paradigm
+
 
 The SPL task is a widely used method in psycholinguistics to study **incremental sentence processing**. In this implementation:
 
@@ -152,15 +150,27 @@ A major extension of this project was the integration of a **multi-section bilin
 
 ## Project Breakdown
 
-### 1. Preprocessing: Audio Durations, Counterbalanced Lists, and BLP Form Generation
+### 1. Preprocessing: Audio Durations, Counterbalanced Lists, and Master Stimuli Generation
 
+<div style="text-align: justify; line-height: 1.7;">
+<p>
+  
 The first stage of the project focused on preparing the materials needed to run the experiment in PsychoPy. This preprocessing step had three main goals:
+
+</p>
+</div>
 
 1. extract the exact duration of each audio segment in milliseconds  
 2. generate four counterbalanced experimental lists  
 3. create the Bilingual Language Profile (BLP) form structure  
 
-This stage was necessary because the experiment relies on segmented `.wav` files, and each segment must be presented with precise timing. By calculating the duration of each file ahead of time, I was able to control the flow of the stimuli more accurately and prepare the condition files that PsychoPy would later load during the experiment.
+<div style="text-align: justify; line-height: 1.7;">
+<p>
+  
+This stage was necessary because the experiment relies on segmented [.wav] files, and each segment must be presented with precise timing. By calculating the duration of each file ahead of time, I was able to control the flow of the stimuli more accurately and prepare the condition files that PsychoPy would later load during the experiment.
+
+</p>
+</div>
 
 #### Purpose
 
