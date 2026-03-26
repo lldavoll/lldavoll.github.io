@@ -9,11 +9,15 @@ collection: portfolio
 
 # Overview
 
+<p align="center">
+  <img src="/images/psychopy1.png" 
+       style="width: 100%; max-width: 800px; height: auto; border-radius: 12px;">
+</p>
+
 <div style="text-align: justify; line-height: 1.7;">
 <p>
   
-This project presents the design, implementation, and analysis pipeline of a <strong>Self-Paced Listening (SPL) experiment</strong> integrated with a <strong>Bilingual Language Profile (BLP) questionnaire</strong>, developed as part of my work in the LABORATIORIO CAMBIAR NOMBRE ACA.
-
+This project presents the design, implementation, and analysis pipeline of a <strong>Self-Paced Listening (SPL) experiment</strong> integrated with a <strong>Bilingual Language Profile (BLP) questionnaire</strong>, developed as part of my work in the Arizona Applied Psycholinguistics Lab [(AAPL)](https://uavip.arizona.edu/arizona-applied-psycholinguistics-lab).
 </p>
 </div>
 
@@ -80,24 +84,71 @@ Example:
 
 - d_1a_seg1.wav = Segment 1
 - d_1a_seg8.wav = Question audio
+  
+---
 
-- **SEC Filings (8-K, 10-K, Exhibit 21):**  
-  Used to extract executive information, corporate structure, and subsidiary relationships through document parsing and text processing.
+Each trial is associated with metadata:
 
-- **FEC Political Contribution Data:**  
-  Used to analyze PAC activity and classify companies based on political donation behavior.
+- `item_id`
+- `list`
+- `fonologia` [phonology]
+- `genero` [genre]
+- `spl_exp` (experimental condition)
 
-- **Internal Company Datasets (Snowflake/Firebase):**  
-  Provided structured corporate data, including company identifiers and PAC contribution records, enabling cross-dataset integration.
-
-- **User-Generated Email Data (Gmail API):**  
-  Historical “brand request” emails (~300k+) used to extract and aggregate user interest signals.
-
-- **Web Data (Company Websites & Social Media):**  
-  Collected via web scraping to enrich company profiles with contact information and external links.
+Four lists are used for **counterbalancing participants**, ensuring experimental control.
 
 ---
 
+### Pseudorandomization
+
+To avoid order effects, I implemented a pseudorandomization constraint:
+
+> No more than two consecutive items may belong to the same condition.
+
+This was implemented in PsychoPy using custom Python logic:
+
+- Items are shuffled dynamically at runtime.
+- A validation function enforces constraints.
+- The final order is applied before the experiment begins.
+
+This reflects the application of **algorithmic thinking in experimental design**.
+
+---
+
+## Bilingual Language Profile (BLP)
+
+A major extension of this project was the integration of a **multi-section bilingual questionnaire**, adapted for Spanish and Quechua speakers.
+
+### Sections Implemented
+
+1. **Biographical Information**
+   - Age, gender, birthplace, education
+   - Parents’ languages
+
+2. **Language History**
+   - Age of acquisition
+   - Years of exposure
+   - Formal education in each language
+
+3. **Language Use**
+   - Usage percentages across contexts:
+     - Family
+     - Work
+     - Thinking
+     - Social environments
+
+4. **Language Competence**
+   - Self-rated proficiency:
+     - Speaking
+     - Understanding
+     - Reading
+     - Writing
+
+5. **Language Attitudes**
+   - Identity and cultural affiliation
+   - Native language perception
+
+---
 ### Tools and Technologies
 
 - **Programming Languages:**  
