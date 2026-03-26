@@ -4,12 +4,11 @@ excerpt: "End-to-end psycholinguistic experiment built in PsychoPy, combining se
 collection: portfolio
 ---
 <p align="center">
-  <img src="/images/psychopy.png" style="width: 100%; max-width: 700px; height: 320px; object-fit: cover; border-radius: 12px;">
+  <img src="/images/psychopy.png" style="width: 100%; max-width: 700px; height: auto; border-radius: 12px;">
 </p>
 
 # Overview
-<div style="text-align: justify; line-height: 1.7;">
-<p>
+
 
 This project presents the design, implementation, and analysis pipeline of a **Self-Paced Listening (SPL) experiment** integrated with a **Bilingual Language Profile (BLP) questionnaire**, developed as part of my work in the LABORATIORIO CAMBIAR NOMBRE ACA.
 
@@ -23,16 +22,6 @@ The primary goal of the project was to create a **fully reproducible psycholingu
 
 This project reflects the intersection of **computational linguistics, experimental design, and data engineering**, all central components of the MSHLT program.
 
-</p>
-
-<p>
-A central part of the internship involved applying natural language processing and data science methods to data problems. I built workflows for information extraction, text normalization, entity resolution, and cross-dataset integration, with the goal of producing reliable datasets from sources that were often inconsistent, incomplete, or semi-structured. This directly aligned with the internship goals of strengthening my NLP and preprocessing skills, gaining experience with large-scale text data, and learning technical analysis skills in a collaborative environment.
-</p>
-
-<p>
-Across the internship, I contributed to several connected projects, including executive extraction from SEC filings, title normalization, contact enrichment, subsidiary extraction from Exhibit 21, PAC donation classification and validation, email-based brand request aggregation, and executive change extraction from alert emails. Together, these tasks formed a broader corporate intelligence pipeline that connected public filings, political data, and internal datasets into reusable analytical resources. 
-</p>
-</div>
   
 ## Project Goals
 <div style="text-align: justify; line-height: 1.7;">
