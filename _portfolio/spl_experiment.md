@@ -149,115 +149,62 @@ A major extension of this project was the integration of a **multi-section bilin
    - Native language perception
 
 ---
-### Tools and Technologies
-
-- **Programming Languages:**  
-  Python, SQL
-
-- **NLP and Data Processing:**  
-  pandas, NumPy, regex, spaCy, NLTK
-
-- **Machine Learning / Statistical Methods:**  
-  scikit-learn
-
-- **Data Engineering and Storage:**  
-  Snowflake, Firebase (Firestore), CSV
-
-- **APIs and Web Scraping:**  
-  SEC EDGAR API, Gmail API, BeautifulSoup, DuckDuckGo search integration, Rapidfuzz
-
-- **Cloud Platforms:**  
-  AWS, Azure, Google Cloud
-
-- **Visualization and Analysis:**  
-  matplotlib
-
----
 
 ## Project Breakdown
 
-### 1. Executive and Corporate Information Extraction
+### 1. Preprocessing: Audio Durations, Counterbalanced Lists, and BLP Form Generation
 
-This project focused on extracting and structuring executive-level information from SEC filings (8-K and 10-K), transforming unstructured financial documents into clean, analyzable datasets.
+The first stage of the project focused on preparing the materials needed to run the experiment in PsychoPy. This preprocessing step had three main goals:
 
-#### Objectives
-- Identify executive names and roles from filings.  
-- Normalize and standardize titles.
-- Create a clean, deduplicated executive dataset.  
+1. extract the exact duration of each audio segment in milliseconds  
+2. generate four counterbalanced experimental lists  
+3. create the Bilingual Language Profile (BLP) form structure  
 
-#### Approach
-- Applied **regex-based extraction** and **spaCy NLP models** for entity recognition.  
-- Implemented **multi-tier confidence validation** (high/low/spaCy).  
-- Removed false positives (e.g., financial terms misidentified as names).  
-- Standardized titles into canonical categories (CEO, CFO, etc.).  
-- Built validation and deduplication pipelines.  
+This stage was necessary because the experiment relies on segmented `.wav` files, and each segment must be presented with precise timing. By calculating the duration of each file ahead of time, I was able to control the flow of the stimuli more accurately and prepare the condition files that PsychoPy would later load during the experiment.
 
-#### Outcome
-- Produced a structured dataset of executives across thousands of companies.  
-- Improved consistency and usability of executive-level data.  
-- Enabled downstream analysis and integration with other datasets.  
+#### Purpose
 
-_SpaCy Extraction snippet: This pipeline combines statistical NLP (spaCy NER) with rule-based post-processing to extract and normalize executive names from noisy SEC filing text. By filtering false positives and enforcing structural constraints, it improves precision and produces a high-quality, deduplicated entity dataset._
+The preprocessing code was designed to support several parts of the experiment at once. Specifically, it was used to:
+
+- control timing between stimuli
+- create four lists for counterbalancing participants across conditions
+- support later logging and timing analysis
+- add the experiment condition label for each item:
+  - **Diminutive (`dim`)**
+  - **Plural (`plu`)**
+- create the Bilingual Language Profile (BLP) form input structure
+  
+
+_Master Stimuli and ms Extraction snippet: This pipeline calculates the duration (in milliseconds) of each .wav audio segment in a folder.
+After that it creates 4 lists, merge them as a master stimuli that can be uploaded to a PsychoPy Experiment._
 
 ```python
-# Load SpaCy English model
-nlp = spacy.load("en_core_web_sm")
+import os
+from pydub import AudioSegment
+import pandas as pd
 
-# Load cleaned low data
-raw_path = "executive_cleaned_low.csv"
-df = pd.read_csv(raw_path)
+audio_dir = r"MY_PATH"
 
-# Extraction
-def extract_persons(text):
-    if pd.isna(text):
-        return None
-    doc = nlp(text)
-    names = [ent.text.strip() for ent in doc.ents if ent.label_ == "PERSON"]
-    return names[0] if names else None
+def get_duration_ms(file_path):
+    audio = AudioSegment.from_wav(file_path)
+    return len(audio)  # duration in milliseconds
 
-df["executive_name"] = df["executive_name"].apply(extract_persons)
+rows = []
 
-# --- STEP 3: Basic text cleaning ---
-df["executive_name"] = (
-    df["executive_name"]
-    .astype(str)
-    .str.replace(r"\b(Email|Phone)\b", "", regex=True)
-    .str.strip()
-)
+for file in os.listdir(audio_dir):
+    if file.endswith(".wav"):
+        path = os.path.join(audio_dir, file)
+        duration = get_duration_ms(path)
 
-# Remove false positives
-false_positive_keywords = [
-    "Prepared Remarks", "Good Standing", "Qualified Transferee", "Diligence", "Milestones",
-    "Retirement", "Witness", "Indemnifying", "Securities", "Transfer Restricted", "Baton Rouge",
-    "Ganado Advocates", "Due Diligence", "Mutual Acknowledgment", "Hasche Sigle",
-    "Dykema Gossett", "Gunderson Dettmer", "Advocates", "Consulting", "LLP", "LLC", "Group",
-    "Corp", "Holdings", "Capital", "Incorporated", "Partners", "PLC", "Advisors", "Associates",
-    "Inc", "Company", "Enterprises", "Legal", "Strategy", "Bank", "Investments", "Management",
-    "Services"
-]
-pattern = re.compile("|".join([re.escape(k) for k in false_positive_keywords]), re.IGNORECASE)
+        rows.append({
+            "audio_file": file,
+            "duration_ms": duration,
+            "segment_number": int(file.split("seg")[-1].replace(".wav", "")),
+            "spl_exp": "dim" if "d_" in file else "plu"
+        })
 
-def is_valid_name(name):
-    if pd.isna(name) or name.strip() == "":
-        return False
-    if pattern.search(name):
-        return False
-    if len(name.split()) > 6 or any(char.isdigit() for char in name):
-        return False
-    if name.isupper() and len(name) > 2:
-        return False
-    return True
-
-df = df[df["executive_name"].apply(is_valid_name)]
-
-# Delete duplicates
-df = df.drop_duplicates(subset=["executive_name"]).reset_index(drop=True)
-
-# --- STEP 6: Save final cleaned file ---
-final_path = "executive_cleaned_spacy.csv"
-df.to_csv(final_path, index=False)
-
-print(f"Cleaned dataset saved as {final_path} ({len(df)} rows)")
+df = pd.DataFrame(rows)
+df.to_csv("durations.csv", index=False, encoding="utf-8-sig")
 ```
 
 ### 2. Corporate Structure and Subsidiary Mapping
