@@ -11,7 +11,7 @@ collection: portfolio
 
 <div style="text-align: justify; line-height: 1.7;">
 
-This project presents the design, implementation, and analysis pipeline of a <strong>Self-Paced Listening (SPL) experiment</strong> integrated with a <strong>Bilingual Language Profile (BLP) questionnaire</div>, developed as part of my work in the LABORATIORIO CAMBIAR NOMBRE ACA.
+This project presents the design, implementation, and analysis pipeline of a <strong>Self-Paced Listening (SPL) experiment</strong> integrated with a <strong>Bilingual Language Profile (BLP) questionnaire</strong>, developed as part of my work in the LABORATIORIO CAMBIAR NOMBRE ACA.
 
 </div>
 
