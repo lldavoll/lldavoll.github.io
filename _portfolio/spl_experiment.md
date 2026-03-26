@@ -15,8 +15,7 @@ collection: portfolio
 </p>
 
 <div style="text-align: justify; line-height: 1.7;">
-<p>
-  
+<p> 
 This project presents the design, implementation, and analysis pipeline of a <strong>Self-Paced Listening (SPL) experiment</strong> integrated with a <strong>Bilingual Language Profile (BLP) questionnaire</strong>, developed as part of my work in the <a href="https://uavip.arizona.edu/arizona-applied-psycholinguistics-lab" target="_blank"> Arizona Applied Psycholinguistics Lab (AAPL) </a>.
 </p>
 </div>
@@ -154,9 +153,7 @@ A major extension of this project was the integration of a **multi-section bilin
 
 <div style="text-align: justify; line-height: 1.7;">
 <p>
-  
 The first stage of the project focused on preparing the materials needed to run the experiment in PsychoPy. This preprocessing step had three main goals:
-
 </p>
 </div>
 
@@ -166,9 +163,7 @@ The first stage of the project focused on preparing the materials needed to run 
 
 <div style="text-align: justify; line-height: 1.7;">
 <p>
-  
 This stage was necessary because the experiment relies on segmented [.wav] files, and each segment must be presented with precise timing. By calculating the duration of each file ahead of time, I was able to control the flow of the stimuli more accurately and prepare the condition files that PsychoPy would later load during the experiment.
-
 </p>
 </div>
 
@@ -183,7 +178,6 @@ The preprocessing code was designed to support several parts of the experiment a
   - **Diminutive (`dim`)**
   - **Plural (`plu`)**
 - Create the Bilingual Language Profile (BLP) form input structure.
-  
 
 _Master Stimuli and ms Extraction snippet: This pipeline calculates the duration (in milliseconds) of each .wav audio segment in a folder.
 After that it creates 4 lists, merge them as a master stimuli that can be uploaded to a PsychoPy Experiment._
@@ -221,13 +215,10 @@ df.to_csv("durations.csv", index=False, encoding="utf-8-sig")
 ### 2. Bilingual Language Profile (BLP) Implementation
 
 <div style="text-align: justify; line-height: 1.7;">
-<p>
-  
+<p>  
 The second major part of the project was the implementation of a <strong>Bilingual Language Profile (BLP)</strong> questionnaire directly inside PsychoPy. The purpose of this component was to gather participant background information relevant to bilingualism, language use, and self-reported proficiency.
-
 <p>
 </p>
-
 The BLP section was designed to complement the self-paced listening task by providing a richer profile of each participant’s linguistic experience. This was especially important because the project involved bilingual participants and required more than simple demographic information.
 </p>
 </div>
@@ -256,10 +247,8 @@ The questionnaire included items such as:
 #### Design Decisions
 
 <div style="text-align: justify; line-height: 1.7;">
-<p>
-  
+<p> 
 At first, I explored PsychoPy’s <strong>Form</strong> component to build the questionnaire. However, in practice this created substantial lag and reduced the performance of the experiment, especially on less powerful computers. To solve this, I redesigned the BLP using a combination of:
-
 </p>
 </div>
 
@@ -270,19 +259,15 @@ At first, I explored PsychoPy’s <strong>Form</strong> component to build the q
 
 <div style="text-align: justify; line-height: 1.7;">
 <p>
-  
 This redesign significantly improved usability and performance. It also gave me greater control over the visual layout, response validation, and multilingual interface design.
-
 </p>
 </div>
 
 #### Why This Matters?
 
 <div style="text-align: justify; line-height: 1.7;">
-<p>
-  
+<p> 
 This part of the project showed me that building experimental tools often requires balancing theory and implementation. From an HLT perspective, the BLP section demonstrates the use of technical tools to collect structured linguistic data while maintaining an accessible participant experience.
-
 </p>
 </div>
 
@@ -291,10 +276,8 @@ This part of the project showed me that building experimental tools often requir
 ### 3. Prueba Step: Practice Version of the Experiment
 
 <div style="text-align: justify; line-height: 1.7;">
-<p>
-  
+<p> 
 Before running the full experiment, I created a <strong>practice version</strong> (`prueba`) to test the full pipeline in a controlled way. This step served as a smaller-scale version of the experiment and was essential for debugging timing, audio playback, keyboard responses, and questionnaire flow.
-
 </p>
 </div>
 
@@ -311,11 +294,9 @@ The practice trials allowed me to verify that:
 <div style="text-align: justify; line-height: 1.7;">
 <p>
 This stage was important because it exposed problems that would have been difficult to diagnose during real participant testing. For example, it helped identify issues related to routine transitions, lag caused by certain interface elements, and how PsychoPy stored response data in the output CSV files.
-<p>
-  
+<p> 
 </p>
 By separating a practice phase from the main experiment, I was able to test the experimental logic more safely and make iterative adjustments before final deployment.
-
 </p>
 </div>
 ---
@@ -324,9 +305,7 @@ By separating a practice phase from the main experiment, I was able to test the 
 
 <div style="text-align: justify; line-height: 1.7;">
 <p>
-  
 Once the preprocessing and practice stages were complete, I moved to a broader testing phase. This involved repeatedly running the experiment in PsychoPy and refining both the task structure and participant interface.
-  
 </p>
 </div>
 
@@ -336,7 +315,6 @@ Several important implementation issues were resolved during this stage:
 
 <div style="text-align: justify; line-height: 1.7;">
 <p>
-  
 One of the main testing goals was to confirm that each audio segment stopped at the correct point. Since the experiment depends on segmented listening, even small timing inconsistencies could affect the validity of the task. The preprocessing step with duration extraction was therefore critical for reliable playback.
 <p>  
 </p>
@@ -364,11 +342,10 @@ The most significant technical issue was lag. Through testing, I found that Psyc
 
 <div style="text-align: justify; line-height: 1.7;">
 <p>
-The last major stage of the project was the **data cleaning pipeline**, which transformed PsychoPy’s raw output into a cleaner and more analysis-ready format.
+The last major stage of the project was the <strong>data cleaning pipeline</strong>, which transformed PsychoPy’s raw output into a cleaner and more analysis-ready format.
 <p>  
 </p>
 Raw PsychoPy CSV files contain a large number of internal columns that are useful for the software itself but not necessarily useful for statistical analysis. In addition, because the experiment combined segmented trials with questionnaire-style responses, the resulting CSV files needed to be reorganized carefully.
-
 </p>
 </div>
 
@@ -400,10 +377,37 @@ A important part of this process was handling the questionnaire output. Since Ps
 </p>
 </div>
 
+_Output Process snippet: This pipeline process all the row data directly from PsychoPy to a readable CSV and save it in a new folder._
+
+```python
+import pandas as pd
+import numpy as np
+
+df = pd.read_csv("raw_data.csv")
+
+# Identify questionnaire/form rows
+form_cols = [c for c in df.columns if c.endswith(".text") or c.endswith(".response")]
+
+form_rows = df[df[form_cols].notna().any(axis=1)]
+non_form_rows = df[~df.index.isin(form_rows.index)]
+
+# Collapse form responses into a single row
+form_dict = {
+    col: form_rows[col].dropna().tolist()[-1] 
+    if not form_rows[col].dropna().empty else np.nan
+    for col in form_cols
+}
+
+form_df = pd.DataFrame([form_dict])
+
+# Combine cleaned experimental rows with questionnaire row
+df_final = pd.concat([non_form_rows, form_df], ignore_index=True)
+```
+
 #### Outcome
 
 The final cleaned dataset was easier to read, easier to analyze, and much more suitable for later work in R or Python.
 
 ---
----
 
+_For more detailed information about PsychoPy's Experiment and Python code visit the following [Repository](https://github.com/lldavoll/Self-Paced-Listening-Experiment-Pipeline)_
