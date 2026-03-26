@@ -338,11 +338,9 @@ Several important implementation issues were resolved during this stage:
 <p>
   
 One of the main testing goals was to confirm that each audio segment stopped at the correct point. Since the experiment depends on segmented listening, even small timing inconsistencies could affect the validity of the task. The preprocessing step with duration extraction was therefore critical for reliable playback.
-<p>
-  
+<p>  
 </p>
-I also examined the difference between PsychoPy log timings and CSV output timings. In particular, the reported value of `audio_stopped` in the CSV did not always exactly match the “Audio finished at” time in the PsychoPy log. This helped me better understand the difference between internal PsychoPy timing and data written to the output file, including small processing delays.
-
+I also examined the difference between PsychoPy log timings and CSV output timings. In particular, the reported value of [audio_stopped] in the CSV did not always exactly match the “Audio finished at” time in the PsychoPy log. This helped me better understand the difference between internal PsychoPy timing and data written to the output file, including small processing delays.
 </p>
 </div>
 
@@ -351,7 +349,6 @@ I also examined the difference between PsychoPy log timings and CSV output timin
 <div style="text-align: justify; line-height: 1.7;">
 <p>
 At one point, the fixation cross routine caused the next audio segment to begin automatically before the participant was ready. After testing several configurations, I removed the fixation and instruction elements that were interfering with participant-controlled pacing. This restored the intended self-paced behavior of the task.
-
 </p>
 </div>
 
@@ -359,156 +356,54 @@ At one point, the fixation cross routine caused the next audio segment to begin 
 
 <div style="text-align: justify; line-height: 1.7;">
 <p>
-The most significant technical issue was lag. Through testing, I found that PsychoPy’s Form component was one of the main sources of slowdown. Splitting the questionnaire into smaller routines helped somewhat, but the strongest improvement came from replacing Forms with TextBox2 and Sliders.
-  
+The most significant technical issue was lag. Through testing, I found that PsychoPy’s Form component was one of the main sources of slowdown. Splitting the questionnaire into smaller routines helped somewhat, but the strongest improvement came from replacing Forms with TextBox2 and Sliders. 
 </p>
 </div>
----
 
-### 4. Political Data Integration and Validation
+### 5. Data Cleaning and Restructuring
 
-This project integrated corporate data with political contribution datasets to analyze corporate political activity.
+<div style="text-align: justify; line-height: 1.7;">
+<p>
+The last major stage of the project was the **data cleaning pipeline**, which transformed PsychoPy’s raw output into a cleaner and more analysis-ready format.
+<p>  
+</p>
+Raw PsychoPy CSV files contain a large number of internal columns that are useful for the software itself but not necessarily useful for statistical analysis. In addition, because the experiment combined segmented trials with questionnaire-style responses, the resulting CSV files needed to be reorganized carefully.
 
-#### Objectives
-- Determine PAC activity at the company level.  
-- Validate and classify political contribution data.  
-- Extend analysis to executive-level political behavior.  
+</p>
+</div>
 
-#### Approach
-- Integrated **FEC data** with internal **Snowflake datasets** . 
-- Built classification pipelines for PAC activity (donated / not donated / none).  
-- Implemented **exact and fuzzy matching** against official records.  
-- Linked executives to company identifiers for future donation analysis.  
+#### Goals of the Cleaning Process
+
+The cleaning script was designed to:
+
+- Remove unnecessary PsychoPy metadata columns.
+- Preserve the important timing and response variables.
+- Exclude practice rows from the final dataset.
+- Reorganize questionnaire responses into a more interpretable format.
+- Move important columns next to `spl_exp` for readability.
+- Save cleaned files in a format that preserves Spanish accents correctly.
+
+#### Main Cleaning Operations
+
+The cleaning process included the following steps:
+
+- Removing metadata columns such as trial counters and internal PsychoPy variables.
+- Filtering out practice rows labeled as `prueba`.
+- Keeping only relevant response columns.
+- Standardizing empty responses and invalid values.
+- Moving timing variables like reaction time and key response fields closer to the experiment label column.
+- Exporting cleaned CSV files with `utf-8-sig` encoding so that accented characters display correctly in Excel.
+
+<div style="text-align: justify; line-height: 1.7;">
+<p>
+A important part of this process was handling the questionnaire output. Since PsychoPy writes different routines in different row structures, the cleaning pipeline had to collapse the form-related information into a more manageable format while preserving the segmented listening trial rows.
+</p>
+</div>
 
 #### Outcome
-- Created a company-level PAC activity dataset.  
-- Achieved high validation accuracy (~95% match rate).  
-- Established groundwork for executive-level political analysis.
 
-_Snowflake FEC Normalization Function Snippet: This normalization function supports entity resolution by converting noisy committee names into a canonical form, improving join accuracy across external (FEC) and internal datasets. It is a key preprocessing step for linking political contribution data at scale._
+The final cleaned dataset was easier to read, easier to analyze, and much more suitable for later work in R or Python.
 
-```python
-def norm_committee_name(s: str) -> str:
-    if s is None:
-        return ""
-    s = str(s).lower()
-    s = re.sub(r"[^a-z0-9\s]", " ", s)  # remove punctuation
-    s = re.sub(r"\b(pac|political|action|committee|fund|the|and|of|for|employees)\b", " ", s)
-    s = re.sub(r"\s+", " ", s).strip()
-    return s
+---
+---
 
-fec_p["committee_name_clean"] = fec_p["CMTE_NM"].map(norm_committee_name)
-sf["committee_name_clean"] = sf["COMMITTEE_NAME"].map(norm_committee_name)
-
-#Left join
-merged = fec_p.merge(
-    sf[["committee_name_clean", "TOTAL_AMOUNT", "HAS_DONATED", "FIRST_CYCLE", "LAST_CYCLE"]],
-    on="committee_name_clean",
-    how="left",
-    suffixes=("_fec", "_sf")
-)
-
-merged["TOTAL_AMOUNT"] = merged["TOTAL_AMOUNT"].fillna(0)
-merged["HAS_DONATED"] = merged["HAS_DONATED"].fillna(False)
-```
-
-## Results and Outcomes
-
-The internship resulted in several structured datasets and reusable workflows that improved the organization’s ability to analyze corporate, executive, and political data at scale.
-
-Some of the main outputs included:
-
-- **Executive extraction dataset:** a cleaned dataset containing **11,283 executive records** across **4,631 companies**, with normalized job titles and confidence labels for extraction quality.
-- **Executive title categorization:** a standardized mapping of raw executive titles into canonical categories such as CEO, CFO, President, and Vice President.
-- **Company contact enrichment dataset:** a structured dataset of **4,631 companies** with extracted domains, investor-relations pages, contact emails, and social media links.
-- **Parent–subsidiary dataset:** a unified dataset built from SEC Exhibit 21 filings, linking companies to subsidiary information and flagging cases where Exhibit 21 was unavailable.
-- **Brand request aggregation dataset:** a cleaned summary of historical user-submitted company requests extracted from email data, including normalized brand names, frequency counts, and time ranges.
-- **PAC donation superset:** a company-level dataset classifying firms into **PAC_DONATED**, **PAC_NO_DONATIONS**, and **NO_PAC** categories based on FEC and Snowflake data.
-- **PAC validation layer:** a matching workflow that achieved approximately **95% alignment** between Snowflake committee names and official FEC records.
-- **Executive change event dataset:** a structured dataset built from Official Board alert emails, capturing appointments, promotions, departures, and role changes across companies and industries.
-
-_For more detailed information about the project's code and output please visit the following [Repository](https://github.com/lldavoll/NLP-Pipelines-for-Corporate-and-Policy-Data)_
-
-## What I Learned...
-
-<div style="text-align: justify; line-height: 1.7;">
-This internship allowed me to apply theoretical knowledge from the MSHLT program to real-world data problems in the context of noisy, large-scale, and heterogeneous datasets.
-</div>
-
-### Applying NLP to Real-World Data
-
-<div style="text-align: justify; line-height: 1.7;">
-Through tasks such as executive extraction and email-based brand parsing, I learned how to apply NLP techniques beyond controlled environments. Unlike classroom datasets, real-world data required combining statistical methods (e.g., spaCy NER) with rule-based approaches to handle ambiguity, inconsistency, and noise.
-</div>
-
-### Importance of Data Preprocessing and Normalization
-
-<div style="text-align: justify; line-height: 1.7;">
-My major takeaway was the importance of preprocessing in NLP pipelines. Tasks such as executive title normalization, committee name standardization, and brand cleaning showed me that raw data is rarely usable without extensive transformation. Small inconsistencies in text can significantly impact downstream tasks such as matching and aggregation.
-</div>
-
-### Entity Resolution and Data Integration
-
-<div style="text-align: justify; line-height: 1.7;">
-Working across multiple datasets (SEC, FEC, Snowflake, email data) highlighted the complexity of entity resolution. I learned how to design normalization strategies and matching workflows (including fuzzy matching) to link entities across sources, which is a key challenge in applied NLP and data engineering.
-</div>
-
-### Scalability and Performance
-
-<div style="text-align: justify; line-height: 1.7;">
-Handling large datasets (SEC filings, hundreds of thousands of emails, Snowflake datasets) required thinking about performance and memory efficiency. I learned to design pipelines that scale, using chunked processing, efficient transformations, and careful validation to ensure reliability.
-</div>
-
-### Professional and Collaborative Skills
-
-<div style="text-align: justify; line-height: 1.7;">
-More important than technical skills, I gained experience working in a collaborative environment outside my native language (Spanish) were I was able to communicate progress, refining solutions based on feedback, and aligning with my coworkers to achieve the project goals. 
-</div>
-
-### Bridging Theory and Practice (Connection to MSHLT Coursework)
-
-<div style="text-align: justify; line-height: 1.7;">
-<p> 
-One of the most valuable aspects of this internship was the opportunity to directly apply concepts from my Master’s in Human Language Technology to real-world data challenges.
-</p>
-
-<p>
-  
-Coursework in <em>Statistical Natural Language Processing, HLT I & II, Computational Linguistics, and Computational Techniques for Linguists</em> provided the foundation for designing NLP pipelines for tasks such as named entity recognition, text normalization, and entity extraction. In practice, however, these methods needed to be combined with rule-based approaches to handle inconsistencies and edge cases that are rarely present in controlled academic datasets.
-
-</p>
-
-<p>
-Additionally, courses such as <em>Statistical Analysis for Linguistics, Data Mining and Discovery, and Data Analysis and Visualization</em> provided the statistical foundation necessary to evaluate data quality, validate outputs, and identify patterns in large datasets. These skills were important for tasks such as PAC donation classification and entity matching, where even small inconsistencies could significantly impact results. These courses also strengthened my ability to communicate results clearly and effectively.
-</p>
-</div>
-
-## Conclusion and Future Work
-
-<div style="text-align: justify; line-height: 1.7;">
-
-<p> 
-As a final takeaway, the internship provided me experience in building NLP-driven data pipelines for real-world datasets. By integrating corporate, financial, and user-generated data sources, I developed systems that transform unstructured text into structured, analyzable information which required combining statistical NLP methods with rule-based approaches, emphasizing the importance of flexibility when working with noisy and heterogeneous data.
-</p>
-
-<p> 
-Beyond the technical implementation, this experience reinforced key data engineering principles such as scalability, validation, and reproducibility. It also highlighted the importance of designing workflows that not only produce accurate results, but are also maintainable and useful for downstream applications.
-</p>
-
-</div>
-
-### Future Work
-
-For future project I would like to extend my work on:
-
-- **Advanced entity resolution:**  
-  Incorporate machine learning or embedding-based methods to improve matching accuracy across datasets.
-
-- **Automation and pipeline orchestration:**  
-  Integrate tools such as dbt or workflow schedulers to improve reproducibility and deployment.
-
-- **Real-time data integration:**  
-  Extend pipelines to support streaming or near real-time updates from APIs and external sources.
-
-- **Containerization:**  
-  Containerize pipelines using Docker to ensure reproducibility, portability, and consistent execution across environments.
