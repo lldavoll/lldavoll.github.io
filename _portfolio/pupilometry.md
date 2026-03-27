@@ -25,9 +25,11 @@ The primary goal of this project is to investigate how bilingual speakers proces
 More specifically, this project pursues the following goals:
 
 1. **Test the Bottleneck Hypothesis in real-time processing**
+   
    <div style="text-align: justify; line-height: 1.7;">
    - A main objective is to evaluate predictions from the <em>Bottleneck Hypothesis</em>, which claims that <strong>functional morphology is a primary source of difficulty in second language acquisition</strong>. By focusing on the subjunctive, this project examines whether bilingual speakers show <strong>increased processing effort when encountering morphological violations</strong>, even when they may perform well on explicit tasks.
 </div>
+
 2. **Compare implicit and explicit knowledge of grammar**
    - **Explicit knowledge** (*offline tasks, such as forced-choice judgments*).
    - **Implicit processing** (*pupil dilation*).
@@ -39,9 +41,11 @@ More specifically, this project pursues the following goals:
      -**L2 learners**.
      
 4. **Measure cognitive load using pupillometry**
+   
 <div style="text-align: justify; line-height: 1.7;">
 A methodological goal is to use <strong>pupil dilation as a continuous, real-time indicator of processing difficulty</strong>. The project tests whether ungrammatical sentences <em>SHOULD HAVE</em> greater pupil dilation which provides a more sensitive measure than traditional behavioral responses.
 </div>
+
 ---
 
 ## Technologies and Tools
