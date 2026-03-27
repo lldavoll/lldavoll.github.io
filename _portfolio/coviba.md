@@ -9,19 +9,15 @@ collection: portfolio
 
 # Overview
 
-<p align="center">
-  <img src="/images/cobiva.png" 
-       style="width: 100%; max-width: 800px; height: auto; border-radius: 12px;">
-</p>
-
 <div style="text-align: justify; line-height: 1.7;">
 <p> 
-As part of an ongoing collaboration with researchers in Hispanic linguistics at the University of Arizona, I contribute to the digitalization and preprocessing of sociolinguistic corpora documenting bilingual speech in the U.S.–Mexico border region. This work is connected to broader projects such as CoVIBA (Corpus de la Frontera) and CESA, which aim to build a large-scale, publicly accessible archive of bilingual interviews from regions including Texas and Arizona, with future expansion to New Mexico and California.
-
+As part of an ongoing collaboration with researchers in Hispanic linguistics at the University of Arizona, I contribute to the preprocessing of sociolinguistic corpora documenting bilingual speech in the U.S.–Mexico border region. This work is connected to broader projects such as <a href="https://www.utrgv.edu/cobiva/" target="_blank"> CoVIBA (Corpus de la Frontera)</a>. and CESA developed by The University of Texas Rio Grande Valley, which aim to build a large-scale, publicly accessible archive of bilingual interviews from regions including Texas and Arizona, with future expansion to New Mexico and California.
+<p>
+</p>
 These corpora consist of recorded sociolinguistic interviews designed to elicit natural, informal speech (Labov, 1972). The data captures oral narratives, language attitudes, and patterns of bilingualism in the Rio Grande Valley and surrounding regions. The ultimate goal is to support research on bilingualism, promote dialect awareness, and provide a resource for both academic and community-oriented work.
-
-My role in this project focuses on the **computational processing and normalization of transcript data**, which is a critical step in transforming raw interview materials into a structured, analyzable corpus.
-  This project presents the design, implementation, and analysis pipeline of a <strong>Self-Paced Listening (SPL) experiment</strong> integrated with a <strong>Bilingual Language Profile (BLP) questionnaire</strong>, developed as part of my work in the <a href="https://uavip.arizona.edu/arizona-applied-psycholinguistics-lab" target="_blank"> Arizona Applied Psycholinguistics Lab (AAPL) </a>.
+<p> 
+</p>
+My role so far focuses on the <strong>computational processing and normalization of transcript data</strong>, which is a critical step in transforming raw interview materials into a structured, analyzable corpus.
 </p>
 </div>
 
