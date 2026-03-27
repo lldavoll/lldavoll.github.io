@@ -47,431 +47,190 @@ The pipeline is implemented in **R**, using a combination of packages commonly a
 This project reflects applied experience in **text preprocessing, pattern matching, and structured data transformation**, all of which are central to Natural Language Processing.
 
 ---
+## Pipeline Design
 
-## Experimental Design
+The preprocessing workflow is organized into modular stages to ensure clarity, reproducibility, and extensibility.
 
-### Self-Paced Listening Paradigm
+### 1. Initial Cleaning
 
+The first stage removes non-linguistic content and artifacts, including:
 
-The SPL task is a widely used method in psycholinguistics to study **incremental sentence processing**. In this implementation:
+- Metadata blocks (e.g., `NOTE` sections).  
+- Random identifiers and formatting noise. 
+- Empty or irrelevant lines.  
 
-- Each sentence is divided into **7 audio segments**.
-- Participants press the **spacebar** to advance between segments.
-- Reaction time is recorded at each step.
+This reduces the transcripts to their essential linguistic content.
 
-After the final segment:
+_Remove NOTE blocks and UUID artifacts snippet: This step removes non-linguistic metadata (NOTE blocks and system-generated UUID strings) from each transcript._
 
-- A **comprehension question (segment 8)** is presented.
-- Participants respond using:
-  - **F = Sí [Yes]**
-  - **J = No [No]**
-
-This design allows us to measure the processing time at each segment, sensitivity to linguistic structure and comprehension accuracy.
-
----
-
-### Stimuli Structure
-
-Audio stimuli follow a structured naming convention:
-
-d_[list][sublist]_seg[number].wav
-
-Example:
-
-- d_1a_seg1.wav = Segment 1
-- d_1a_seg8.wav = Question audio
-  
----
-
-Each trial is associated with metadata:
-
-- `item_id`
-- `list`
-- `fonologia` [phonology]
-- `genero` [genre]
-- `spl_exp` (experimental condition)
-
-Two lists are used for **counterbalancing participants**, ensuring experimental control, the structure I followed was:
-
-<p align="center">
-  <img src="/images/stimuli.png" 
-       style="width: 100%; max-width: 800px; height: auto; border-radius: 12px;">
-</p>
----
-
-### Pseudorandomization
-
-To avoid order effects, I implemented a pseudorandomization constraint:
-
-> No more than two consecutive items may belong to the same condition.
-
-This was implemented in PsychoPy using custom Python logic:
-
-- Items are shuffled dynamically at runtime.
-- A validation function enforces constraints.
-- The final order is applied before the experiment begins.
-
-_Pseudorandomization snippet_
-
-```python
-items = df["item_id"].unique().tolist()
-items_d = [it for it in items if it.endswith("d")]
-items_p = [it for it in items if it.endswith("p")]
-
-random.shuffle(items_d)
-random.shuffle(items_p)
-
-final_order = []
-
-while items_d or items_p:
-    if len(final_order) >= 2 and final_order[-1][-1] == final_order[-2][-1]:
-        choice = "p" if final_order[-1].endswith("d") else "d"
-    else:
-        choice = "d" if len(items_d) >= len(items_p) else "p"
-
-    if choice == "d" and items_d:
-        final_order.append(items_d.pop())
-    elif choice == "p" and items_p:
-        final_order.append(items_p.pop())
-```
-
----
-
-## Bilingual Language Profile (BLP)
-
-A major extension of this project was the integration of a **multi-section bilingual questionnaire**, adapted for Spanish and Quechua speakers.
-
-### Sections Implemented
-
-1. **Biographical Information**
-   - Age, gender, birthplace, education
-   - Parents’ languages
-
-2. **Language History**
-   - Age of acquisition
-   - Years of exposure
-   - Formal education in each language
-
-3. **Language Use**
-   - Usage percentages across contexts:
-     - Family
-     - Work
-     - Thinking
-     - Social environments
-
-4. **Language Competence**
-   - Self-rated proficiency:
-     - Speaking
-     - Understanding
-     - Reading
-     - Writing
-
-5. **Language Attitudes**
-   - Identity and cultural affiliation
-   - Native language perception
-
----
-
-## Project Breakdown
-
-### 1. Preprocessing: Audio Durations, Counterbalanced Lists, and Master Stimuli Generation
-
-<div style="text-align: justify; line-height: 1.7;">
-<p>
-The first stage of the project focused on preparing the materials needed to run the experiment in PsychoPy. This preprocessing step had three main goals:
-</p>
-</div>
-
-1. Extract the exact duration of each audio segment in milliseconds.  
-2. Generate four counterbalanced experimental lists.  
-3. Create the Bilingual Language Profile (BLP) form structure.  
-
-<div style="text-align: justify; line-height: 1.7;">
-<p>
-This stage was necessary because the experiment relies on segmented [.wav] files, and each segment must be presented with precise timing. By calculating the duration of each file ahead of time, I was able to control the flow of the stimuli more accurately and prepare the condition files that PsychoPy would later load during the experiment.
-</p>
-</div>
-
-#### Purpose
-
-The preprocessing code was designed to support several parts of the experiment at once. Specifically, it was used to:
-
-- Control timing between stimuli.
-- Create four lists for counterbalancing participants across conditions.
-- Support later logging and timing analysis.
-- Add the experiment condition label for each item:
-  - **Diminutive (`dim`)**
-  - **Plural (`plu`)**
-- Create the Bilingual Language Profile (BLP) form input structure.
-
-_Master Stimuli and ms Extraction snippet: This pipeline calculates the duration (in milliseconds) of each .wav audio segment in a folder.
-After that it creates 4 lists, merge them as a master stimuli that can be uploaded to a PsychoPy Experiment._
-
-```python
-import os
-from pydub import AudioSegment
-import pandas as pd
-
-audio_dir = r"MY_PATH"
-
-def get_duration_ms(file_path):
-    audio = AudioSegment.from_wav(file_path)
-    return len(audio)  # duration in milliseconds
-
-rows = []
-
-for file in os.listdir(audio_dir):
-    if file.endswith(".wav"):
-        path = os.path.join(audio_dir, file)
-        duration = get_duration_ms(path)
-
-        rows.append({
-            "audio_file": file,
-            "duration_ms": duration,
-            "segment_number": int(file.split("seg")[-1].replace(".wav", "")),
-            "spl_exp": "dim" if "d_" in file else "plu"
-        })
-
-df = pd.DataFrame(rows)
-df.to_csv("durations.csv", index=False, encoding="utf-8-sig")
+```r
+transcribe_1 <- function (x) {
+  x %>%
+    str_remove_all("\r\n\r\nNOTE .*") %>%
+    str_remove_all("\\w{8}-\\w{4}-\\w{4}-\\w{4}-\\w{12}(-\\w{1})?\\r\\n")
+}
 ```
 ---
 
-### 2. Bilingual Language Profile (BLP) Implementation
+### 2. Structural Normalization
 
-<p align="center">
-  <img src="/images/psychopy2.png" 
-       style="width: 100%; max-width: 800px; height: auto; border-radius: 12px;">
-</p>
+This stage standardizes the internal structure of transcripts by:
 
-<div style="text-align: justify; line-height: 1.7;">
-<p>  
-The second major part of the project was the implementation of a <strong>Bilingual Language Profile (BLP)</strong> questionnaire directly inside PsychoPy. The purpose of this component was to gather participant background information relevant to bilingualism, language use, and self-reported proficiency.
-<p>
-</p>
-The BLP section was designed to complement the self-paced listening task by providing a richer profile of each participant’s linguistic experience. This was especially important because the project involved bilingual participants and required more than simple demographic information.
-</p>
-</div>
+- Converting speaker labels into a consistent format (e.g., `INV:` to `<v INV>`).  
+- Normalizing timestamp syntax.  
+- Correcting misplaced speaker tags.  
+- Fixing spacing and line break inconsistencies.  
 
-#### Sections Included
+Given that interviewers vary in experience, transcripts exhibit significant variability; this step ensures uniformity across the dataset.
 
-The BLP implementation was divided into multiple sections:
+_Normalization of Transcripts snippet: This step performs structural normalization of the cleaned transcripts. While Step 1 removed non-linguistic metadata, this stage standardizes speaker labels, timestamps, spacing, and formatting inconsistencies introduced during transcription or export._
 
-- **Biographical information.**
-- **Language history.**
-- **Language use.**
-- **Language competence.**
-- **Language attitudes.**
+```r
+transcribe_2 <- function(x) {
 
-The questionnaire included items such as:
+  # Regex fragments
+  TS  <- "(\\d{1,2}:\\d{2}:\\d{2}\\.\\d{3})"
+  TSP <- paste0(TS, " --> ", TS)
+  SPK <- "(INV|PAR|INT)" #INT OR INV??????
 
-- Age and place of birth.
-- Current residence.
-- Parents’ languages.
-- Age of acquisition for each language.
-- Years of formal education in each language.
-- Self-reported speaking, reading, writing, and comprehension ability.
-- Patterns of language use with family, friends, work, and internal thought.
-- Identity and attitude toward the participant’s languages.
+  x %>%
+    # 1) Normalize speaker tags / IDs
+    str_replace_all("<\\.?\\s*(INV|PAR|INV)>", "<v \\1>") %>% # original kept "INV|PAR|INV" 
+    str_replace_all(paste0("(", "<v (INV|PAR|INV)>", ")\\s?(", TSP, ")\\r\\n(.*)"),
+                    "\\3\r\n\\1 \\4") %>% # speaker before timestamp
+    str_replace_all(paste0("(", SPK, "):"), "<v \\1>") %>% # INV: -> <v INV>
+    str_replace_all(paste0("/\\s+<v ", SPK, ">"), "/") %>% # remove speaker IDs after /text/
 
-#### Design Decisions
+    # 2) Timestamp
+    str_replace_all("—->", "-->") %>%
+    str_replace_all("-—>", "-->") %>%
+    str_replace_all(paste0("(\\d{1,2}:\\d{2}:\\d{2}\\.)(\\d{2,3})"), "\\1000") %>%  # force .000
+    str_replace_all("0{3,}:", "00:") %>%
 
-<div style="text-align: justify; line-height: 1.7;">
-<p> 
-At first, I explored PsychoPy’s <strong>Form</strong> component to build the questionnaire. However, in practice this created substantial lag and reduced the performance of the experiment, especially on less powerful computers. To solve this, I redesigned the BLP using a combination of:
-</p>
-</div>
-
-- **TextBox2** for open-ended text fields
-- **Sliders** for ratings and numeric scales
-- **Custom “Siguiente” buttons** for navigation
-- **Code components** to enforce that participants could only continue after answering all required questions
-
-<div style="text-align: justify; line-height: 1.7;">
-<p>
-This redesign significantly improved usability and performance. It also gave me greater control over the visual layout, response validation, and multilingual interface design.
-</p>
-</div>
-
-#### Why This Matters?
-
-<div style="text-align: justify; line-height: 1.7;">
-<p> 
-This part of the project showed me that building experimental tools often requires balancing theory and implementation. From an HLT perspective, the BLP section demonstrates the use of technical tools to collect structured linguistic data while maintaining an accessible participant experience.
-</p>
-</div>
-
----
-
-### 3. Prueba Step: Practice Version of the Experiment
-
-<div style="text-align: justify; line-height: 1.7;">
-<p> 
-Before running the full experiment, I created a <strong>practice version</strong> (`prueba`) to test the full pipeline in a controlled way. This step served as a smaller-scale version of the experiment and was essential for debugging timing, audio playback, keyboard responses, and questionnaire flow.
-</p>
-</div>
-
-The practice trials allowed me to verify that:
-
-- Segmented audio played in the correct order.
-- Participants could advance with the spacebar.
-- Comprehension questions appeared correctly.
-- Key responses (`f` and `j`) were recorded properly.
-- Timing variables were stored as expected.
-- PsychoPy loaded the correct CSV condition files.
-- The BLP routines worked as intended inside the full experiment structure.
-
-<div style="text-align: justify; line-height: 1.7;">
-<p>
-This stage was important because it exposed problems that would have been difficult to diagnose during real participant testing. For example, it helped identify issues related to routine transitions, lag caused by certain interface elements, and how PsychoPy stored response data in the output CSV files.
-<p> 
-</p>
-By separating a practice phase from the main experiment, I was able to test the experimental logic more safely and make iterative adjustments before final deployment.
-</p>
-</div>
----
-
-### 4. Testing and Experimental Refinement
-
-<div style="text-align: justify; line-height: 1.7;">
-<p>
-Once the preprocessing and practice stages were complete, I moved to a broader testing phase. This involved repeatedly running the experiment in PsychoPy and refining both the task structure and participant interface.
-</p>
-</div>
-
-Several important implementation issues were resolved during this stage:
-
-#### Audio Timing
-
-<div style="text-align: justify; line-height: 1.7;">
-<p>
-One of the main testing goals was to confirm that each audio segment stopped at the correct point. Since the experiment depends on segmented listening, even small timing inconsistencies could affect the validity of the task. The preprocessing step with duration extraction was therefore critical for reliable playback.
-<p>  
-</p>
-I also examined the difference between PsychoPy log timings and CSV output timings. In particular, the reported value of [audio_stopped] in the CSV did not always exactly match the “Audio finished at” time in the PsychoPy log. This helped me better understand the difference between internal PsychoPy timing and data written to the output file, including small processing delays.
-</p>
-</div>
-
-```python
-# Convert response time from seconds to milliseconds
-if resp_q.rt is not None:
-    resp_q_rt_ms = resp_q.rt * 1000
-else:
-    resp_q_rt_ms = None
-
-# Label the F/J response as Sí/No
-if resp_q.keys == 'f':
-    resp_label = 'Sí'
-elif resp_q.keys == 'j':
-    resp_label = 'No'
-else:
-    resp_label = 'Sin respuesta'
-
-# Add data to the PsychoPy output file
-thisExp.addData('resp_key', resp_q.keys)
-thisExp.addData('resp_label', resp_label)
-thisExp.addData('resp_q_rt_ms', resp_q_rt_ms)
+    # 3) Line break / spacing fixes around timestamps
+    str_replace_all(paste0("\\n\\n", TS), "\r\n\r\n\\1") %>%
+    str_replace_all(paste0("\\s{1,}(", TS, ") -->"), "\r\n\r\n\\1 -->") %>%
+    str_replace_all("(\\r\\n\\r\\n)\\s{1}(\\d{1,2})", "\\1\\2") %>%
+    str_replace_all("(\\d{3}\\r\\n)\\s{1}", "\\1") %>%
+    str_replace_all(".000\\s*\\n<v (INV|PAR|INT)>", ".000\r\n<v \\1>") %>%
 ```
+---
 
-#### Fixation Cross and Routine Flow
+### 3. Timestamp Reconstruction
 
-<div style="text-align: justify; line-height: 1.7;">
-<p>
-At one point, the fixation cross routine caused the next audio segment to begin automatically before the participant was ready. After testing several configurations, I removed the fixation and instruction elements that were interfering with participant-controlled pacing. This restored the intended self-paced behavior of the task.
-</p>
-</div>
+One of the most technically complex aspects of the pipeline involves reconstructing timestamps:
 
-#### Performance and Lag
+- Extracting start times from existing segments.  
+- Assigning end times based on subsequent segments.  
+- Interpolating missing timestamps when intervals are incomplete.  
+- Adjusting zero-duration segments using small offsets (e.g., `.250`, `.750`).  
 
-<div style="text-align: justify; line-height: 1.7;">
-<p>
-The most significant technical issue was lag. Through testing, I found that PsychoPy’s Form component was one of the main sources of slowdown. Splitting the questionnaire into smaller routines helped somewhat, but the strongest improvement came from replacing Forms with TextBox2 and Sliders. 
-</p>
-</div>
+This process ensures that each segment has a valid temporal interval, which is essential for alignment with audio and time-based analyses.
 
-### 5. Data Cleaning and Restructuring
+_Timestamp reconstruction and reassignment snippet: This stage reconstructs and standardizes timestamp intervals across the entire transcript to ensure that temporal segmentation is internally consistent and computationally valid._
 
-<div style="text-align: justify; line-height: 1.7;">
-<p>
-The last major stage of the project was the <strong>data cleaning pipeline</strong>, which transformed PsychoPy’s raw output into a cleaner and more analysis-ready format.
-<p>  
-</p>
-Raw PsychoPy CSV files contain a large number of internal columns that are useful for the software itself but not necessarily useful for statistical analysis. In addition, because the experiment combined segmented trials with questionnaire-style responses, the resulting CSV files needed to be reorganized carefully.
-</p>
-</div>
+```r
+assign_timestamps <- function(name, txt, endTime) {
 
-#### Goals of the Cleaning Process
+  cat("Assigning new timestamps to ", name, "...\n", sep = "")
 
-The cleaning script was designed to:
+  # 1) Extract start times as character
+  starts_raw <- str_extract_all(txt, "(\\d{1,2}:\\d{2}:\\d{2}\\.\\d{3}) -->", simplify = TRUE)
+  starts_raw <- starts_raw[starts_raw != ""]
+  ts <- data.frame(start = str_replace_all(starts_raw, " -->", ""), stringsAsFactors = FALSE)
 
-- Remove unnecessary PsychoPy metadata columns.
-- Preserve the important timing and response variables.
-- Exclude practice rows from the final dataset.
-- Reorganize questionnaire responses into a more interpretable format.
-- Move important columns next to `spl_exp` for readability.
-- Save cleaned files in a format that preserves Spanish accents correctly.
+  # 2) Attach dialogue text segments
+  split <- t(str_split(
+    txt,
+    "(\\d{1,2}:\\d{2}:\\d{2}\\.\\d{3}) --> (\\d{1,2}:\\d{2}:\\d{2}\\.\\d{3})",
+    simplify = TRUE
+  ))
+  split <- split[-1, ]
 
-#### Main Cleaning Operations
+  if (nrow(ts) == length(split)) {
+    ts$text <- split
+  } else {
+    cat("ERROR! There is likely a major formatting issue in the following transcript:", name, "\n")
+    # Keep going with best effort (matches original “print error but continue” behavior)
+    ts$text <- split
+  }
 
-The cleaning process included the following steps:
+  # 3) Remove milliseconds temporarily and convert to chron
+  ts$start <- str_replace_all(ts$start, "(\\d{1,2}:\\d{2}:\\d{2})\\.\\d{3}", "\\1")
+  ts$end   <- str_replace_all(ts$end,   "(\\d{1,2}:\\d{2}:\\d{2})\\.\\d{3}", "\\1")
 
-- Removing metadata columns such as trial counters and internal PsychoPy variables.
-- Filtering out practice rows labeled as `prueba`.
-- Keeping only relevant response columns.
-- Standardizing empty responses and invalid values.
-- Moving timing variables like reaction time and key response fields closer to the experiment label column.
-- Exporting cleaned CSV files with `utf-8-sig` encoding so that accented characters display correctly in Excel.
+  ts$start <- chron(times = ts$start)
+  ts$end   <- chron(times = ts$end)
+}
+```
+---
 
-<div style="text-align: justify; line-height: 1.7;">
-<p>
-A important part of this process was handling the questionnaire output. Since PsychoPy writes different routines in different row structures, the cleaning pipeline had to collapse the form-related information into a more manageable format while preserving the segmented listening trial rows.
-</p>
-</div>
+### 4. Output Generation
 
-_Output Process snippet: This pipeline process all the row data directly from PsychoPy to a readable CSV and save it in a new folder._
+The cleaned transcripts are:
 
-```python
-import pandas as pd
-import numpy as np
+- Reformatted into valid WebVTT structure.  
+- Saved into a structured output directory.  
+- Renamed systematically for traceability.  
 
-df = pd.read_csv("raw_data.csv")
+This produces a consistent set of files ready for integration into the corpus.
 
-# Identify questionnaire/form rows
-form_cols = [c for c in df.columns if c.endswith(".text") or c.endswith(".response")]
+_Export Cleaned Transcripts snippet: TThis final stage writes the processed transcripts to disk. Instead of changing the working directory, now its explicitly define an output directory and construct full file paths when saving._
 
-form_rows = df[df[form_cols].notna().any(axis=1)]
-non_form_rows = df[~df.index.isin(form_rows.index)]
+```r
+# Define output directory explicitly
+output_dir <- file.path(your_wd, "Post R Cleanup")
 
-# Collapse form responses into a single row
-form_dict = {
-    col: form_rows[col].dropna().tolist()[-1] 
-    if not form_rows[col].dropna().empty else np.nan
-    for col in form_cols
+# Create directory if it does not exist
+dir.create(output_dir, showWarnings = FALSE, recursive = TRUE)
+
+# Write each cleaned transcript
+for (i in seq_len(nrow(files))) {
+  write_file(
+    files$Text[i],
+    file.path(output_dir, files$Name[i])
+  )
 }
 
-form_df = pd.DataFrame([form_dict])
-
-# Combine cleaned experimental rows with questionnaire row
-df_final = pd.concat([non_form_rows, form_df], ignore_index=True)
+cat("Cleanup script complete!\n")
 ```
-
-#### Outcome
-
-The final cleaned dataset was easier to read, easier to analyze, and much more suitable for later work in R or Python.
-
-**Before:**
-
-<p align="center">
-  <img src="/images/psychopy3.png" 
-       style="width: 100%; max-width: 800px; height: auto; border-radius: 12px;">
-</p>
-
-**After:**
-
-<p align="center">
-  <img src="/images/psychopy4.png" 
-       style="width: 100%; max-width: 800px; height: auto; border-radius: 12px;">
-</p>
 ---
 
-_For more detailed information about PsychoPy's Experiment and Python code visit the following [Repository](https://github.com/lldavoll/Self-Paced-Listening-Experiment-Pipeline)_
+## Reproducibility and Refactoring
+
+The idea wass refactoring an existing script into a **reproducible R Markdown pipeline**. This included:
+
+- Modularizing code into clearly defined steps.  
+- Adding documentation for each transformation stage.  
+- Eliminating hard-coded dependencies.  
+- Improving readability and maintainability.  
+
+---
+
+## Validation and Analytical Considerations
+
+To evaluate the refactored pipeline, I conducted a comparison between the original and revised outputs.
+
+Findings include:
+
+- Both versions produce structurally valid WebVTT files.  
+- Speaker labels and timestamps are consistently normalized.  
+- However, differences emerge in segmentation:
+  - Some intervals are merged.  
+  - Others are split.  
+  - Minor formatting differences are introduced.  
+
+These results highlight an important methodological distinction between **data normalization** and **data transformation**. While normalization improves consistency, it may alter segmentation boundaries, which can impact certain types of analysis (e.g., turn-taking or pause duration studies).
+
+---
+
+## Outcomes
+
+This ongoing work has contributed to:
+
+- The development of a scalable transcript preprocessing pipeline  
+- Standardized data suitable for sociolinguistic and computational analysis  
+- Improved reproducibility in corpus preparation workflows  
+- Identification of trade-offs in preprocessing decisions  
+
+---
