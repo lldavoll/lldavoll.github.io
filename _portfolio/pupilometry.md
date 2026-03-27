@@ -25,9 +25,10 @@ The primary goal of this project is to investigate how bilingual speakers proces
 More specifically, this project pursues the following goals:
 
 1. **Test the Bottleneck Hypothesis in real-time processing**
+   
    <div style="text-align: justify; line-height: 1.7;">
-     - A main objective is to evaluate predictions from the <em>Bottleneck Hypothesis</em>, which claims that <strong>functional morphology is a primary source of difficulty in second language acquisition</strong>. By focusing on the subjunctive, this project examines whether bilingual speakers show <strong>increased processing effort when encountering morphological violations</strong>, even when they may perform well on explicit tasks.
-   </div>
+   - A main objective is to evaluate predictions from the <em>Bottleneck Hypothesis</em>, which claims that <strong>functional morphology is a primary source of difficulty in second language acquisition</strong>. By focusing on the subjunctive, this project examines whether bilingual speakers show <strong>increased processing effort when encountering morphological violations</strong>, even when they may perform well on explicit tasks.
+</div>
 
 2. **Compare implicit and explicit knowledge of grammar**
    - **Explicit knowledge** (*offline tasks, such as forced-choice judgments*).
@@ -35,9 +36,9 @@ More specifically, this project pursues the following goals:
 
 3. **Examine differences across speaker populations**
    - Another goal is to compare how different bilingual groups process subjunctive morphology:
-     -**Native speakers** (*baseline*).
-     -**Heritage speakers**.  
-     -**L2 learners**.
+     - **Native speakers** (*baseline*).
+     - **Heritage speakers**.
+     - **L2 learners**.
      
 4. **Measure cognitive load using pupillometry**
    <div style="text-align: justify; line-height: 1.7;">
