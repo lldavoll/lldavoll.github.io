@@ -238,4 +238,4 @@ This ongoing work has contributed to:
 
 ---
 
-_For more detailed information about the project's following repositories [Official COBIVA Repository:](https://github.com/COBIVA) [Official COBIVA Repository:](https://github.com/COBIVA)_ 
+_For more detailed information about the project's following repositories [Official COBIVA Repository:](https://github.com/COBIVA) [Official COBIVA Repository:](https://github.com/lldavoll/Webvtt-Transcript-Normalization-Using-R)_
