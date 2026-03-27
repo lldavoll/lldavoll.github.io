@@ -11,7 +11,7 @@ collection: portfolio
 
 <div style="text-align: justify; line-height: 1.7;">
 <p> 
-This project was developed as part of my undergraduate studies in <strong>Electrical Engineering</strong> with the research group: <a href="https://vicerrectorias.utp.edu.co/viie/integrantes/195/grupo" target="_blank">"GRUPO DE INVESTIGACIÓN EN ANÁLISIS DE DATOS Y SOCIOLOGÍA COMPUTACIONAL (GIADSc)"</a> under the project: <a href="https://vicerrectorias.utp.edu.co/viie/detallesproyecto/2596" target="_blank">"Caracterización de biomarcadores en registros EEG durante la ejecución de tareas de reconocimiento emocional para la búsqueda de alteraciones en procesos de cognición social relacionadas con patologías neurodegenerativas y neuropsiquiátricas"</a> which focuses on the preprocessing and analysis of <strong>electroencephalography (EEG) signals</strong> collected during emotional recognition tasks. The primary goal was to identify **biomarkers associated with alterations in social cognition**, which may be linked to <strong>neurodegenerative and neuropsychiatric disorders</strong>.
+This project was developed as part of my undergraduate studies in <strong>Electrical Engineering</strong> at the Universidad Tecnológica de Pereira, Colombia with the research group: <a href="https://vicerrectorias.utp.edu.co/viie/integrantes/195/grupo" target="_blank">"GRUPO DE INVESTIGACIÓN EN ANÁLISIS DE DATOS Y SOCIOLOGÍA COMPUTACIONAL (GIADSc)"</a> under the project: <a href="https://vicerrectorias.utp.edu.co/viie/detallesproyecto/2596" target="_blank">"Caracterización de biomarcadores en registros EEG durante la ejecución de tareas de reconocimiento emocional para la búsqueda de alteraciones en procesos de cognición social relacionadas con patologías neurodegenerativas y neuropsiquiátricas"</a> which focuses on the preprocessing and analysis of <strong>electroencephalography (EEG) signals</strong> collected during emotional recognition tasks. The primary goal was to identify <strong>biomarkers associated with alterations in social cognition</strong>, which may be linked to <strong>neurodegenerative and neuropsychiatric disorders</strong>.
 <p>
 </p>
 Electroencephalography (EEG) measures electrical brain activity using electrodes placed on the scalp. These signals are <strong>high-dimensional, noisy, and complex</strong>, requiring advanced preprocessing techniques before meaningful analysis can be performed.
@@ -26,9 +26,9 @@ In this project, I designed and implemented a <strong>complete EEG preprocessing
 The main objectives of this project were:
 
 - Preprocess **raw EEG signals** collected during emotional recognition experiments.  
-- Identify and remove **physiological and technical artifacts**.  
-- Improve **signal quality and reliability**.  
-- Prepare EEG data for **feature extraction and classification tasks**.  
+- Identify and remove **physiological and technical artifacts.**
+- Improve **signal quality and reliability.**  
+- Prepare EEG data for **feature extraction and classification tasks.**  
 
 ---
 
@@ -49,9 +49,9 @@ Each recording contains <strong>multi-channel time-series data</strong>, capturi
 
 The analysis focused on comparing three stages:
 
-- **Raw EEG signals**  
-- **Filtered EEG signals**  
-- **Fully preprocessed EEG signals**  
+- **Raw EEG signals.**  
+- **Filtered EEG signals.**  
+- **Fully preprocessed EEG signals.**  
 
 This comparison enabled both **qualitative (visual)** and **quantitative validation** of the preprocessing pipeline.
 
@@ -67,7 +67,7 @@ A central challenge in EEG analysis is the presence of **artifacts (noise not ge
 - Body movement.  
 
 ### Technical Artifacts
-- **Electrical interference (60 Hz noise)**.  
+- **Electrical interference (60 Hz noise).**  
 - Equipment-related noise.  
 - Poor electrode connections.  
 
@@ -92,12 +92,12 @@ The pipeline is implemented in **MATLAB and EEGLAB** for further use in classifi
 I implemented a **structured, end-to-end preprocessing pipeline** using **EEGLAB**, consisting of:
 
 1. Importing EEG data.  
-2. Assigning **channel locations and references**.  
-3. Applying **signal filtering**.  
-4. Detecting and interpolating **bad channels**.  
-5. Removing **large artifacts**.  
-6. Performing **Independent Component Analysis (ICA)**.  
-7. Rejecting **noisy components**.  
+2. Assigning **channel locations and references.**  
+3. Applying **signal filtering.**  
+4. Detecting and interpolating **bad channels.**  
+5. Removing **large artifacts.**  
+6. Performing **Independent Component Analysis (ICA).**  
+7. Rejecting **noisy components.**  
 
 This pipeline reflects **standard practices in EEG research** and ensures **high-quality signal preparation**.
 
@@ -109,14 +109,14 @@ This pipeline reflects **standard practices in EEG research** and ensures **high
 
 Filtering was applied to remove:
 
-- **Baseline drift**  
-- **Power line noise (60 Hz)**  
-- **High-frequency interference**  
+- **Baseline drift.** 
+- **Power line noise (60 Hz).**  
+- **High-frequency interference.**  
 
 Techniques used:
-- **FIR filters**  
-- **Spectral filtering**  
-- **Wavelet-based approaches**  
+- **FIR filters.**  
+- **Spectral filtering.**  
+- **Wavelet-based approaches.**  
 
 The goal was to preserve **meaningful neural activity** while eliminating **irrelevant noise**.
 
@@ -124,16 +124,16 @@ The goal was to preserve **meaningful neural activity** while eliminating **irre
 
 ### 3. Independent Component Analysis (ICA)
 
-**Independent Component Analysis (ICA)** was used to decompose EEG signals into **independent sources**, enabling:
+Independent Component Analysis (ICA) was used to decompose EEG signals into **independent sources**, enabling:
 
-- Separation of **neural signals vs noise**  
-- Identification of **artifact-related components**  
+- Separation of **neural signals vs noise.**  
+- Identification of **artifact-related components.**  
 
 Two approaches were explored:
-- **RUNICA**  
-- **SOBI (Second-Order Blind Identification)**  
+- **RUNICA.**  
+- **SOBI (Second-Order Blind Identification).**  
 
-The **SOBI algorithm** was particularly effective for capturing **temporally correlated artifacts**.
+The **SOBI algorithm** was really effective for capturing **temporally correlated artifacts**.
 
 <p align="center">
   <img src="/images/eeg5.png" style="width: 100%; max-width: 700px; height: auto; border-radius: 12px;">
@@ -146,9 +146,9 @@ The **SOBI algorithm** was particularly effective for capturing **temporally cor
 The preprocessing approach was divided into **two stages**:
 
 #### Stage 1: Physiological Artifact Removal
-- Filtering and channel correction  
-- No ICA applied  
-- **Visual validation of signal improvement**  
+- Filtering and channel correction.  
+- No ICA applied. 
+- Visual validation of signal improvement.  
 
 ### Before:
 <p align="center">
@@ -163,9 +163,9 @@ The preprocessing approach was divided into **two stages**:
 #### Stage 2: Technical Artifact Removal (ICA-based)
 - **Blind Source Separation (BSS)**  
 - Removal of:
-  - Eye-related artifacts (**EOG**)  
-  - Muscle artifacts (**EMG**)  
-  - **Electrical noise (60 Hz)**  
+  - Eye-related artifacts (**EOG**).  
+  - Muscle artifacts (**EMG**).  
+  - **Electrical noise (60 Hz).**  
 
 ### Before:
 <p align="center">
@@ -184,14 +184,14 @@ This **two-stage strategy** improved both **robustness and interpretability** of
 
 The preprocessing pipeline achieved:
 
-- **Significant noise reduction across channels**  
-- **Improved signal clarity and stability**  
-- Clear distinction between **raw vs processed signals**  
+- **Significant noise reduction across channels.**  
+- Improved signal clarity and stability.  
+- Clear distinction between **raw vs processed signals.**  
 
 Evaluation methods included:
 
-- **Visual inspection of EEG plots**  
-- **Quantitative comparisons across preprocessing stages**  
+- Visual inspection of EEG plots.  
+- Quantitative comparisons across preprocessing stages. 
 
 These results demonstrate that **proper preprocessing is critical** before any **classification or modeling tasks**.
 
