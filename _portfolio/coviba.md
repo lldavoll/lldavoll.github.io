@@ -11,7 +11,7 @@ collection: portfolio
 
 <div style="text-align: justify; line-height: 1.7;">
 <p> 
-As part of an ongoing collaboration with researchers in Hispanic linguistics at the University of Arizona, I contribute to the preprocessing of sociolinguistic corpora documenting bilingual speech in the U.S.–Mexico border region. This work is connected to broader projects such as <a href="https://www.utrgv.edu/cobiva/" target="_blank"> CoVIBA (Corpus de la Frontera)</a>. and CESA developed by The University of Texas Rio Grande Valley, which aim to build a large-scale, publicly accessible archive of bilingual interviews from regions including Texas and Arizona, with future expansion to New Mexico and California.
+As part of an ongoing collaboration with researchers in Hispanic linguistics at the University of Arizona and The University of Texas Rio Grande Valley, I contribute to the preprocessing of sociolinguistic corpora documenting bilingual speech in the U.S.–Mexico border region. This work is connected to broader projects such as <a href="https://www.utrgv.edu/cobiva/" target="_blank"> CoVIBA (Corpus de la Frontera)</a>. and CESA, which aim to build a large-scale, publicly accessible archive of bilingual interviews from regions including Texas and Arizona, with future expansion to New Mexico and California.
 <p>
 </p>
 These corpora consist of recorded sociolinguistic interviews designed to elicit natural, informal speech (Labov, 1972). The data captures oral narratives, language attitudes, and patterns of bilingualism in the Rio Grande Valley and surrounding regions. The ultimate goal is to support research on bilingualism, promote dialect awareness, and provide a resource for both academic and community-oriented work.
@@ -21,32 +21,30 @@ My role so far focuses on the <strong>computational processing and normalization
 </p>
 </div>
 
-The primary goal of the project was to create a <strong>fully reproducible psycholinguistic experiment pipeline</strong>, including:
-
-- Experimental design and stimulus presentation. (PsychoPy)
-- Participant interaction and reaction time collection.
-- Bilingual profiling through structured questionnaires.
-- Automated data cleaning and restructuring (Python).
-- A repository-ready architecture for reproducibility and reuse.
-  
 ## Project Goals
 
-The project was designed around three main objectives:
+The primary objective of my contribution is to design a **reproducible and scalable preprocessing pipeline** for transcript data. Specifically, this involves:
 
-1. **Implement a controlled SPL paradigm**
-   - Present auditory stimuli segmented across multiple steps.
-   - Record precise reaction times at each segment.
-   - Capture comprehension responses following each trial.
+- Cleaning and standardizing WebVTT transcript files.  
+- Normalizing speaker annotations and formatting conventions.  
+- Repairing and reconstructing timestamp intervals.  
+- Removing transcription artifacts and metadata noise.  
+- Ensuring consistency across interviews with varying quality.  
+- Preparing the corpus for downstream linguistic and computational analysis.  
 
-2. **Integrate a bilingual profiling system**
-   - Collect demographic and linguistic background data.
-   - Measure language use, proficiency, and attitudes.
-   - Ensure usability across Spanish and Quechua contexts.
+This work supports the broader effort of building a high-quality sociolinguistic dataset suitable for both qualitative and quantitative research.
 
-3. **Develop a reproducible data pipeline**
-   - Clean and standardize raw PsychoPy outputs.
-   - Merge experimental and questionnaire data.
-   - Prepare datasets for statistical analysis.
+---## Technologies and Tools
+
+The pipeline is implemented in **R**, using a combination of packages commonly applied in text processing and NLP workflows:
+
+- `stringr` for regex-based text normalization.  
+- `readr` for file input/output.
+- `chron` for time manipulation and interpolation.  
+- `magrittr` for pipeline-style transformations.  
+- R Markdown for reproducible and well-documented workflows. 
+
+This project reflects applied experience in **text preprocessing, pattern matching, and structured data transformation**, all of which are central to Natural Language Processing.
 
 ---
 
