@@ -1,6 +1,6 @@
 ---
 title: "EEG Signal Processing for Emotion Recognition and Biomarker Extraction"
-excerpt: "Research project on EEG preprocessing and artifact removal using EEGLAB/MATLAB for emotional signal analysis."
+excerpt: "Research project on EEG signal preprocessing and artifact removal using EEGLAB and MATLAB, involving advanced techniques such as filtering, Independent Component Analysis (ICA), and noise reduction to support emotional recognition and biomarker discovery."
 collection: portfolio
 ---
 <p align="center">
