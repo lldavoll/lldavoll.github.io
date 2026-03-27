@@ -11,7 +11,7 @@ collection: portfolio
 
 <div style="text-align: justify; line-height: 1.7;">
 <p> 
-This project was developed as part of my undergraduate studies in <strong>Electrical Engineering</strong> and focuses on the preprocessing and analysis of <strong>electroencephalography (EEG) signals</strong> collected during emotional recognition tasks. The primary goal was to identify **biomarkers associated with alterations in social cognition**, which may be linked to <strong>neurodegenerative and neuropsychiatric disorders</strong>.
+This project was developed as part of my undergraduate studies in <strong>Electrical Engineering</strong> with the research group: <a href="https://vicerrectorias.utp.edu.co/viie/integrantes/195/grupo" target="_blank">"GRUPO DE INVESTIGACIÓN EN ANÁLISIS DE DATOS Y SOCIOLOGÍA COMPUTACIONAL (GIADSc)"</a> under the project: <a href="https://vicerrectorias.utp.edu.co/viie/detallesproyecto/2596" target="_blank">"Caracterización de biomarcadores en registros EEG durante la ejecución de tareas de reconocimiento emocional para la búsqueda de alteraciones en procesos de cognición social relacionadas con patologías neurodegenerativas y neuropsiquiátricas"</a> which focuses on the preprocessing and analysis of <strong>electroencephalography (EEG) signals</strong> collected during emotional recognition tasks. The primary goal was to identify **biomarkers associated with alterations in social cognition**, which may be linked to <strong>neurodegenerative and neuropsychiatric disorders</strong>.
 <p>
 </p>
 Electroencephalography (EEG) measures electrical brain activity using electrodes placed on the scalp. These signals are <strong>high-dimensional, noisy, and complex</strong>, requiring advanced preprocessing techniques before meaningful analysis can be performed.
@@ -33,6 +33,10 @@ The main objectives of this project were:
 ---
 
 ## Dataset and Experimental Context
+
+<p align="center">
+  <img src="/images/eeg10.png" style="width: 100%; max-width: 700px; height: auto; border-radius: 12px;">
+</p>
 
 <div style="text-align: justify; line-height: 1.7;">
 <p> 
@@ -81,204 +85,128 @@ The pipeline is implemented in **MATLAB and EEGLAB** for further use in classifi
   - **Wavelet Transformation.**
 
 ---
+## Project Breakdowmn
 
+### 1. EEG Preprocessing Pipeline (EEGLAB)
 
-- `stringr` for regex-based text normalization.  
-- `readr` for file input/output.
-- `chron` for time manipulation and interpolation.  
-- `magrittr` for pipeline-style transformations.  
-- R Markdown for reproducible and well-documented workflows. 
+I implemented a **structured, end-to-end preprocessing pipeline** using **EEGLAB**, consisting of:
 
-This project reflects applied experience in **text preprocessing, pattern matching, and structured data transformation**, all of which are central to Natural Language Processing.
+1. Importing EEG data.  
+2. Assigning **channel locations and references**.  
+3. Applying **signal filtering**.  
+4. Detecting and interpolating **bad channels**.  
+5. Removing **large artifacts**.  
+6. Performing **Independent Component Analysis (ICA)**.  
+7. Rejecting **noisy components**.  
 
+This pipeline reflects **standard practices in EEG research** and ensures **high-quality signal preparation**.
+
+<p align="center">
+  <img src="/images/eeg1.png" style="width: 100%; max-width: 700px; height: auto; border-radius: 12px;">
+</p>
 ---
-## Pipeline Design
+### 2. Signal Filtering
 
-The preprocessing workflow is organized into modular stages to ensure clarity, reproducibility, and extensibility.
+Filtering was applied to remove:
 
-### 1. Initial Cleaning
+- **Baseline drift**  
+- **Power line noise (60 Hz)**  
+- **High-frequency interference**  
 
-The first stage removes non-linguistic content and artifacts, including:
+Techniques used:
+- **FIR filters**  
+- **Spectral filtering**  
+- **Wavelet-based approaches**  
 
-- Metadata blocks (e.g., `NOTE` sections).  
-- Random identifiers and formatting noise. 
-- Empty or irrelevant lines.  
-
-This reduces the transcripts to their essential linguistic content.
-
-_Remove NOTE blocks and UUID artifacts snippet: This step removes non-linguistic metadata (NOTE blocks and system-generated UUID strings) from each transcript._
-
-```r
-transcribe_1 <- function (x) {
-  x %>%
-    str_remove_all("\r\n\r\nNOTE .*") %>%
-    str_remove_all("\\w{8}-\\w{4}-\\w{4}-\\w{4}-\\w{12}(-\\w{1})?\\r\\n")
-}
-```
----
-
-### 2. Structural Normalization
-
-This stage standardizes the internal structure of transcripts by:
-
-- Converting speaker labels into a consistent format (e.g., `INV:` to `<v INV>`).  
-- Normalizing timestamp syntax.  
-- Correcting misplaced speaker tags.  
-- Fixing spacing and line break inconsistencies.  
-
-Given that interviewers vary in experience, transcripts exhibit significant variability; this step ensures uniformity across the dataset.
-
-_Normalization of Transcripts snippet: This step performs structural normalization of the cleaned transcripts. While Step 1 removed non-linguistic metadata, this stage standardizes speaker labels, timestamps, spacing, and formatting inconsistencies introduced during transcription or export._
-
-```r
-transcribe_2 <- function(x) {
-
-  # Regex fragments
-  TS  <- "(\\d{1,2}:\\d{2}:\\d{2}\\.\\d{3})"
-  TSP <- paste0(TS, " --> ", TS)
-  SPK <- "(INV|PAR|INT)" #INT OR INV??????
-
-  x %>%
-    # 1) Normalize speaker tags / IDs
-    str_replace_all("<\\.?\\s*(INV|PAR|INV)>", "<v \\1>") %>% # original kept "INV|PAR|INV" 
-    str_replace_all(paste0("(", "<v (INV|PAR|INV)>", ")\\s?(", TSP, ")\\r\\n(.*)"),
-                    "\\3\r\n\\1 \\4") %>% # speaker before timestamp
-    str_replace_all(paste0("(", SPK, "):"), "<v \\1>") %>% # INV: -> <v INV>
-    str_replace_all(paste0("/\\s+<v ", SPK, ">"), "/") %>% # remove speaker IDs after /text/
-
-    # 2) Timestamp
-    str_replace_all("—->", "-->") %>%
-    str_replace_all("-—>", "-->") %>%
-    str_replace_all(paste0("(\\d{1,2}:\\d{2}:\\d{2}\\.)(\\d{2,3})"), "\\1000") %>%  # force .000
-    str_replace_all("0{3,}:", "00:") %>%
-
-    # 3) Line break / spacing fixes around timestamps
-    str_replace_all(paste0("\\n\\n", TS), "\r\n\r\n\\1") %>%
-    str_replace_all(paste0("\\s{1,}(", TS, ") -->"), "\r\n\r\n\\1 -->") %>%
-    str_replace_all("(\\r\\n\\r\\n)\\s{1}(\\d{1,2})", "\\1\\2") %>%
-    str_replace_all("(\\d{3}\\r\\n)\\s{1}", "\\1") %>%
-    str_replace_all(".000\\s*\\n<v (INV|PAR|INT)>", ".000\r\n<v \\1>") %>%
-```
----
-
-### 3. Timestamp Reconstruction
-
-One of the most technically complex aspects of the pipeline involves reconstructing timestamps:
-
-- Extracting start times from existing segments.  
-- Assigning end times based on subsequent segments.  
-- Interpolating missing timestamps when intervals are incomplete.  
-- Adjusting zero-duration segments using small offsets (e.g., `.250`, `.750`).  
-
-This process ensures that each segment has a valid temporal interval, which is essential for alignment with audio and time-based analyses.
-
-_Timestamp reconstruction and reassignment snippet: This stage reconstructs and standardizes timestamp intervals across the entire transcript to ensure that temporal segmentation is internally consistent and computationally valid._
-
-```r
-assign_timestamps <- function(name, txt, endTime) {
-
-  cat("Assigning new timestamps to ", name, "...\n", sep = "")
-
-  # 1) Extract start times as character
-  starts_raw <- str_extract_all(txt, "(\\d{1,2}:\\d{2}:\\d{2}\\.\\d{3}) -->", simplify = TRUE)
-  starts_raw <- starts_raw[starts_raw != ""]
-  ts <- data.frame(start = str_replace_all(starts_raw, " -->", ""), stringsAsFactors = FALSE)
-
-  # 2) Attach dialogue text segments
-  split <- t(str_split(
-    txt,
-    "(\\d{1,2}:\\d{2}:\\d{2}\\.\\d{3}) --> (\\d{1,2}:\\d{2}:\\d{2}\\.\\d{3})",
-    simplify = TRUE
-  ))
-  split <- split[-1, ]
-
-  if (nrow(ts) == length(split)) {
-    ts$text <- split
-  } else {
-    cat("ERROR! There is likely a major formatting issue in the following transcript:", name, "\n")
-    # Keep going with best effort (matches original “print error but continue” behavior)
-    ts$text <- split
-  }
-
-  # 3) Remove milliseconds temporarily and convert to chron
-  ts$start <- str_replace_all(ts$start, "(\\d{1,2}:\\d{2}:\\d{2})\\.\\d{3}", "\\1")
-  ts$end   <- str_replace_all(ts$end,   "(\\d{1,2}:\\d{2}:\\d{2})\\.\\d{3}", "\\1")
-
-  ts$start <- chron(times = ts$start)
-  ts$end   <- chron(times = ts$end)
-}
-```
----
-
-### 4. Output Generation
-
-The cleaned transcripts are:
-
-- Reformatted into valid WebVTT structure.  
-- Saved into a structured output directory.  
-- Renamed systematically for traceability.  
-
-This produces a consistent set of files ready for integration into the corpus.
-
-_Export Cleaned Transcripts snippet: This final stage writes the processed transcripts to disk. Instead of changing the working directory, now its explicitly define an output directory and construct full file paths when saving._
-
-```r
-# Define output directory explicitly
-output_dir <- file.path(your_wd, "Post R Cleanup")
-
-# Create directory if it does not exist
-dir.create(output_dir, showWarnings = FALSE, recursive = TRUE)
-
-# Write each cleaned transcript
-for (i in seq_len(nrow(files))) {
-  write_file(
-    files$Text[i],
-    file.path(output_dir, files$Name[i])
-  )
-}
-
-cat("Cleanup script complete!\n")
-```
----
-
-## Reproducibility and Refactoring
-
-The idea wass refactoring an existing script into a **reproducible R Markdown pipeline**. This included:
-
-- Modularizing code into clearly defined steps.  
-- Adding documentation for each transformation stage.  
-- Eliminating hard-coded dependencies.  
-- Improving readability and maintainability.  
+The goal was to preserve **meaningful neural activity** while eliminating **irrelevant noise**.
 
 ---
 
-## Validation and Analytical Considerations
+### 3. Independent Component Analysis (ICA)
 
-To evaluate the refactored pipeline, I conducted a comparison between the original and revised outputs.
+**Independent Component Analysis (ICA)** was used to decompose EEG signals into **independent sources**, enabling:
 
-Findings include:
+- Separation of **neural signals vs noise**  
+- Identification of **artifact-related components**  
 
-- Both versions produce structurally valid WebVTT files.  
-- Speaker labels and timestamps are consistently normalized.  
-- However, differences emerge in segmentation:
-  - Some intervals are merged.  
-  - Others are split.  
-  - Minor formatting differences are introduced.  
+Two approaches were explored:
+- **RUNICA**  
+- **SOBI (Second-Order Blind Identification)**  
 
-<div style="text-align: justify; line-height: 1.7;">
-These results highlight an important methodological distinction between <strong>data normalization** and **data transformation</strong>. While normalization improves consistency, it may alter segmentation boundaries, which can impact certain types of analysis (e.g., turn-taking or pause duration studies).
-</div>
----
+The **SOBI algorithm** was particularly effective for capturing **temporally correlated artifacts**.
 
-## Outcomes
-
-This ongoing work has contributed to:
-
-- The development of a scalable transcript preprocessing pipeline. 
-- Standardized data suitable for sociolinguistic and computational analysis. 
-- Improved reproducibility in corpus preparation workflows.  
-- Identification of trade-offs in preprocessing decisions.  
+<p align="center">
+  <img src="/images/eeg5.png" style="width: 100%; max-width: 700px; height: auto; border-radius: 12px;">
+</p>
 
 ---
 
-_For more detailed information about the project's following repositories: [Official COBIVA Repository](https://github.com/COBIVA), [Webvtt Transcript Normalization Using R](https://github.com/lldavoll/Webvtt-Transcript-Normalization-Using-R)_
+### 4. Two-Stage Artifact Removal Strategy
+
+The preprocessing approach was divided into **two stages**:
+
+#### Stage 1: Physiological Artifact Removal
+- Filtering and channel correction  
+- No ICA applied  
+- **Visual validation of signal improvement**  
+
+### Before:
+<p align="center">
+  <img src="/images/eeg6.png" style="width: 100%; max-width: 700px; height: auto; border-radius: 12px;">
+</p>
+
+### After:
+<p align="center">
+  <img src="/images/eeg7.png" style="width: 100%; max-width: 700px; height: auto; border-radius: 12px;">
+</p>
+
+#### Stage 2: Technical Artifact Removal (ICA-based)
+- **Blind Source Separation (BSS)**  
+- Removal of:
+  - Eye-related artifacts (**EOG**)  
+  - Muscle artifacts (**EMG**)  
+  - **Electrical noise (60 Hz)**  
+
+### Before:
+<p align="center">
+  <img src="/images/eeg8.png" style="width: 100%; max-width: 700px; height: auto; border-radius: 12px;">
+</p>
+
+### After:
+<p align="center">
+  <img src="/images/eeg9.png" style="width: 100%; max-width: 700px; height: auto; border-radius: 12px;">
+</p>
+This **two-stage strategy** improved both **robustness and interpretability** of the EEG signals.
+
+---
+
+## Results and Outcomes
+
+The preprocessing pipeline achieved:
+
+- **Significant noise reduction across channels**  
+- **Improved signal clarity and stability**  
+- Clear distinction between **raw vs processed signals**  
+
+Evaluation methods included:
+
+- **Visual inspection of EEG plots**  
+- **Quantitative comparisons across preprocessing stages**  
+
+These results demonstrate that **proper preprocessing is critical** before any **classification or modeling tasks**.
+
+### Raw Signal:
+<p align="center">
+  <img src="/images/eeg2.png" style="width: 100%; max-width: 700px; height: auto; border-radius: 12px;">
+</p>
+### Filtered Signal:
+<p align="center">
+  <img src="/images/eeg3.png" style="width: 100%; max-width: 700px; height: auto; border-radius: 12px;">
+</p>
+### Fully Cleaned Signal:
+<p align="center">
+  <img src="/images/eeg4.png" style="width: 100%; max-width: 700px; height: auto; border-radius: 12px;">
+</p>
+---
+
+_The complete thesis for this project can be accessed here: [Download Full Thesis (PDF)](https://lldavoll.github.io/files/TG_DavidAcevedoCardona.pdf)_
