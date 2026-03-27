@@ -11,13 +11,13 @@ collection: portfolio
 
 <div style="text-align: justify; line-height: 1.7;">
 <p> 
-As part of an ongoing collaboration with researchers in Hispanic linguistics at the University of Arizona and The University of Texas Rio Grande Valley, I contribute to the preprocessing of sociolinguistic corpora documenting bilingual speech in the U.S.–Mexico border region. This work is connected to broader projects such as <a href="https://www.utrgv.edu/cobiva/" target="_blank"> CoVIBA (Corpus de la Frontera)</a>. and CESA, which aim to build a large-scale, publicly accessible archive of bilingual interviews from regions including Texas and Arizona, with future expansion to New Mexico and California.
+As part of an ongoing collaboration with researchers in Hispanic linguistics at the University of Arizona and The University of Texas Rio Grande Valley, I contribute to the preprocessing of sociolinguistic corpora documenting bilingual speech in the U.S.–Mexico border region. This work is connected to broader projects such as <a href="https://www.utrgv.edu/cobiva/" target="_blank"> CoVIBA (Corpus de la Frontera)</a> and CESA, which aim to build a large-scale, publicly accessible archive of bilingual interviews from regions including Texas and Arizona, with future expansion to New Mexico and California.
 <p>
 </p>
 These corpora consist of recorded sociolinguistic interviews designed to elicit natural, informal speech (Labov, 1972). The data captures oral narratives, language attitudes, and patterns of bilingualism in the Rio Grande Valley and surrounding regions. The ultimate goal is to support research on bilingualism, promote dialect awareness, and provide a resource for both academic and community-oriented work.
 <p> 
 </p>
-My role so far focuses on the <strong>computational processing and normalization of transcript data</strong>, which is a critical step in transforming raw interview materials into a structured, analyzable corpus.
+My role focuses on the <strong>computational processing and normalization of transcript data</strong>, which is a critical step in transforming raw interview materials into a structured, analyzable corpus.
 </p>
 </div>
 
@@ -34,7 +34,9 @@ The primary objective of my contribution is to design a **reproducible and scala
 
 This work supports the broader effort of building a high-quality sociolinguistic dataset suitable for both qualitative and quantitative research.
 
----## Technologies and Tools
+---
+
+## Technologies and Tools
 
 The pipeline is implemented in **R**, using a combination of packages commonly applied in text processing and NLP workflows:
 
@@ -175,7 +177,7 @@ The cleaned transcripts are:
 
 This produces a consistent set of files ready for integration into the corpus.
 
-_Export Cleaned Transcripts snippet: TThis final stage writes the processed transcripts to disk. Instead of changing the working directory, now its explicitly define an output directory and construct full file paths when saving._
+_Export Cleaned Transcripts snippet: This final stage writes the processed transcripts to disk. Instead of changing the working directory, now its explicitly define an output directory and construct full file paths when saving._
 
 ```r
 # Define output directory explicitly
@@ -220,17 +222,20 @@ Findings include:
   - Others are split.  
   - Minor formatting differences are introduced.  
 
-These results highlight an important methodological distinction between **data normalization** and **data transformation**. While normalization improves consistency, it may alter segmentation boundaries, which can impact certain types of analysis (e.g., turn-taking or pause duration studies).
-
+<div style="text-align: justify; line-height: 1.7;">
+These results highlight an important methodological distinction between <strong>data normalization** and **data transformation</strong>. While normalization improves consistency, it may alter segmentation boundaries, which can impact certain types of analysis (e.g., turn-taking or pause duration studies).
+</div>
 ---
 
 ## Outcomes
 
 This ongoing work has contributed to:
 
-- The development of a scalable transcript preprocessing pipeline  
-- Standardized data suitable for sociolinguistic and computational analysis  
-- Improved reproducibility in corpus preparation workflows  
-- Identification of trade-offs in preprocessing decisions  
+- The development of a scalable transcript preprocessing pipeline. 
+- Standardized data suitable for sociolinguistic and computational analysis. 
+- Improved reproducibility in corpus preparation workflows.  
+- Identification of trade-offs in preprocessing decisions.  
 
 ---
+
+_For more detailed information about the project's following repositories [Official COBIVA Repository:](https://github.com/COBIVA) [Official COBIVA Repository:](https://github.com/COBIVA)_ 
