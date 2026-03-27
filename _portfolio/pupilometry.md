@@ -12,14 +12,11 @@ collection: portfolio
 <div style="text-align: justify; line-height: 1.7;">
 <p> 
 This project consists of the design, implementation, and deployment of a <strong>pupillometry-based psycholinguistic experiment</strong> investigating how bilingual speakers process <strong>Spanish subjunctive morphology in real time</strong>. The experiment was built using Experiment Builder and run on an EyeLink 1000 Plus system, integrating <em>linguistic theory, experimental design, and technical implementation.</em>
-<p>   
-</p>
-The project is part of my work in the <a href="https://uavip.arizona.edu/arizona-applied-psycholinguistics-lab" target="_blank"> Arizona Applied Psycholinguistics Lab (AAPL) </a>, which studies how <strong>pupil dilation reflects cognitive load during sentence processing</strong>, particularly when participants encounter <strong>ungrammatical structures</strong>. This study extends that paradigm by incorporating additional experimental controls, including <strong>indicative mood baselines**, lexical frequency manipulation, and nonce verbs</strong>.
-<p>   
+</p>   
+<p>
+The project is part of my work in the <a href="https://uavip.arizona.edu/arizona-applied-psycholinguistics-lab" target="_blank"> Arizona Applied Psycholinguistics Lab (AAPL) </a>, which studies how <strong>pupil dilation reflects cognitive load during sentence processing</strong>, particularly when participants encounter <strong>ungrammatical structures</strong>. This study extends that paradigm by incorporating additional experimental controls, including <strong>indicative mood baselines, lexical frequency manipulation, and nonce verbs</strong>. 
 </p>
 </div>
-
-## Project Goals
 
 ## Project Goals
 
@@ -27,28 +24,18 @@ The primary goal of this project is to investigate how bilingual speakers proces
 
 More specifically, this project pursues the following goals:
 
-### 1. **Test the Bottleneck Hypothesis in real-time processing**
+1. **Test the Bottleneck Hypothesis in real-time processing**
+   - A central objective is to evaluate predictions from the *Bottleneck Hypothesis*, which claims that **functional morphology is a primary source of difficulty in second language acquisition**. By focusing on the subjunctive, this project examines whether bilingual speakers show **increased processing effort when encountering morphological violations**, even when they may perform well on explicit tasks.
 
-A central objective is to evaluate predictions from the *Bottleneck Hypothesis*, which claims that **functional morphology is a primary source of difficulty in second language acquisition**. By focusing on the subjunctive, this project examines whether bilingual speakers show **increased processing effort when encountering morphological violations**, even when they may perform well on explicit tasks.
+2. **Compare implicit and explicit knowledge of grammar**
+   - **Explicit knowledge** (*offline tasks, such as forced-choice judgments*).
+   - **Implicit processing** (*pupil dilation*).
 
-
-### 2. **Compare implicit and explicit knowledge of grammar**
-
-The project aims to determine whether there is a mismatch between:
-
-- **Explicit knowledge** (*offline tasks, such as forced-choice judgments*)  
-- **Implicit processing** (*online measures, such as pupil dilation*)  
-
----
-
-### 3. **Examine differences across speaker populations**
-
-Another goal is to compare how different bilingual groups process subjunctive morphology:
-
-- **Native speakers** (*baseline*).  
-- **Heritage speakers**.  
-- **L2 learners**.  
-
+3. **Examine differences across speaker populations**
+   - Another goal is to compare how different bilingual groups process subjunctive morphology:
+     -**Native speakers** (*baseline*).
+     -**Heritage speakers**.  
+     -**L2 learners**. 
 ---
 
 ### 4. **Measure cognitive load using pupillometry**
