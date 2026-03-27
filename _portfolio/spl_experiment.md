@@ -112,7 +112,29 @@ This was implemented in PsychoPy using custom Python logic:
 - A validation function enforces constraints.
 - The final order is applied before the experiment begins.
 
-This reflects the application of **algorithmic thinking in experimental design**.
+_Pseudorandomization snippet_
+
+```python
+items = df["item_id"].unique().tolist()
+items_d = [it for it in items if it.endswith("d")]
+items_p = [it for it in items if it.endswith("p")]
+
+random.shuffle(items_d)
+random.shuffle(items_p)
+
+final_order = []
+
+while items_d or items_p:
+    if len(final_order) >= 2 and final_order[-1][-1] == final_order[-2][-1]:
+        choice = "p" if final_order[-1].endswith("d") else "d"
+    else:
+        choice = "d" if len(items_d) >= len(items_p) else "p"
+
+    if choice == "d" and items_d:
+        final_order.append(items_d.pop())
+    elif choice == "p" and items_p:
+        final_order.append(items_p.pop())
+```
 
 ---
 
@@ -217,6 +239,11 @@ df.to_csv("durations.csv", index=False, encoding="utf-8-sig")
 ---
 
 ### 2. Bilingual Language Profile (BLP) Implementation
+
+<p align="center">
+  <img src="/images/psychopy2.png" 
+       style="width: 100%; max-width: 800px; height: auto; border-radius: 12px;">
+</p>
 
 <div style="text-align: justify; line-height: 1.7;">
 <p>  
@@ -326,6 +353,27 @@ I also examined the difference between PsychoPy log timings and CSV output timin
 </p>
 </div>
 
+```python
+# Convert response time from seconds to milliseconds
+if resp_q.rt is not None:
+    resp_q_rt_ms = resp_q.rt * 1000
+else:
+    resp_q_rt_ms = None
+
+# Label the F/J response as Sí/No
+if resp_q.keys == 'f':
+    resp_label = 'Sí'
+elif resp_q.keys == 'j':
+    resp_label = 'No'
+else:
+    resp_label = 'Sin respuesta'
+
+# Add data to the PsychoPy output file
+thisExp.addData('resp_key', resp_q.keys)
+thisExp.addData('resp_label', resp_label)
+thisExp.addData('resp_q_rt_ms', resp_q_rt_ms)
+```
+
 #### Fixation Cross and Routine Flow
 
 <div style="text-align: justify; line-height: 1.7;">
@@ -412,6 +460,19 @@ df_final = pd.concat([non_form_rows, form_df], ignore_index=True)
 
 The final cleaned dataset was easier to read, easier to analyze, and much more suitable for later work in R or Python.
 
+**Before:**
+
+<p align="center">
+  <img src="/images/psychopy3.png" 
+       style="width: 100%; max-width: 800px; height: auto; border-radius: 12px;">
+</p>
+
+**After:**
+
+<p align="center">
+  <img src="/images/psychopy4.png" 
+       style="width: 100%; max-width: 800px; height: auto; border-radius: 12px;">
+</p>
 ---
 
 _For more detailed information about PsychoPy's Experiment and Python code visit the following [Repository](https://github.com/lldavoll/Self-Paced-Listening-Experiment-Pipeline)_
