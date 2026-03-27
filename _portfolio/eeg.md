@@ -17,7 +17,7 @@ This project was developed as part of my undergraduate studies in <strong>Electr
 Electroencephalography (EEG) measures electrical brain activity using electrodes placed on the scalp. These signals are <strong>high-dimensional, noisy, and complex</strong>, requiring advanced preprocessing techniques before meaningful analysis can be performed.
 <p>
 </p>
-In this project, I designed and implemented a <strong>complete EEG preprocessing pipeline</strong> using the <strong>EEGLAB toolbox (MATLAB)</strong>, incorporating <strong>filtering, artifact removal, and Independent Component Analysis (ICA)<strong>. This work represents a strong foundation in <strong>signal processing and data analysis</strong>, which I later build upon in my graduate studies in <strong>Human Language Technology</strong>.
+In this project, I designed and implemented a <strong>complete EEG preprocessing pipeline</strong> using the <strong>EEGLAB toolbox (MATLAB)</strong>, incorporating <strong>filtering, artifact removal, and Independent Component Analysis (ICA)</strong>. This work represents a strong foundation in <strong>signal processing and data analysis</strong>, which I later build upon in my graduate studies in <strong>Human Language Technology</strong>.
 </p>
 </div>
 
