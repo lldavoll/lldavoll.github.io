@@ -4,13 +4,13 @@ excerpt: "Designed and refactored an R-based pipeline to clean, normalize, and r
 collection: portfolio
 ---
 <p align="center">
-  <img src="/images/coviba.png" style="width: 100%; max-width: 700px; height: auto; border-radius: 12px;">
+  <img src="/images/cobiva.png" style="width: 100%; max-width: 700px; height: auto; border-radius: 12px;">
 </p>
 
 # Overview
 
 <p align="center">
-  <img src="/images/psychopy1.png" 
+  <img src="/images/cobiva.png" 
        style="width: 100%; max-width: 800px; height: auto; border-radius: 12px;">
 </p>
 
