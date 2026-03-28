@@ -10,9 +10,8 @@ redirect_from:
 
 <p align="center">
   <img src="../images/about.png" 
-    style="width: 100%; max-width: 600px; height: auto; border-radius: 12px;">
+    style="width: 100%; max-width: 900px; height: 300px; object-fit: cover; border-radius: 12px;">
 </p>
-
 
 <div style="text-align: justify; line-height: 1.7;">
 
