@@ -2,6 +2,7 @@
 title: "Pupillometry Experiment on Spanish Subjunctive Processing: EyeLink Implementation and Psycholinguistic Analysis [Ongoing Project]"
 excerpt: "A pupillometry-based experiment using EyeLink to investigate real-time processing of Spanish subjunctive morphology in heritage speakers and L2 learners."
 collection: portfolio
+order: 3
 ---
 <p align="center">
   <img src="/images/experiment.png" style="width: 100%; max-width: 700px; height: auto; border-radius: 12px;">
