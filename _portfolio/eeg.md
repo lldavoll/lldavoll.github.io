@@ -188,10 +188,11 @@ Figure 6. EEG without technical artifact removal.
 <p align="center">
   <img src="/images/eeg9.png" style="width: 100%; max-width: 700px; height: auto; border-radius: 12px;">
 </p>
-This **two-stage strategy** improved both **robustness and interpretability** of the EEG signals.
 <p align="center"><em>
 Figure 7. EEG with technical artifact removal.
 </em></p>
+
+This **two-stage strategy** improved both **robustness and interpretability** of the EEG signals.
 ---
 
 ## Results and Outcomes
