@@ -13,6 +13,7 @@ This is a brief list of the courses that I had taught. If you have any specific 
 **Terms:** Spring 2025 / Fall 2025 / Spring 2026
 
 Spanish 102 is designed as an introduction to Spanish as an additional language and the many facets of Hispanic culture. This course begins to develop all four core language skills—speaking, listening, reading, and writing.
+
 _For more information about the course check the following [link](https://catalog.arizona.edu/courses/0317091)_
 
 ### SPAN 101: Introductory Spanish
