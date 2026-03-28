@@ -7,7 +7,9 @@ author_profile: true
 
 ## Lesson Plans
 
-Here are selected lesson plans and teaching materials I have developed for Spanish language instruction.
+Here are selected lesson plans and teaching materials I have developed for Spanish language instruction, feel free to view and download them.
 
-- [SPAN 102: Fiestas y celebraciones](/files/span102_fiestas_lesson_plan.pdf)
-- [SPAN 101: Rutinas diarias](/files/span101_rutinas_lesson_plan.pdf)
+- [SPAN 101: ¿Cómo suena la inclusión?](/files/como_suena_la_inclusion.pdf)
+- [SPAN 102: Fiestas y celebraciones](/files/las_fiestas.pdf)
+- [SPAN 101: Mi Cumpleaños](/files/mi_cumpleaños.pdf)
+
