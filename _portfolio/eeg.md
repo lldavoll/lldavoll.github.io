@@ -37,7 +37,9 @@ The main objectives of this project were:
 <p align="center">
   <img src="/images/eeg10.png" style="width: 100%; max-width: 700px; height: auto; border-radius: 12px;">
 </p>
-
+<p align="center"><em>
+Figure 1. Electrodes/channels recorded in the EEG signals.
+</em></p>
 <div style="text-align: justify; line-height: 1.7;">
 <p> 
 The dataset consists of EEG recordings from <strong>70+ participants</strong> exposed to emotional stimuli, particularly facial expressions representing emotions such as <strong>happiness, sadness, fear, anger, and disgust</strong>.
@@ -139,6 +141,9 @@ The **SOBI algorithm** was really effective for capturing **temporally correlate
   <img src="/images/eeg5.png" style="width: 100%; max-width: 700px; height: auto; border-radius: 12px;">
 </p>
 
+<p align="center"><em>
+Figure 3. Component activation.
+</em></p>
 ---
 
 ### 4. Two-Stage Artifact Removal Strategy
@@ -154,12 +159,17 @@ The preprocessing approach was divided into **two stages**:
 <p align="center">
   <img src="/images/eeg6.png" style="width: 100%; max-width: 700px; height: auto; border-radius: 12px;">
 </p>
+<p align="center"><em>
+Figure 4. EEG without physiological artifact removal.
+</em></p>
 
 ### After:
 <p align="center">
   <img src="/images/eeg7.png" style="width: 100%; max-width: 700px; height: auto; border-radius: 12px;">
 </p>
-
+<p align="center"><em>
+Figure 5. EEG with physiological artifact removal.
+</em></p>
 #### Stage 2: Technical Artifact Removal (ICA-based)
 - **Blind Source Separation (BSS)**  
 - Removal of:
@@ -171,13 +181,17 @@ The preprocessing approach was divided into **two stages**:
 <p align="center">
   <img src="/images/eeg8.png" style="width: 100%; max-width: 700px; height: auto; border-radius: 12px;">
 </p>
-
+<p align="center"><em>
+Figure 6. EEG without technical artifact removal.
+</em></p>
 ### After:
 <p align="center">
   <img src="/images/eeg9.png" style="width: 100%; max-width: 700px; height: auto; border-radius: 12px;">
 </p>
 This **two-stage strategy** improved both **robustness and interpretability** of the EEG signals.
-
+<p align="center"><em>
+Figure 7. EEG with technical artifact removal.
+</em></p>
 ---
 
 ## Results and Outcomes
@@ -199,14 +213,25 @@ These results demonstrate that **proper preprocessing is critical** before any *
 <p align="center">
   <img src="/images/eeg2.png" style="width: 100%; max-width: 700px; height: auto; border-radius: 12px;">
 </p>
+<p align="center"><em>
+Figure 8. Raw EEG signal.
+</em></p>
+
 ### Filtered Signal:
 <p align="center">
   <img src="/images/eeg3.png" style="width: 100%; max-width: 700px; height: auto; border-radius: 12px;">
 </p>
+<p align="center"><em>
+Figure 9. EEG signal filtered.
+</em></p>
+
 ### Fully Cleaned Signal:
 <p align="center">
   <img src="/images/eeg4.png" style="width: 100%; max-width: 700px; height: auto; border-radius: 12px;">
 </p>
+<p align="center"><em>
+Figure 10. EEG Signal after a full clean stage.
+</em></p>
 ---
 
 _The complete thesis for this project can be accessed here: [Download Full Thesis (PDF)](https://lldavoll.github.io/files/TG_DavidAcevedoCardona.pdf)_
