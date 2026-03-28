@@ -2,6 +2,7 @@
 title: "Design and Implementation of a Self-Paced Listening Experiment with Integrated Bilingual Language Profiling (Quechua-Spanish)"
 excerpt: "End-to-end psycholinguistic experiment built in PsychoPy, combining self-paced listening with bilingual profiling and a reproducible Python data pipeline."
 collection: portfolio
+order: 2
 ---
 <p align="center">
   <img src="/images/psychopy.png" style="width: 100%; max-width: 700px; height: auto; border-radius: 12px;">
