@@ -3,8 +3,11 @@ main:
   - title: "Portfolio"
     url: /portfolio/
     
-  - title: "Resumen & CV"
-    url: /resumen_cv/
+  - title: "Resume & CV"
+    url: /resume_cv/
     
   - title: "Repositories"
     url: /repositories/
+
+  - title: "Teaching"
+    url: /teaching/
