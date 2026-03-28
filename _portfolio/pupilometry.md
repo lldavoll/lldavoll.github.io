@@ -255,4 +255,4 @@ As the project continues, further refinements will focus on improving stability,
 
 ---
 
-_For more detailed information about the project please check the following repository: [Official COBIVA Repository](https://github.com/lldavoll/Eyelink-Pupillometry-Spanish-Subjunctive-Using-EB)._
+_For more detailed information about the project please check the following [Repository](https://github.com/lldavoll/Eyelink-Pupillometry-Spanish-Subjunctive-Using-EB)._
