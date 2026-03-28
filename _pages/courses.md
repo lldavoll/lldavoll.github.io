@@ -8,8 +8,6 @@ author_profile: true
 This is a brief list of the courses that I had taught. If you have any specific questions about course topics, feel free to  reach me via email.
 
 
-Spanish 102 is designed as an introduction to Spanish as an additional language and the many facets of Hispanic culture. This course begins to develop all four core language skills—speaking, listening, reading, and writing.
-
 ### SPAN 102: Second Semester Spanish
 **Institution:** University of Arizona  
 **Terms:** Spring 2025 / Fall 2025 / Spring 2026
