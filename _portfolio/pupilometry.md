@@ -99,13 +99,13 @@ The first stage of the project focuses on preparing the <strong>DataSource file<
 
 The dataset is designed to include:
 
-- **Trial identifiers** (item_id, condition, list)  
+- **Trial identifiers**: item_id, condition, list.  
 - **Linguistic variables**:
-  - Mood (*subjunctive vs indicative*)  
-  - Grammaticality (*grammatical vs ungrammatical*)  
-  - Verb type (*volitional vs epistemic*)  
-- **Audio file paths**  
-- **Timing-related variables**  
+  - Mood: *subjunctive vs indicative*.  
+  - Grammaticality: *grammatical vs ungrammatical*.  
+  - Verb type: *volitional vs epistemic*.  
+- **Audio file paths**.  
+- **Timing-related variables**.  
 
 <div style="text-align: justify; line-height: 1.7;">
 <p>
@@ -243,9 +243,9 @@ From an HLT perspective, this work reflects the integration of:
 </p>
 </div>
 
-- **Linguistic theory to experimental variables**  
-- **Structured datasets to experimental control**  
-- **Hardware systems to real-time data collection**  
+- **Linguistic theory to experimental variables**.  
+- **Structured datasets to experimental control**.  
+- **Hardware systems to real-time data collection**.  
 
 <div style="text-align: justify; line-height: 1.7;">
 <p>
@@ -255,4 +255,4 @@ As the project continues, further refinements will focus on improving stability,
 
 ---
 
-_For more detailed information about the project please check the following repository: [Official COBIVA Repository](https://github.com/COBIVA).
+_For more detailed information about the project please check the following repository: [Official COBIVA Repository](https://github.com/lldavoll/Eyelink-Pupillometry-Spanish-Subjunctive-Using-EB)._
