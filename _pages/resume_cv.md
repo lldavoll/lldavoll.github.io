@@ -1,7 +1,7 @@
 ---
 layout: archive
-title: "Resumen & CV"
-permalink: /resumen_cv/
+title: "Resume & CV"
+permalink: /resume_cv/
 author_profile: true
 redirect_from:
   - /resume
@@ -9,9 +9,9 @@ redirect_from:
 
 {% include base_path %}
 
-Here you can find my latest **Resumen & CV**, please feel free to view and download them:
+Here you can find my latest **Resume & CV**, please feel free to view and download them:
 
-## Resumen
+## Resume
 
 <div style="text-align: center;">
 
