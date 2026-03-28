@@ -5,7 +5,8 @@ collection: portfolio
 order: 1
 ---
 <p align="center">
-  <img src="/images/good.png" style="width: 100%; max-width: 700px; height: 320px; object-fit: cover; border-radius: 12px;">
+  <img src="/images/good.png" 
+    style="width: 100%; max-width: 800px; height: auto; border-radius: 12px;">
 </p>
 
 # Summary
