@@ -15,7 +15,7 @@ collection: portfolio
 </p>
 
 <p align="center"><em>
-Figure 1. PsychoPy Builder timeline showing trial loop and stimulus routines.
+Figure 1. PsychoPy Builder timeline, trial loop and stimulus routines.
 </em></p>
 
 <div style="text-align: justify; line-height: 1.7;">
