@@ -2,6 +2,7 @@
 title: "Building a Reproducible Transcript Cleaning Pipeline in R [Ongoing Project]"
 excerpt: "Designed and refactored an R-based pipeline to clean, normalize, and restructure WebVTT transcripts for the digitalization and preprocessing of a large-scale sociolinguistic corpus of bilingual speech in the U.S.–Mexico border, focusing on transcript normalization and timestamp reconstruction using R."
 collection: portfolio
+order: 5
 ---
 <p align="center">
   <img src="/images/cobiva.png" style="width: 100%; max-width: 700px; height: auto; border-radius: 12px;">
