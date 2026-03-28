@@ -24,7 +24,7 @@ Spanish 101 is designed as an introduction to Spanish as an additional language 
 
 _For more information about the course check the following [link](https://catalog.arizona.edu/courses/0317051)_
 
-### IE 763: Signal AnalysisIntroductory Spanish
+### IE 763: Signal Analysis
 **Institution:** Universidad Técnologica de Pereira - Colombia  
 **Term:** Spring 2022  
 
