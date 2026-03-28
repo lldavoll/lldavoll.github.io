@@ -14,6 +14,10 @@ collection: portfolio
        style="width: 100%; max-width: 800px; height: auto; border-radius: 12px;">
 </p>
 
+<p align="center"><em>
+Figure 1. PsychoPy Builder timeline showing trial loop and stimulus routines.
+</em></p>
+
 <div style="text-align: justify; line-height: 1.7;">
 <p> 
 This project presents the design, implementation, and analysis pipeline of a <strong>Self-Paced Listening (SPL) experiment</strong> integrated with a <strong>Bilingual Language Profile (BLP) questionnaire</strong>, developed as part of my work in the <a href="https://uavip.arizona.edu/arizona-applied-psycholinguistics-lab" target="_blank"> Arizona Applied Psycholinguistics Lab (AAPL) </a>.
@@ -98,6 +102,9 @@ Two lists are used for **counterbalancing participants**, ensuring experimental 
   <img src="/images/stimuli.png" 
        style="width: 100%; max-width: 800px; height: auto; border-radius: 12px;">
 </p>
+<p align="center"><em>
+Figure 2. Master Stimuli with Counterbalancing for PsychoPy.
+</em></p>
 ---
 
 ### Pseudorandomization
@@ -244,6 +251,9 @@ df.to_csv("durations.csv", index=False, encoding="utf-8-sig")
   <img src="/images/psychopy2.png" 
        style="width: 100%; max-width: 800px; height: auto; border-radius: 12px;">
 </p>
+<p align="center"><em>
+Figure 3. GUI in PsychoPy for the experiment.
+</em></p>
 
 <div style="text-align: justify; line-height: 1.7;">
 <p>  
@@ -467,12 +477,18 @@ The final cleaned dataset was easier to read, easier to analyze, and much more s
        style="width: 100%; max-width: 800px; height: auto; border-radius: 12px;">
 </p>
 
+<p align="center"><em>
+Figure 4. Direct output data (raw data) from PsychoPy.
+</em></p>
 **After:**
 
 <p align="center">
   <img src="/images/psychopy4.png" 
        style="width: 100%; max-width: 800px; height: auto; border-radius: 12px;">
 </p>
+<p align="center"><em>
+Figure 5. Clean data.
+</em></p>
 ---
 
 _For more detailed information about PsychoPy's Experiment and Python code visit the following [Repository](https://github.com/lldavoll/Self-Paced-Listening-Experiment-Pipeline)_
