@@ -16,7 +16,7 @@ Here you can find my latest **Resume & CV**, please feel free to view and downlo
 <div style="text-align: center;">
 
 <iframe 
-    src="/files/resumen.pdf" 
+    src="/files/resume.pdf" 
     width="100%" 
     height="800px"
     style="border: none;">
