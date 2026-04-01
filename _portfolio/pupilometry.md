@@ -143,7 +143,7 @@ Each trial is designed to follow this sequence:
 4. **Acceptability judgment (button/key response)**.  
 
 <p align="center">
-  <img src="/images/experiment2.jpg" style="width: 100%; max-width: 700px; height: auto; border-radius: 12px;">
+  <img src="/images/experiment2.png" style="width: 100%; max-width: 700px; height: auto; border-radius: 12px;">
 </p>
 <p align="center"><em>
 Figure 1. Trial Structure.
@@ -174,7 +174,7 @@ Key implementation features include:
 <div style="text-align: justify; line-height: 1.7;">
 
 <p align="center">
-  <img src="/images/experiment3.jpg" style="width: 100%; max-width: 700px; height: auto; border-radius: 12px;">
+  <img src="/images/experiment3.png" style="width: 100%; max-width: 700px; height: auto; border-radius: 12px;">
 </p>
 <p align="center"><em>
 Figure 2. Audio Integration.
