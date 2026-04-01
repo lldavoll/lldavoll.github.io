@@ -51,7 +51,7 @@ More specifically, this project pursues the following goals:
 ## Technologies and Tools
 
 <p align="center">
-  <img src="/images/experiment1.png" style="width: 100%; max-width: 700px; height: auto; border-radius: 12px;">
+  <img src="/images/experiment1.jpg" style="width: 100%; max-width: 700px; height: auto; border-radius: 12px;">
 </p>
 
 ### System Architecture
