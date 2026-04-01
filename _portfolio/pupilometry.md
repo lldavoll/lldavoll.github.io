@@ -142,6 +142,13 @@ Each trial is designed to follow this sequence:
 3. **Pupil recording during playback**.  
 4. **Acceptability judgment (button/key response)**.  
 
+<p align="center">
+  <img src="/images/experiment2.jpg" style="width: 100%; max-width: 700px; height: auto; border-radius: 12px;">
+</p>
+<p align="center"><em>
+Figure 1. Trial Structure.
+</em></p>
+
 <div style="text-align: justify; line-height: 1.7;">
 <p>
 This structure is implemented using a loop connected to the DataSource file, where each row corresponds to one trial. The system is currently being refined to ensure proper randomization and condition balancing.
@@ -165,6 +172,14 @@ Key implementation features include:
 - Alignment between stimulus onset and recording events.  
 
 <div style="text-align: justify; line-height: 1.7;">
+
+<p align="center">
+  <img src="/images/experiment3.jpg" style="width: 100%; max-width: 700px; height: auto; border-radius: 12px;">
+</p>
+<p align="center"><em>
+Figure 2. Audio Integration.
+</em></p>
+
 <p>
 This part of the system is currently being tested and adjusted to minimize latency. Particular attention is being given to audio configuration (e.g., <strong>ASIO drivers</strong>) to ensure accurate temporal alignment.
 </p>
@@ -185,6 +200,52 @@ The current setup includes:
 - Calibration and validation procedures prior to trials.  
 - Trial-level control of recording start/stop.  
 - Logging of events aligned with stimulus presentation.  
+
+_Data INtegration snippet: This snippet defines a custom Experiment Builder class that interfaces with the EyeLink system via <code>pylink</code>. It manages trial-level state, periodically retrieves the newest eye-tracking sample, extracts pupil size data, and sends real-time status messages to the Host PC. The implementation ensures controlled timing of updates, enabling reliable monitoring of pupil dynamics during stimulus presentation._
+
+```python
+import sreb
+import sreb.time
+import pylink
+
+class CustomClassTemplate(sreb.EBObject):
+
+    def __init__(self):
+        sreb.EBObject.__init__(self)
+        self.updateDuration = 500
+        self.checkingStatus = 0
+
+    def resetTrial(self, trialNum):
+        self.startTime = 0
+        self.updatePupil = 0
+        self.checkingStatus = 0
+        self.trialNum = trialNum
+
+    def sendPupilTohost(self):
+        if self.checkingStatus == 1:
+            if self.startTime == 0:
+                self.lastUpdateTime = sreb.time.getCurrentTime()
+                self.updatePupil = 1
+                self.startTime = sreb.time.getCurrentTime()
+
+            elif sreb.time.getCurrentTime() - self.lastUpdateTime >= self.updateDuration:
+                self.lastUpdateTime = sreb.time.getCurrentTime()
+                self.updatePupil = 1
+
+            if self.updatePupil == 1:
+                s = pylink.getEYELINK().getNewestSample()
+                if s:
+                    eyeData = s.getRightEye()
+                    if eyeData is None:
+                        eyeData = s.getLeftEye()
+
+                    self.pupilSize = int(eyeData.getPupilSize())
+                    pylink.getEYELINK().sendCommand(
+                        "record_status_message 'Trial = " + str(self.trialNum) +
+                        "   Pupil Size = " + str(self.pupilSize) + "'"
+                    )
+                    self.updatePupil = 0
+```
 
 <div style="text-align: justify; line-height: 1.7;">
 <p>
