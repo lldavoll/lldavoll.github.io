@@ -412,37 +412,31 @@ _For more detailed information about the project's code and output please visit 
 ## What I Learned...
 
 <div style="text-align: justify; line-height: 1.7;">
-This internship allowed me to apply theoretical knowledge from the MSHLT program to real-world data problems in the context of noisy, large-scale, and heterogeneous datasets.
+This internship allowed me to apply theoretical knowledge from the MSHLT program to real data problems involving noisy, large-scale, and heterogeneous datasets.
 </div>
 
 ### Applying NLP to Real-World Data
 
 <div style="text-align: justify; line-height: 1.7;">
-Through tasks such as executive extraction and email-based brand parsing, I learned how to apply NLP techniques beyond controlled environments. Unlike classroom datasets, real-world data required combining statistical methods (e.g., spaCy NER) with rule-based approaches to handle ambiguity, inconsistency, and noise.
-</div>
-
-### Importance of Data Preprocessing and Normalization
-
-<div style="text-align: justify; line-height: 1.7;">
-My major takeaway was the importance of preprocessing in NLP pipelines. Tasks such as executive title normalization, committee name standardization, and brand cleaning showed me that raw data is rarely usable without extensive transformation. Small inconsistencies in text can significantly impact downstream tasks such as matching and aggregation.
+Through tasks such as executive extraction and email-based brand parsing, I learned how to apply NLP techniques beyond controlled environments. Unlike classroom datasets, real data required combining statistical methods (e.g., spaCy, NER) with rule-based approaches, along with extensive preprocessing and normalization to handle ambiguity, inconsistency, and noise. These steps ensured that downstream tasks such as matching, aggregation, and analysis produced reliable results.
 </div>
 
 ### Entity Resolution and Data Integration
 
 <div style="text-align: justify; line-height: 1.7;">
-Working across multiple datasets (SEC, FEC, Snowflake, email data) highlighted the complexity of entity resolution. I learned how to design normalization strategies and matching workflows (including fuzzy matching) to link entities across sources, which is a key challenge in applied NLP and data engineering.
+Working across multiple datasets (SEC, FEC, Snowflake, and email data) highlighted the complexity of entity resolution. I learned how to design normalization strategies and matching workflows, including fuzzy matching, to reliably link entities across sources. This process is essential for transforming fragmented data into unified datasets that support meaningful analysis.
 </div>
 
 ### Scalability and Performance
 
 <div style="text-align: justify; line-height: 1.7;">
-Handling large datasets (SEC filings, hundreds of thousands of emails, Snowflake datasets) required thinking about performance and memory efficiency. I learned to design pipelines that scale, using chunked processing, efficient transformations, and careful validation to ensure reliability.
+Handling large datasets, including SEC filings and hundreds of thousands of emails, required careful consideration of performance and memory efficiency. I learned to design scalable pipelines using techniques such as chunked processing, efficient transformations, and validation steps to ensure both reliability and efficiency.
 </div>
 
 ### Professional and Collaborative Skills
 
 <div style="text-align: justify; line-height: 1.7;">
-More important than technical skills, I gained experience working in a collaborative environment outside my native language (Spanish) were I was able to communicate progress, refining solutions based on feedback, and aligning with my coworkers to achieve the project goals. 
+Beyond technical skills, I gained experience working in a collaborative environment outside my native language (Spanish), where I communicated progress, refined solutions based on feedback, and aligned with teammates to achieve shared project goals.
 </div>
 
 ### Bridging Theory and Practice (Connection to MSHLT Coursework)
@@ -453,13 +447,11 @@ One of the most valuable aspects of this internship was the opportunity to direc
 </p>
 
 <p>
-  
-Coursework in <em>Statistical Natural Language Processing, HLT I & II, Computational Linguistics, and Computational Techniques for Linguists</em> provided the foundation for designing NLP pipelines for tasks such as named entity recognition, text normalization, and entity extraction. In practice, however, these methods needed to be combined with rule-based approaches to handle inconsistencies and edge cases that are rarely present in controlled academic datasets.
-
+Coursework in <em>Statistical Natural Language Processing, HLT I & II, Computational Linguistics, and Computational Techniques for Linguists</em> provided the foundation for designing NLP pipelines for tasks such as named entity recognition, text normalization, and entity extraction. In practice, these methods needed to be combined with rule-based approaches to handle inconsistencies and edge cases that are rarely present in controlled academic datasets.
 </p>
 
 <p>
-Additionally, courses such as <em>Statistical Analysis for Linguistics, Data Mining and Discovery, and Data Analysis and Visualization</em> provided the statistical foundation necessary to evaluate data quality, validate outputs, and identify patterns in large datasets. These skills were important for tasks such as PAC donation classification and entity matching, where even small inconsistencies could significantly impact results. These courses also strengthened my ability to communicate results clearly and effectively.
+Additionally, courses such as <em>Statistical Analysis for Linguistics, Data Mining and Discovery, and Data Analysis and Visualization</em> provided the statistical foundation to evaluate data quality, validate outputs, and identify patterns in large datasets. These skills were particularly important for tasks such as PAC donation classification and entity matching, where small inconsistencies could significantly impact results.
 </p>
 </div>
 
@@ -479,7 +471,7 @@ Beyond the technical implementation, this experience reinforced key data enginee
 
 ### Future Work
 
-For future project I would like to extend my work on:
+For future projects I would like to extend my work on:
 
 - **Advanced entity resolution:**  
   Incorporate machine learning or embedding-based methods to improve matching accuracy across datasets.
