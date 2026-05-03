@@ -98,7 +98,7 @@ Each trial is associated with metadata:
 - `genero` [genre]
 - `spl_exp` (experimental condition)
 
-Two lists are used for **counterbalancing participants**, ensuring experimental control, the structure I followed was:
+Two lists are used for **counterbalancing participants**, ensuring experimental control. The structure I followed was:
 
 <p align="center">
   <img src="/images/stimuli.png" 
@@ -468,11 +468,11 @@ form_df = pd.DataFrame([form_dict])
 df_final = pd.concat([non_form_rows, form_df], ignore_index=True)
 ```
 
-#### Outcome
+### Outcome
 
 The final cleaned dataset was easier to read, easier to analyze, and much more suitable for later work in R or Python.
 
-**Before:**
+## Before:
 
 <p align="center">
   <img src="/images/psychopy3.png" 
@@ -480,16 +480,17 @@ The final cleaned dataset was easier to read, easier to analyze, and much more s
 </p>
 
 <p align="center"><em>
-Figure 4. Direct output data (raw data) from PsychoPy.
+Figure 4. Cropped example of raw PsychoPy output before cleaning.
 </em></p>
-**After:**
+
+## After:
 
 <p align="center">
   <img src="/images/psychopy4.png" 
        style="width: 100%; max-width: 800px; height: auto; border-radius: 12px;">
 </p>
 <p align="center"><em>
-Figure 5. Clean data.
+Figure 5. Cropped example of the cleaned dataset after restructuring.
 </em></p>
 ---
 
