@@ -10,14 +10,14 @@ order: 1
 </p>
 
 # Summary
-# Summary
+
 <div style="text-align: justify; line-height: 1.7;">
 <p>
-During my internship at <a href="https://www.goodsuniteus.com/">Goods Unite Us</a>, I worked as an NLP Intern developing data pipelines to process large-scale structured and unstructured datasets related to corporations, executives, political contributions, and user-generated requests. The main goal of the company is to increase transparency around corporate political activity by linking companies to their political donation behavior and making this information accessible to users.
+During my internship at <a href="https://www.goodsuniteus.com/">Goods Unite Us</a>, I worked as an NLP Intern developing data pipelines to process large-scale structured and unstructured datasets related to corporations, executives, political contributions, and user-generated requests. The main goal of the company is to increase transparency around corporate political activity by linking companies to their political donation behavior and making this information accessible to users, allowing them to better understand which companies support which political organizations and how those contributions are structured.
 </p>
 
 <p>
-To achieve this goal is important to understand that the data is distributed across multiple heterogeneous sources—such as SEC filings, FEC records, internal databases, and email-based user input—and is often inconsistent, incomplete, or semi-structured. This fragmentation makes it difficult to reliably connect entities across datasets and to generate accurate insights at scale.
+The biggest challenge in achieving this goal is that the data is distributed across multiple heterogeneous sources—such as SEC filings, FEC records, internal databases, and email-based user input—and is often inconsistent, incomplete, or semi-structured. This fragmentation makes it difficult to reliably connect entities across datasets and to generate accurate insights at scale.
 </p>
 
 <p>
@@ -25,9 +25,10 @@ My work focused on designing and implementing NLP-driven data pipelines to trans
 </p>
 
 <p>
-Across the internship, I contributed to several intersections of this system, including executive extraction from SEC filings, title normalization, subsidiary extraction from Exhibit 21, PAC donation classification and validation, email-based brand request aggregation, and contact enrichment through web scraping. Together, these tasks formed a unified corporate intelligence pipeline that connected public filings, political data, and internal datasets into reusable analytical resources that directly support the company’s products.
+Across the internship, I contributed to different intersections of this system, including executive extraction from SEC filings, title normalization, subsidiary extraction from Exhibit 21, PAC donation classification and validation, email-based brand request aggregation, and contact enrichment through web scraping. Together, these tasks formed a unified corporate intelligence pipeline that connected public filings, political data, and internal datasets into reusable analytical resources that directly support the company’s products.
 </p>
 </div>
+
   
 ## Project Goals
 <div style="text-align: justify; line-height: 1.7;">
