@@ -44,7 +44,7 @@ I am currently seeking <strong>full-time opportunities</strong> in <strong>Artif
 </p>
 
 <p>
-You can also view my work on <a href="https://github.com/lldavoll">GitHub</a> or connect with me on <a href="linkedin.com/in/davoacevedo">LinkedIn!</a>
+You can also view my work on <a href="https://github.com/lldavoll">GitHub</a> or connect with me on <a href="https://linkedin.com/in/davoacevedo">LinkedIn!</a>
 </p>
 
 </div>
