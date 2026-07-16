@@ -12,6 +12,8 @@ author_profile: true
   <img src="{{ base_path }}/images/teaching/class4.jpeg" class="slide" alt="Teaching photo 4">
   <img src="{{ base_path }}/images/teaching/class5.jpeg" class="slide" alt="Teaching photo 5">
   <img src="{{ base_path }}/images/teaching/class6.jpeg" class="slide" alt="Teaching photo 6">
+  <img src="{{ base_path }}/images/teaching/class7.jpeg" class="slide" alt="Teaching photo 7">
+  <img src="{{ base_path }}/images/teaching/class8.jpeg" class="slide" alt="Teaching photo 8">
 </div>
 
 <div style="text-align: justify; line-height: 1.7;">
